@@ -1,0 +1,63 @@
+:root {
+  --main-color: #972e51;      /* Яркий маджента */
+  --background-color: #d3d1d1; /* Глубокий угольный */
+  --text-over-background: aliceblue;
+}
+
+*, html {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+
+}
+
+body{
+    overflow-x: hidden;
+    background-color: var(--background-color);
+    min-height: 100vh;
+}
+
+header{
+    display: flex;
+    flex-direction: column;
+    padding: 0px;
+
+    align-items: center;
+
+    width: 100%;
+    background-color: var(--main-color);
+
+}
+
+.header-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 80%;
+} /* Центрируем всё внутри хедера. */
+
+nav{
+    display: flex;
+    flex-direction: row;
+    margin-left: 30vw;
+    font-size: 2rem;
+    gap: 25px;
+}
+
+nav a{
+    color: aliceblue;
+}
+
+.header-logo{
+    max-width: 250px;
+    height: auto;
+}
+
+footer{
+    background-color: black;
+    padding: 20px;
+    color: var(--text-over-background);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
