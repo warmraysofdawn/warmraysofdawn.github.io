@@ -12,15 +12,18 @@
 }
 
 body{
+    display: flex;
     overflow-x: hidden;
+    align-items: center;
     background-color: var(--background-color);
     min-height: 100vh;
+    flex-direction: column;
 }
 
 header{
     display: flex;
     flex-direction: column;
-    padding: 0px;
+    padding: 20px;
 
     align-items: center;
 
@@ -50,7 +53,49 @@ nav a{
 
 .header-logo{
     max-width: 250px;
+    width: 250px;
     height: auto;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 87%;
+}
+
+.main-h{
+    text-align: center;
+}
+
+.get-a-row{
+    display: flex;
+    flex-direction: row;
+    height: 420px;
+    width: auto;
+}
+
+.high-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    height: 400px;
+    background-color: blue;
+}
+
+.small-cards{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 400px;
+
+}
+
+.small-card{
+    height: 190px;
+    background-color: #972e51;
+    margin: 20px;
 }
 
 footer{
@@ -60,4 +105,6 @@ footer{
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: auto;
+    width: 100%;
 }
