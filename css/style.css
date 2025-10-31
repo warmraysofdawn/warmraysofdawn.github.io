@@ -1,14 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Sansation:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alumni+Sans+Collegiate+One:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Prosto+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Shantell+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap');
+
 :root {
-  --main-color: #972e51;      /* Яркий маджента */
+  --main-color: #972e51;     /* Яркий маджента */
   --background-color: #d3d1d1; /* Глубокий угольный */
   --text-over-background: aliceblue;
+
+  --card-background: rgba(77, 77, 77, 0.582);
+
+  --neon-1: rgb(255, 96, 175);
+  --neon-1: rgb(89, 208, 255);
+  --neon-1: rgb(65, 245, 134);
+
+  --border: aqua;
+
+    --text-primary: #cc7e7e;
+    --text-secondary: #bdd8df;
+    --text-accent: #FFBF00;
+
+    --nav-font: "Sansation", sans-serif;
+    --header-font: "Alumni Sans Collegiate One", sans-serif;
+    --sec-font: "Prosto One", sans-serif;
+    --paragraph-font: "Shantell Sans", cursive;
+    --caveat: "Caveat", cursive;
 }
 
 *, html {
     margin: 0;
     padding: 0;
     text-decoration: none;
-
+    box-sizing: border-box;
 }
 
 body{
@@ -18,6 +42,51 @@ body{
     background-color: var(--background-color);
     min-height: 100vh;
     flex-direction: column;
+}
+
+/* Предотвращаем скролл тела когда меню открыто */
+body.menu-open {
+    overflow: hidden;
+}
+
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-image: url('/img/logo.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.7;
+    animation: float 15s infinite ease-in-out;
+}
+
+/* Классы для разных вариантов анимации */
+.particle.color-1 {
+    animation: float 18s infinite ease-in-out, colorChange1 8s infinite linear;
+}
+
+.particle.color-2 {
+    animation: float 12s infinite ease-in-out, colorChange2 6s infinite linear;
+}
+
+.particle.color-3 {
+    animation: float 20s infinite ease-in-out, colorChange3 10s infinite linear;
+}
+
+.particle.color-4 {
+    animation: float 14s infinite ease-in-out, colorChange1 7s infinite reverse;
 }
 
 header{
@@ -39,64 +108,195 @@ header{
     width: 80%;
 } /* Центрируем всё внутри хедера. */
 
-nav{
+.burger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1000;
+}
+
+.burger span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background-color: aliceblue;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+/* Анимация бургера при активации */
+.burger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.burger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.burger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* Стили для навигации */
+nav {
     display: flex;
     flex-direction: row;
     margin-left: 30vw;
     font-size: 2rem;
     gap: 25px;
+    font-family: var(--nav-font);
+    font-weight: 400;
+    font-style: normal;
+    transition: transform 0.3s ease;
 }
 
-nav a{
+nav a {
     color: aliceblue;
+    transform: translateY(5px);
+    transition: transform 0.3s ease-out, color 0.3s ease;
 }
 
-.header-logo{
+nav a:hover {
+    transform: translateY(-5px);
+    color: var(--text-accent);
+}
+.header-logo {
     max-width: 250px;
     width: 250px;
     height: auto;
+    transform: translateY(5px);
+    transition: transform 0.3s ease-out; /* Медленное возвращение */
+    filter: drop-shadow(8px 8px 10px rgba(255, 231, 17, 0.5));
 }
+
+.header-logo:hover {
+    transform: translateY(-25px) scale(1.2);
+    transition: transform 0.39s ease-in; /* Быстрое наведение */
+    filter: drop-shadow(11px 10px 14px rgba(252, 233, 68, 0.6));
+}
+
 
 main{
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 87%;
+    padding: 5vh;
 }
 
 .main-h{
     text-align: center;
+    font-size: 3rem;
+    font-family: var(--header-font);
+    font-weight: 400;
+  font-style: italic;
+  color: var(--text-primary);
 }
 
-.get-a-row{
+.get-a-row {
     display: flex;
     flex-direction: row;
     height: 420px;
     width: auto;
+    gap: 20px; /* Расстояние между большой и маленькими картами */
+    padding: 0 20px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.high-card{
+.high-card, .small-card, .small-cards {
+    box-sizing: border-box;
+}
+
+.high-card {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 50%;
     height: 400px;
-    background-color: blue;
+    background-color: var(--card-background);
+    backdrop-filter: blur(15px);
+    border-radius: 30px;
+    padding: 30px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    justify-content: space-between; /* Равномерное распределение контента */
 }
 
-.small-cards{
+.small-cards {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between; /* Равномерное распределение маленьких карточек */
     height: 400px;
-
+    width: 50%; /* Чтобы занимала вторую половину */
+    margin: 0;
 }
 
-.small-card{
+.small-card {
     height: 190px;
-    background-color: #972e51;
-    margin: 20px;
+    background-color: var(--card-background);
+    margin: 10px;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
+
+/* Стили для текстового контента */
+.secondary-h {
+    font-size: 1.5rem;
+    font-family: var(--sec-font);
+  font-weight: 400;
+  font-style: normal;
+    margin-bottom: 15px;
+    color: var(--text-primary);
+    text-align: center;
+}
+
+.main-p {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    font-family: var(--paragraph-font);
+    text-align: center;
+    margin-bottom: 20px;
+    flex-grow: 1; /* Чтобы параграф занимал доступное пространство */
+}
+
+/* Стили для кнопок */
+.card-button {
+    background: linear-gradient(135deg, var(--main-color), #d94d8c);
+    border-radius: 15px;
+    padding: 12px 24px;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 4px 15px rgba(204, 94, 155, 0.3);
+}
+
+.card-button h2 {
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 0;
+}
+
+.card-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(204, 94, 155, 0.4);
+}
+
+
 
 footer{
     background-color: black;
@@ -107,4 +307,277 @@ footer{
     align-items: center;
     margin-top: auto;
     width: 100%;
+}
+
+.footer-capture{
+    font-family: var(--paragraph-font);
+    font-size: 1.34rem;
+    color: var(--text-primary);
+}
+
+.footer-links{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start; /* исправлено с left на flex-start */
+    justify-content: flex-start;
+    margin-right: auto; /* прижимает к левому краю */
+    width: 100%; /* занимает всю доступную ширину */
+}
+
+.footer-quote{
+    margin-top: 0.5%;
+    text-align: left;
+    font-family: var(--caveat);
+    font-weight: 400;
+    font-style: normal;
+    font-size: 2.3rem;
+    text-decoration: underline;
+    text-decoration-line: underline;
+    text-decoration-color: var(--text-primary);
+    text-decoration-thickness: 3px; /* Задает толщину линии 3 пикселя */
+    white-space: nowrap;
+    margin-left: 10%; 
+}
+
+
+.footer-logo-links-container{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-left: 50%;
+}
+
+.footer-logo-link img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    
+}
+
+.footer-logo-link:hover{
+    transform: rotate(20deg) rotateX(40deg);
+    filter: invert();
+}
+
+.footer-logo-link{
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    display: block;
+    box-sizing: border-box;
+    transition: transform 0.5s ease, filter 0.5s ease;
+    filter: drop-shadow(0px 5px 10px var(--main-color));
+}
+/* Адаптивность */
+@media (max-width: 768px) {
+
+body{
+    max-width: 768px;
+    overflow-x: hidden;
+}
+
+.header-container {
+        justify-content: space-between;
+        width: 90%;
+        position: relative;
+    }
+
+    .burger {
+        display: flex;
+        margin-left: 0;
+    }
+
+    .header-logo {
+        margin-left: 0;
+        max-width: 200px;
+    }
+
+    /* Скрываем навигацию по умолчанию */
+    nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background-color: var(--main-color);
+        flex-direction: column;
+        align-items: baseline;
+        margin-left: 20px;
+        justify-content: center;
+        /* margin-left: 0; */
+        gap: 30px;
+        font-size: 1.8rem;
+        transition: right 0.4s ease;
+        z-index: 999;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Показываем навигацию при активации */
+    nav.active {
+        right: 0;
+    }
+
+    /* Затемнение фона при открытом меню */
+    nav.active::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+    }
+
+    /* Анимация для ссылок при появлении */
+    nav.active a {
+        animation: slideInFromRight 0.5s ease forwards;
+        opacity: 0;
+        transform: translateX(50px);
+    }
+
+    nav.active a:nth-child(1) { animation-delay: 0.1s; }
+    nav.active a:nth-child(2) { animation-delay: 0.2s; }
+    nav.active a:nth-child(3) { animation-delay: 0.3s; }
+    nav.active a:nth-child(4) { animation-delay: 0.4s; }
+    nav.active a:nth-child(5) { animation-delay: 0.5s; }
+
+     .get-a-row {
+        flex-direction: column;
+        height: auto;
+        gap: 15px;
+        width: 100%; /* ← Исправлено с 500px на 100% */
+        padding: 0 15px; /* ← Добавлены отступы по бокам */
+        box-sizing: border-box; /* ← Чтобы padding не увеличивал ширину */
+    }
+    
+    .high-card, .small-cards {
+        width: 100%;
+        height: auto;
+        min-height: 180px;
+    }
+    
+    .small-cards {
+        gap: 15px; /* ← Добавьте отступ между маленькими карточками */
+    }
+    
+    .small-card {
+        height: auto;
+        min-height: 180px;
+        margin: 0; /* ← Уберите внешние отступы */
+    }
+
+    .footer{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .footer-capture{
+        /* margin-left: 10%; */
+        text-align: center;
+    }
+
+    .footer-quote{
+        /* margin-left: 10%; */
+        text-align: center;
+    }
+
+    .signed{
+        text-align: center;
+    }
+
+    .footer-logo-links-container{
+        display: flex;
+        flex-direction: row;
+    }
+}
+
+@media(min-width: 768px){
+    *{
+        width: 100% !important;
+    }
+
+    .footer-logo-link img{
+        width: 30px;
+        height: auto;
+    }
+
+    footer{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: auto;
+        text-align: center;
+        width: 100% !important;
+    }
+
+    .footer-links{
+        width: 100% !important;
+    }
+
+    .footer-logo-links-container{
+        margin-left: 35%;
+    }
+
+}
+
+/* Базовая анимация движения */
+@keyframes float {
+    0%, 100% {
+        transform: translate(0, 0) scale(1);
+    }
+    25% {
+        transform: translate(20px, -15px) scale(1.1);
+    }
+    50% {
+        transform: translate(-15px, 10px) scale(0.9);
+    }
+    75% {
+        transform: translate(10px, 15px) scale(1.05);
+    }
+}
+
+/* Анимации смены цвета */
+@keyframes colorChange1 {
+    0% { filter: hue-rotate(0deg) brightness(1); }
+    33% { filter: hue-rotate(120deg) brightness(1.2); }
+    66% { filter: hue-rotate(240deg) brightness(0.8); }
+    100% { filter: hue-rotate(360deg) brightness(1); }
+}
+
+@keyframes colorChange2 {
+    0% { filter: hue-rotate(180deg) brightness(0.9); }
+    50% { filter: hue-rotate(0deg) brightness(1.1); }
+    100% { filter: hue-rotate(180deg) brightness(0.9); }
+}
+
+@keyframes colorChange3 {
+    0% { filter: hue-rotate(300deg) brightness(1); }
+    25% { filter: hue-rotate(60deg) brightness(1.3); }
+    75% { filter: hue-rotate(150deg) brightness(0.7); }
+    100% { filter: hue-rotate(300deg) brightness(1); }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(400deg);
+  }
+
+  100%{
+    transform: rotate(20deg) rotateX(230deg);
+  }
+}
+
+
+@keyframes slideInFromRight {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }

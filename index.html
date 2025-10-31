@@ -8,20 +8,29 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <header>
-        <div class="header-container">
-            <a href="/"><img class="header-logo" src="/img/тлр-лого копия-1.svg" alt="Лого"></a>
+    <div class="background-container" id="particles-container"></div>
 
-            <nav>
-                    <a href="/">Главная</a>
-                    <a href="/poems/">Стихи</a>
-                    <a href="/events/">События</a>
-                    <a href="/articles/">Статьи</a>
-                    <a href="/contact/">Связаться</a>
-                
-            </nav>
-        </div>
-    </header>
+<header>
+    <div class="header-container">
+        <a href="/"><img class="header-logo" src="/img/logo.svg" alt="Лого"></a>
+        
+
+        <button class="burger" id="burger-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <!-- Навигация -->
+        <nav id="main-nav">
+            <a href="/">Главная</a>
+            <a href="/poems/">Стихи</a>
+            <a href="/events/">События</a>
+            <a href="/articles/">Статьи</a>
+            <a href="/contact/">Связаться</a>
+        </nav>
+    </div>
+</header>
 
     <main>
         <h1  class="main-h">тёплые лучи рассвета. Главная страница</h1>
@@ -30,7 +39,7 @@
 
             <div class="small-cards">
                 <div class="small-card"><h2 class="secondary-h">Читать статьи.</h2> <p class="main-p">Мне, как автору, писать это чрезвычайно лень. Редко я это делаю. Но буду пытаться, что ж, а пока ознакомьтесь с тем, что есть!</p> <a href="/articles/"><div class="card-button" id="articles-button"><h2>Вчитаться</h2></div></a></div>
-                <div class="small-card"><h2 class="secondary-h">СРКЦН - авторский проект.</h2> <p class="main-p">Я вообще по образованию ITшник, что вы хотите. Вы можете посмотреть презентацию проекта уже сегодня!</p> <a href="/SoRUPP-presentation/"><div class="card-button" id="event-button"><h2>Узнать больше</h2></div></a></div>
+                <div class="small-card"><h2 class="secondary-h">СРКЦН - авторский проект.</h2> <p class="main-p">Я вообще по образованию ITшник, что вы хотите. Вы можете посмотреть презентацию проекта уже сегодня!</p> <a href="/SoRUPP_presentation/"><div class="card-button" id="event-button"><h2>Узнать больше</h2></div></a></div>
 
             </div>
         </div>
@@ -41,6 +50,16 @@
     <footer>
         <h3 class="footer-capture">"Останавливаясь в самосовершенствовании, человек переходит в фазу медленного самоубийства; останавливаясь в созидании, человек переходит к уничтожению"</h3>
         <h3 class="signed">тёплые лучи рассвета.</h3>
+        <div class="footer-links">
+            <h4 class="footer-quote">Будьте добрее, мы живём на одной земле</h4>
+            <div class="footer-logo-links-container">
+                <a href="https://t.me/warmraysofdawn" target="_blank"><img class="footer-logo-link" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/500px-Telegram_logo.svg.png" alt="Telegram"></a>
+                <a href="https://warm-rays-magazine.github.io/" target="_blank"><img class="footer-logo-link" src="/img/wrdm-logo.svg" alt="WRDM logo"></a>
+                <a href="https://github.com/warmraysofdawn/" target="_blank"><img class="footer-logo-link" src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="Github logo"></a>
+                
+            </div>
+        </div>
     </footer>
+    <script src="/js/main.js"></script>
 </body>
 </html>

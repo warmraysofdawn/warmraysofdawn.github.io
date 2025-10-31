@@ -15,7 +15,7 @@
             <nav>
                     <a href="/">Главная</a>
                     <a href="/poems/">Стихи</a>
-                    <a href="/events/">События</a>
+                    <a href="/events/">С обытия</a>
                     <a href="/more/">Статьи</a>
                     <a href="/contact/">Связаться</a>
                 
