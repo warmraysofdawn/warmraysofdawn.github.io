@@ -5,7 +5,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap');
 
 :root {
-  --main-color: #972e51;     /* Яркий маджента */
+  --main-color: rgba(151, 46, 81, 0.85);     /* Яркий маджента */
+  --main-color-mobile: rgb(151, 46, 81);
   --background-color: #d3d1d1; /* Глубокий угольный */
   --text-over-background: aliceblue;
 
@@ -89,16 +90,23 @@ body.menu-open {
     animation: float 14s infinite ease-in-out, colorChange1 7s infinite reverse;
 }
 
-header{
+header {
     display: flex;
     flex-direction: column;
     padding: 20px;
-
     align-items: center;
-
     width: 100%;
     background-color: var(--main-color);
-
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    box-sizing: border-box;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 
+        0 4px 24px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    position: relative; /* Добавьте это */
+    z-index: 1000; /* Добавьте это */
 }
 
 .header-container{
@@ -118,7 +126,7 @@ header{
     border: none;
     cursor: pointer;
     padding: 0;
-    z-index: 1000;
+    z-index: 1002; /* Должен быть выше чем у меню */
 }
 
 .burger span {
@@ -208,6 +216,7 @@ main{
     padding: 0 20px;
     max-width: 1200px;
     margin: 0 auto;
+    z-index: 1;
 }
 
 .high-card, .small-card, .small-cards {
@@ -369,158 +378,421 @@ footer{
     filter: drop-shadow(0px 5px 10px var(--main-color));
 }
 /* Адаптивность */
+
 @media (max-width: 768px) {
-
-body{
-    max-width: 768px;
-    overflow-x: hidden;
-}
-
-.header-container {
-        justify-content: space-between;
-        width: 90%;
+    /* Исправляем header и навигацию */
+    header {
         position: relative;
+        z-index: 1000;
     }
-
-    .burger {
-        display: flex;
-        margin-left: 0;
-    }
-
-    .header-logo {
-        margin-left: 0;
-        max-width: 200px;
-    }
-
-    /* Скрываем навигацию по умолчанию */
     nav {
         position: fixed;
         top: 0;
-        right: -100%;
+        right: -100%; /* Скрыто за пределами экрана */
         width: 70%;
         height: 100vh;
-        background-color: var(--main-color);
+        background-color: var(--main-color-mobile);
         flex-direction: column;
         align-items: baseline;
         margin-left: 20px;
         justify-content: center;
-        /* margin-left: 0; */
         gap: 30px;
         font-size: 1.8rem;
         transition: right 0.4s ease;
-        z-index: 999;
+        z-index: 1001;
         box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
     }
 
-    /* Показываем навигацию при активации */
+    /* Когда меню активно */
     nav.active {
-        right: 0;
+        right: 0; /* Показываем меню */
     }
 
-    /* Затемнение фона при открытом меню */
-    nav.active::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: -1;
+    .burger {
+        display: flex; /* Должно быть flex */
+        margin-left: 0;
+        z-index: 1002;
+        position: relative; /* Добавьте это */
+        margin-left: 30%
     }
 
-    /* Анимация для ссылок при появлении */
-    nav.active a {
-        animation: slideInFromRight 0.5s ease forwards;
-        opacity: 0;
-        transform: translateX(50px);
-    }
-
-    nav.active a:nth-child(1) { animation-delay: 0.1s; }
-    nav.active a:nth-child(2) { animation-delay: 0.2s; }
-    nav.active a:nth-child(3) { animation-delay: 0.3s; }
-    nav.active a:nth-child(4) { animation-delay: 0.4s; }
-    nav.active a:nth-child(5) { animation-delay: 0.5s; }
-
-     .get-a-row {
+    /* Улучшаем адаптацию карточек */
+    .get-a-row {
         flex-direction: column;
         height: auto;
         gap: 15px;
-        width: 100%; /* ← Исправлено с 500px на 100% */
-        padding: 0 15px; /* ← Добавлены отступы по бокам */
-        box-sizing: border-box; /* ← Чтобы padding не увеличивал ширину */
+        width: 100%;
+        padding: 0 15px;
+        box-sizing: border-box;
+        z-index: 1;
+        margin-top: 20px; /* Добавляем отступ сверху */
     }
     
     .high-card, .small-cards {
         width: 100%;
         height: auto;
-        min-height: 180px;
+        min-height: 200px;
     }
     
     .small-cards {
-        gap: 15px; /* ← Добавьте отступ между маленькими карточками */
+        gap: 15px;
     }
     
     .small-card {
         height: auto;
         min-height: 180px;
-        margin: 0; /* ← Уберите внешние отступы */
+        margin: 0;
+        padding: 20px;
     }
 
-    .footer{
-        display: flex;
+    /* Улучшаем текстовое содержимое карточек */
+    .secondary-h {
+        font-size: 1.3rem;
+        margin-bottom: 10px;
+    }
+
+    .main-p {
+        font-size: 0.9rem;
+        line-height: 1.4;
+        margin-bottom: 15px;
+    }
+
+    .card-button {
+        padding: 10px 20px;
+    }
+
+    .card-button h2 {
+        font-size: 1rem;
+    }
+
+    /* Адаптируем основной заголовок */
+    .main-h {
+        font-size: 2rem;
+        padding: 0 15px;
+        text-align: center;
+    }
+
+    /* КОМПЛЕКСНАЯ АДАПТАЦИЯ ФУТЕРА */
+    footer {
+        padding: 20px 15px;
+        margin-top: 40px;
+    }
+
+    .footer-capture {
+        font-size: 1.1rem;
+        text-align: center;
+        line-height: 1.4;
+        margin-bottom: 15px;
+    }
+
+    .signed {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 1rem;
+    }
+
+    .footer-links {
         flex-direction: column;
-        justify-content: center;
         align-items: center;
+        gap: 20px;
+        margin-right: 0;
+        width: 100%;
     }
 
-    .footer-capture{
-        /* margin-left: 10%; */
+    .footer-quote {
+        font-size: 1.5rem;
         text-align: center;
+        margin-left: 0;
+        white-space: normal; /* Разрешаем перенос строк */
+        line-height: 1.3;
+        order: 2; /* Меняем порядок - цитата будет после логотипов */
     }
 
-    .footer-quote{
-        /* margin-left: 10%; */
-        text-align: center;
+    .footer-logo-links-container {
+        margin-left: 0;
+        justify-content: center;
+        order: 1; /* Логотипы будут первыми */
+        gap: 15px;
     }
 
-    .signed{
-        text-align: center;
-    }
-
-    .footer-logo-links-container{
-        display: flex;
-        flex-direction: row;
+    .footer-logo-link {
+        width: 50px;
+        height: 50px;
     }
 }
 
-@media(min-width: 768px){
-    *{
-        width: 100% !important;
+/* Дополнительные улучшения для очень маленьких экранов */
+@media (max-width: 480px) {
+    .main-h {
+        font-size: 1.8rem;
     }
 
-    .footer-logo-link img{
-        width: 30px;
-        height: auto;
+    .high-card, .small-card {
+        padding: 15px;
+        min-height: 160px;
     }
 
-    footer{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-top: auto;
-        text-align: center;
-        width: 100% !important;
+    .secondary-h {
+        font-size: 1.1rem;
     }
 
-    .footer-links{
-        width: 100% !important;
+    .main-p {
+        font-size: 0.85rem;
     }
 
-    .footer-logo-links-container{
-        margin-left: 35%;
+    .footer-capture {
+        font-size: 1rem;
     }
 
+    .footer-quote {
+        font-size: 1.3rem;
+    }
+
+    .footer-logo-link {
+        width: 45px;
+        height: 45px;
+    }
+}
+
+/* Адаптация для ноутбуков (1024px - 1366px) */
+@media (min-width: 1024px) and (max-width: 1366px) {
+    /* Уменьшаем основные контейнеры */
+    main {
+        width: 95%;
+        padding: 3vh 2vh;
+    }
+    
+    .header-container {
+        width: 90%;
+    }
+    
+    /* Корректируем навигацию */
+    nav {
+        margin-left: 15vw;
+        font-size: 1.7rem;
+        gap: 20px;
+    }
+    
+    /* Уменьшаем логотип */
+    .header-logo {
+        max-width: 220px;
+        width: 220px;
+    }
+    
+    /* Адаптируем карточки */
+    .get-a-row {
+        height: 380px;
+        max-width: 1100px;
+    }
+    
+    .high-card, .small-cards {
+        height: 360px;
+    }
+    
+    .small-card {
+        height: 175px;
+        padding: 20px;
+    }
+    
+    /* Корректируем текст */
+    .main-h {
+        font-size: 2.5rem;
+    }
+    
+    .secondary-h {
+        font-size: 1.3rem;
+    }
+    
+    .main-p {
+        font-size: 0.95rem;
+    }
+    
+    /* Адаптируем футер */
+    .footer-capture {
+        font-size: 1.2rem;
+    }
+    
+    .footer-quote {
+        font-size: 2rem;
+        margin-left: 5%;
+    }
+    
+    .footer-logo-links-container {
+        margin-left: 30%;
+    }
+    
+    .footer-logo-link {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+/* Адаптация для маленьких десктопов (1367px - 1600px) */
+@media (min-width: 1367px) and (max-width: 1600px) {
+    .header-container {
+        width: 85%;
+    }
+    
+    nav {
+        margin-left: 20vw;
+        font-size: 1.8rem;
+    }
+    
+    .get-a-row {
+        max-width: 1150px;
+    }
+    
+    .footer-logo-links-container {
+        margin-left: 32%;
+    }
+}
+
+/* Адаптация для средних ноутбуков (768px - 1023px) */
+@media (min-width: 769px) and (max-width: 1023px) {
+    /* Улучшаем отображение для планшетов в ландшафтной ориентации */
+    main {
+        width: 95%;
+        padding: 4vh 2vh;
+    }
+    
+    .header-container {
+        width: 95%;
+    }
+    
+    /* Навигация для планшетов */
+    nav {
+        margin-left: 8vw;
+        font-size: 1.6rem;
+        gap: 15px;
+    }
+    
+    /* Карточки для планшетов */
+    .get-a-row {
+        height: 350px;
+        gap: 15px;
+    }
+    
+    .high-card, .small-cards {
+        height: 330px;
+    }
+    
+    .small-card {
+        height: 160px;
+        padding: 18px;
+    }
+    
+    /* Текст для планшетов */
+    .main-h {
+        font-size: 2.2rem;
+    }
+    
+    .secondary-h {
+        font-size: 1.2rem;
+    }
+    
+    .main-p {
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+    
+    /* Футер для планшетов */
+    .footer-capture {
+        font-size: 1.1rem;
+    }
+    
+    .footer-quote {
+        font-size: 1.7rem;
+        margin-left: 3%;
+    }
+    
+    .footer-links {
+        flex-wrap: wrap;
+    }
+    
+    .footer-logo-links-container {
+        margin-left: 20%;
+        gap: 8px;
+    }
+    
+    .footer-logo-link {
+        width: 55px;
+        height: 55px;
+    }
+}
+
+/* Улучшения для очень маленьких ноутбуков (1024px - 1280px) */
+@media (min-width: 1024px) and (max-width: 1280px) {
+    nav {
+        margin-left: 12vw;
+        font-size: 1.6rem;
+    }
+    
+    .header-logo {
+        max-width: 200px;
+        width: 200px;
+    }
+    
+    .get-a-row {
+        height: 360px;
+    }
+    
+    .high-card, .small-cards {
+        height: 340px;
+    }
+    
+    .small-card {
+        height: 165px;
+    }
+    
+    .footer-logo-links-container {
+        margin-left: 25%;
+    }
+}
+
+/* Оптимизация для высоких ноутбуков (900px - 1050px по высоте) */
+@media (max-height: 1050px) and (min-width: 1024px) {
+    .get-a-row {
+        height: 340px;
+    }
+    
+    .high-card, .small-cards {
+        height: 320px;
+    }
+    
+    .small-card {
+        height: 155px;
+    }
+    
+    .main-h {
+        margin-bottom: 2vh;
+    }
+}
+
+/* Улучшаем отображение на устройствах с тач-интерфейсом */
+@media (hover: none) and (pointer: coarse) {
+    .card-button:hover {
+        transform: none;
+        box-shadow: 0 4px 15px rgba(204, 94, 155, 0.3);
+    }
+    
+    nav a:hover {
+        transform: none;
+        color: aliceblue;
+    }
+    
+    .header-logo:hover {
+        transform: none;
+        transition: none;
+    }
+}
+
+/* Оптимизация для устройств с ретиной дисплеями */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .header-logo,
+    .footer-logo-link img {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
 }
 
 /* Базовая анимация движения */
