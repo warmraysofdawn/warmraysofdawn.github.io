@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     console.log('Контейнер найден, создаем частицы...');
     
-    const particleCount = 100;
+    const particleCount = 60;
     
     for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
@@ -42,54 +42,49 @@ document.addEventListener('DOMContentLoaded', function() {
 // Бургер-меню
 document.addEventListener('DOMContentLoaded', function() {
     const burgerBtn = document.getElementById('burger-btn');
-    const mainNav = document.getElementById('main-nav');
+    const nav = document.getElementById('main-nav');
     const body = document.body;
 
-    burgerBtn.addEventListener('click', function() {
-        // Переключаем активные классы
-        this.classList.toggle('active');
-        mainNav.classList.toggle('active');
-        body.classList.toggle('menu-open');
-
-        // Блокируем скролл при открытом меню
-        if (mainNav.classList.contains('active')) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = '';
-        }
-    });
-
-    // Закрываем меню при клике на ссылку
-    const navLinks = mainNav.querySelectorAll('a');
-    navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            burgerBtn.classList.remove('active');
-            mainNav.classList.remove('active');
-            body.classList.remove('menu-open');
-            document.body.style.overflow = '';
+    if (burgerBtn && nav) {
+        burgerBtn.addEventListener('click', function() {
+            this.classList.toggle('active');
+            nav.classList.toggle('active');
+            body.classList.toggle('menu-open');
+            
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', !isExpanded);
         });
-    });
 
-    // Закрываем меню при клике вне его
-    document.addEventListener('click', function(event) {
-        const isClickInsideNav = mainNav.contains(event.target);
-        const isClickOnBurger = burgerBtn.contains(event.target);
-        
-        if (!isClickInsideNav && !isClickOnBurger && mainNav.classList.contains('active')) {
-            burgerBtn.classList.remove('active');
-            mainNav.classList.remove('active');
-            body.classList.remove('menu-open');
-            document.body.style.overflow = '';
-        }
-    });
+        // Закрытие меню при клике на ссылку
+        const navLinks = nav.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                closeMenu();
+            });
+        });
 
-    // Закрываем меню при нажатии Escape
-    document.addEventListener('keydown', function(event) {
-        if (event.key === 'Escape' && mainNav.classList.contains('active')) {
+        // Закрытие меню при клике вне его области
+        document.addEventListener('click', function(event) {
+            const isClickInsideNav = nav.contains(event.target);
+            const isClickOnBurger = burgerBtn.contains(event.target);
+            
+            if (!isClickInsideNav && !isClickOnBurger && nav.classList.contains('active')) {
+                closeMenu();
+            }
+        });
+
+        // Закрытие меню при нажатии Escape
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && nav.classList.contains('active')) {
+                closeMenu();
+            }
+        });
+
+        function closeMenu() {
             burgerBtn.classList.remove('active');
-            mainNav.classList.remove('active');
+            nav.classList.remove('active');
             body.classList.remove('menu-open');
-            document.body.style.overflow = '';
+            burgerBtn.setAttribute('aria-expanded', 'false');
         }
-    });
+    }
 });

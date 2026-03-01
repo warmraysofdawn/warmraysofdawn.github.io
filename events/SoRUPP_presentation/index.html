@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>СРКЦН - Презентация</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --coral: #FF6B6B;
+            --dark-bg: #1a1a1a;
+            --text-light: #ffffff;
+            --accent: #4ECDC4;
+            --secondary: #45B7AF;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(rgba(26, 26, 26, 0.9), rgba(26, 26, 26, 0.9)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" opacity="0.1"><rect width="100%" height="100%" fill="none" stroke="%23FF6B6B" stroke-width="2"/></svg>'),
+                        #2d2d2d;
+            color: var(--text-light);
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .presentation-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .slides-wrapper {
+            display: flex;
+            width: 1500vw;
+            height: 100vh;
+            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform-style: preserve-3d;
+        }
+
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            padding: 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: transparent;
+        }
+
+        .logo-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            margin-top: 10vw;
+            opacity: 0.6;
+            pointer-events: none;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="%23FF6B6B"><circle cx="100" cy="100" r="80" stroke="%234ECDC4" stroke-width="4" fill="none"/><path d="M70,70 L130,130 M130,70 L70,130" stroke="%234ECDC4" stroke-width="4"/></svg>') center/30% no-repeat;
+            filter: drop-shadow(0 0 30px var(--coral));
+            z-index: 1;
+        }
+
+        .content-container {
+            max-width: 1200px;
+            width: 90%;
+            height: 80%;
+            position: relative;
+            z-index: 2;
+            background: rgba(45, 45, 45, 0.8);
+            border-radius: 20px;
+            padding: 3rem;
+            border: 1px solid var(--coral);
+            box-shadow: 0 0 50px rgba(255, 107, 107, 0.3);
+            backdrop-filter: blur(10px);
+            overflow-y: auto;
+        }
+
+        .code-placeholder {
+            background: #2d2d2d;
+            border: 2px dashed var(--coral);
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 1rem 0;
+            min-height: 200px;
+            color: var(--text-light);
+            font-family: 'Courier New', monospace;
+        }
+
+        .progress-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 107, 107, 0.3);
+            z-index: 1000;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--coral);
+            width: 10%;
+            transition: width 0.3s ease;
+        }
+
+        .nav-buttons {
+            position: fixed;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 2rem;
+            z-index: 1000;
+            transform: translateY(-50%);
+        }
+
+        .nav-btn {
+            background: rgba(255, 107, 107, 0.8);
+            border: none;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-btn:hover {
+            background: var(--coral);
+            transform: scale(1.1);
+        }
+
+        h1, h2, h3 {
+            color: var(--coral);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            text-shadow: 0 0 20px rgba(255, 107, 107, 0.5);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+        }
+
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: rgba(78, 205, 196, 0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid var(--accent);
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+
+        .tech-item {
+            background: rgba(255, 107, 107, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            border: 1px solid var(--coral);
+        }
+
+        .qr-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .qr-placeholder {
+            background: rgba(255, 255, 255, 0.1);
+            height: 200px;
+            border: 2px dashed var(--coral);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--coral);
+        }
+
+        .interactive-demo {
+            background: rgba(45, 45, 45, 0.9);
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 1px solid var(--accent);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+        }
+
+        .comparison-table th, .comparison-table td {
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid var(--coral);
+        }
+
+        .comparison-table th {
+            background: rgba(255, 107, 107, 0.2);
+            color: var(--coral);
+        }
+
+        .good { color: #4ECDC4; }
+        .medium { color: #FFD166; }
+        .bad { color: #FF6B6B; }
+
+        .highlight {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .steps-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .step-number {
+            background: var(--coral);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .structure-tree {
+            background: rgba(45, 45, 45, 0.9);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border: 1px solid var(--accent);
+            font-family: 'Courier New', monospace;
+        }
+
+        .folder {
+            color: var(--accent);
+        }
+
+        .file {
+            color: var(--coral);
+        }
+
+        .tree-indent {
+            margin-left: 1.5rem;
+        }
+
+        /* Анимации */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .parallax-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" opacity="0.05"><polygon points="100,100 150,200 50,300" fill="%23FF6B6B"/><circle cx="800" cy="300" r="50" fill="%234ECDC4"/><rect x="700" y="600" width="100" height="100" fill="%23FF6B6B"/></svg>');
+            background-size: cover;
+            z-index: -1;
+        }
+
+        .slide {
+            transform: translateX(0);
+            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .slide.active {
+            transform: translateX(0);
+        }
+
+        .slide.next {
+            transform: translateX(100vw);
+        }
+
+        .slide.prev {
+            transform: translateX(-100vw);
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 2rem 1rem;
+            }
+            
+            .content-container {
+                padding: 1.5rem;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .nav-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <div class="parallax-bg"></div>
+        
+        <div class="slides-wrapper">
+            <!-- Слайд 1: Титульный -->
+            <section class="slide active">
+                <div class="logo-background"></div>
+                <div class="content-container floating">
+                    <h1>СРКЦН</h1>
+                    <h2>Система резервирования контента и цифрового наследия</h2>
+                    <p>Программное решение для систематизации, сохранения и публикации творческих работ</p>
+                    <div style="margin-top: 2rem;">
+                        <div class="tech-item">Python</div>
+                        <div class="tech-item">Flask</div>
+                        <div class="tech-item">pywebview</div>
+                        <div class="tech-item">JavaScript</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Слайд 2: Идея и предпосылки -->
+            <section class="slide">
+                <div class="logo-background"></div>
+                <div class="content-container">
+                    <h2>Идея создания</h2>
+                    <p>Множество творческих людей создают материалы, но часто сталкиваются с проблемой их упорядочивания и представления широкой аудитории.</p>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h3>🎯 Проблема</h3>
+                            <p>Существующие платформы требуют навыков разработки, навязывают стиль, не дают полного контроля или смешивают личное с профессиональным.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>💡 Решение</h3>
+                            <p>Объединить функции каталогизатора, архиватора и генератора сайтов в одном простом приложении.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Слайд 3: Целевая аудитория -->
+            <section class="slide">
+                <div class="logo-background"></div>
+                <div class="content-container">
+                    <h2>Кому это нужно?</h2>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h3>🎨 Художники</h3>
+                            <p>Хранение изображений, описаний техник, создание галерей.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>✍️ Писатели и поэты</h3>
+                            <p>Структурирование рассказов, стихов, романов с обложками.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>🎵 Музыканты</h3>
+                            <p>Демо-записи, ноты, описания проектов.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>💻 Программисты-любители</h3>
+                            <p>Код, скриншоты, документация к проектам.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>🔬 Научные сотрудники</h3>
+                            <p>Публикации, учебные материалы, презентации.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>📚 Школьники и студенты</h3>
+                            <p>Портфолио достижений для конкурсов и олимпиад.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Слайд 4: Почему программа, а не фреймворк -->
+            <section class="slide">
+                <div class="logo-background"></div>
+                <div class="content-container">
+                    <h2>Готовое приложение</h2>
+                    <p>Изначально планировалась библиотека для разработчиков, но анализ показал: большинство пользователей — не программисты.</p>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h3>🚀 Запуск двойным щелчком</h3>
+                            <p>Не требует установки интерпретаторов, управления зависимостями, знания кода.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>🖥️ Графический интерфейс</h3>
+                            <p>Интуитивные формы заполнения, встроенный веб-сервер и база данных скрыты от пользователя.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Слайд 5: Обзор функциональности -->
+            <section class="slide">
+                <div class="logo-background"></div>
+                <div class="content-container">
+                    <h2>Основные разделы</h2>
+                    <div class="feature-grid">
+                        <div class="feature-card">📁 Работы</div>
+                        <div class="feature-card">👤 Портфолио</div>
+                        <div class="feature-card">🖼️ Галереи</div>
+                        <div class="feature-card">💾 Резервные копии</div>
+                        <div class="feature-card">🔒 Целостность</div>
+                        <div class="feature-card">🐙 Git</div>
+                        <div class="feature-card">📤 Экспорт</div>
+                        <div class="feature-card">📊 Граф связей</div>
+                    </div>
+                    <p>Все данные хранятся в JSON-файлах в папке <strong>data</strong> — простота резервирования и переносимости.</p>
+                </div>
+            </section>
+
+            <!-- Слайд 6: Раздел «Работы» -->
+            <section class="slide">
+                <div class="logo-background"></div>
+                <div class="content-container">
+                    <h2>Каталогизация работ</h2>
+                    <p>При добавлении работы указываются:</p>
+                    <div class="feature-grid">
+                        <div class="feature-card">Название, описание, дата</div>
+                        <div class="feature-card">Сфера → Жанр → Тема (единообразная классификация)</div>
+                        <div class="feature-card">Произвольные теги</div>
+                        <div class="feature-card">Основной контент, обложка, README (Markdown)</div>
+                        <div class="feature-card">Автоматическое переименование файлов + SHA-256 хеш</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Слайд 7: Связи и граф зависимостей -->
+            <section class="slide">
+                <div class="logo-background"></div>
+                <div class="content-container">
+                    <h2>Визуализация связей</h2>
+                    <p>Поле «Связанные ID» создаёт граф зависимостей между работами (серии рассказов, модули проекта).</p>
+                    <div id="graph-container" style="height: 300px; background: #2d2d2d; border-radius: 5px; border: 1px solid var(--coral); margin: 1rem 0;"></div>
+                    <p style="font-size: 1rem;">Пример: связи между работами разных сфер (литература, программирование, искусство)</p>
+                </div>
+            </section>
+
+            <!-- Слайд 8: Портфолио и шаблоны -->
+            <section class="slide">
+                <div class="logo-background"></div>
+                <div class="content-container">
+                    <h2>Настройка портфолио</h2>
+                    <div class="feature-grid">
+                        <div class="feature-card">Фото, имя, цитата, биография</div>
+                        <div class="feature-card">Цветовая акцентная гамма</div>
+                        <div class="feature-card">Выбор шаблона из папки static/templates</div>
+                        <div class="feature-card">SEO-метатеги для генерируемых страниц</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Слайд 9: Галереи изображений -->
+            <section class="slide">
+                <div class="logo-background"></div>
+                <div class="content-container">
+                    <h2>Галереи</h2>
+                    <p>Создание галерей с множеством изображений, названием, описанием, типом отображения (сетка/список). Изображения хешируются.</p>
+                    <div class="qr-placeholder" style="height:150px;">Пример галереи</div>
+                </div>
+            </section>
+
+            <!-- Слайд 10: Резервное копирование и целостность -->
+            <section class="slide">
+                <div class="logo-background"></div>
+                <div class="content-container">
+                    <h2>Надёжность данных</h2>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h3>💾 Автоматические бэкапы</h3>
+                            <p>ZIP-архивы всех данных и файлов при каждом изменении, ротация (10 копий), ручное создание с комментарием.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>🔍 Проверка целостности</h3>
+                            <p>Сравнение SHA-256 хешей, выявление отсутствующих или повреждённых файлов, восстановление из бэкапа.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Слайд 11: Экспорт статического сайта и Git -->
+            <section class="slide">
+                <div class="logo-background"></div>
+                <div class="content-container">
+                    <h2>Публикация и версионирование</h2>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h3>📦 Экспорт сайта</h3>
+                            <p>Генерация полноценного статического сайта (HTML, «красивые» URL, .htaccess/_redirects) в ZIP-архиве.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>🐙 Git-интеграция</h3>
+                            <p>Опционально: подключение GitHub/GitLab, история коммитов, push/pull, восстановление файлов из прошлых версий.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Слайд 12: Технологический стек -->
+            <section class="slide">
+                <div class="logo-background"></div>
+                <div class="content-container">
+                    <h2>Технологии</h2>
+                    <div class="tech-stack">
+                        <div class="tech-item">Python</div>
+                        <div class="tech-item">Flask</div>
+                        <div class="tech-item">pywebview</div>
+                        <div class="tech-item">JSON</div>
+                        <div class="tech-item">cryptography (Fernet)</div>
+                        <div class="tech-item">PyGithub / python-gitlab</div>
+                        <div class="tech-item">markdown</div>
+                        <div class="tech-item">hashlib</div>
+                        <div class="tech-item">JavaScript (vanilla)</div>
+                    </div>
+                    <p>Кроссплатформенность, простой GUI через встроенный браузер, минимум зависимостей.</p>
+                </div>
+            </section>
+
+            <!-- Слайд 13: Архитектура -->
+            <section class="slide">
+                <div class="logo-background"></div>
+                <div class="content-container">
+                    <h2>Архитектура приложения</h2>
+                    <div class="structure-tree">
+                        <div class="folder">СРКЦН/</div>
+                        <div class="tree-indent">
+                            <div class="file">launch.py</div>
+                            <div class="file">app.py (Flask)</div>
+                            <div class="folder">data/</div>
+                            <div class="tree-indent">
+                                <div class="file">content.json</div>
+                                <div class="file">portfolio.json</div>
+                                <div class="file">galleries.json</div>
+                            </div>
+                            <div class="folder">uploads/</div>
+                            <div class="folder">static/</div>
+                            <div class="tree-indent">
+                                <div class="folder">templates/</div>
+                                <div class="file">app.js (фронтенд)</div>
+                            </div>
+                            <div class="folder">backups/</div>
+                        </div>
+                    </div>
+                    <p>Flask обрабатывает API, фронтенд на чистом JS обновляет интерфейс.</p>
+                </div>
+            </section>
+
+            <!-- Слайд 14: Перспективы развития -->
+            <section class="slide">
+                <div class="logo-background"></div>
+                <div class="content-container">
+                    <h2>Планы на будущее</h2>
+                    <ul style="text-align: left; font-size: 1.2rem; line-height: 2;">
+                        <li>📚 Расширение библиотеки шаблонов, конструктор тем</li>
+                        <li>🔗 Улучшение интерактивного графа связей</li>
+                        <li>☁️ Интеграция с облачными хранилищами (Google Drive, Dropbox)</li>
+                        <li>🌐 Мультиязычность (уже есть английская ветка)</li>
+                        <li>📄 Экспорт в PDF-портфолио</li>
+                        <li>🚀 Публикация сайта прямо из программы (FTP, Netlify)</li>
+                        <li>🧩 Система плагинов</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Слайд 15: Заключительный -->
+            <section class="slide">
+                <div class="logo-background"></div>
+                <div class="content-container floating">
+                    <h1>Готово к использованию!</h1>
+                    <p>Просто, надёжно, бесплатно. Сохраните своё цифровое наследие.</p>
+                    <div style="margin-top: 2rem;">
+                        <div class="tech-item">Кроссплатформенность</div>
+                        <div class="tech-item">Не требует программирования</div>
+                        <div class="tech-item">Открытый исходный код</div>
+                    </div>
+                    <p style="margin-top: 2rem;">Запуск: <span class="highlight">python launch.py</span></p>
+                </div>
+            </section>
+        </div>
+
+        <!-- Навигация -->
+        <div class="nav-buttons">
+            <button class="nav-btn prev-btn">←</button>
+            <button class="nav-btn next-btn">→</button>
+        </div>
+
+        <!-- Прогресс-бар -->
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+    </div>
+
+<script src="https://unpkg.com/cytoscape@3.23.0/dist/cytoscape.min.js"></script>
+<script>
+    class Presentation {
+        constructor() {
+            this.currentSlide = 0;
+            this.totalSlides = document.querySelectorAll('.slide').length;
+            this.slidesWrapper = document.querySelector('.slides-wrapper');
+            this.progressFill = document.querySelector('.progress-fill');
+            
+            this.init();
+        }
+
+        init() {
+            document.querySelector('.next-btn').addEventListener('click', () => this.next());
+            document.querySelector('.prev-btn').addEventListener('click', () => this.prev());
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight') this.next();
+                if (e.key === 'ArrowLeft') this.prev();
+                if (e.key === ' ') this.next();
+                if (e.key === 'Escape') this.goToSlide(0);
+            });
+
+            this.setupTouchEvents();
+            this.setupParallax();
+            this.updateProgress();
+            this.setupGraphObserver();
+        }
+
+        next() {
+            if (this.currentSlide < this.totalSlides - 1) {
+                this.currentSlide++;
+                this.updateSlide();
+            }
+        }
+
+        prev() {
+            if (this.currentSlide > 0) {
+                this.currentSlide--;
+                this.updateSlide();
+            }
+        }
+
+        goToSlide(slideIndex) {
+            if (slideIndex >= 0 && slideIndex < this.totalSlides) {
+                this.currentSlide = slideIndex;
+                this.updateSlide();
+            }
+        }
+
+        updateSlide() {
+            const translateX = -this.currentSlide * 100;
+            this.slidesWrapper.style.transform = `translateX(${translateX}vw)`;
+            this.updateProgress();
+            
+            document.querySelectorAll('.slide').forEach((slide, index) => {
+                slide.classList.toggle('active', index === this.currentSlide);
+                slide.classList.toggle('prev', index < this.currentSlide);
+                slide.classList.toggle('next', index > this.currentSlide);
+            });
+        }
+
+        updateProgress() {
+            const progress = ((this.currentSlide + 1) / this.totalSlides) * 100;
+            this.progressFill.style.width = `${progress}%`;
+        }
+
+        setupTouchEvents() {
+            let startX = 0;
+            document.addEventListener('touchstart', (e) => {
+                startX = e.changedTouches[0].screenX;
+            });
+            document.addEventListener('touchend', (e) => {
+                const endX = e.changedTouches[0].screenX;
+                const diff = startX - endX;
+                if (Math.abs(diff) > 50) {
+                    diff > 0 ? this.next() : this.prev();
+                }
+            });
+        }
+
+        setupParallax() {
+            document.addEventListener('mousemove', (e) => {
+                const x = (e.clientX / window.innerWidth) * 100;
+                const y = (e.clientY / window.innerHeight) * 100;
+                document.querySelector('.parallax-bg').style.transform = 
+                    `translate(${x * 0.05}px, ${y * 0.05}px)`;
+            });
+        }
+
+        setupGraphObserver() {
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                        const slide = mutation.target;
+                        if (slide.classList.contains('active') && slide.querySelector('#graph-container')) {
+                            setTimeout(initDemoGraph, 100);
+                        }
+                    }
+                });
+            });
+            document.querySelectorAll('.slide').forEach(slide => {
+                observer.observe(slide, { attributes: true });
+            });
+        }
+    }
+
+    // Данные для демо-графа (разные сферы)
+    const graphData = {
+        nodes: [
+            { id: '1', label: 'Роман "Эпоха"', sphere: 'literature' },
+            { id: '2', label: 'Цикл стихов "Отражения"', sphere: 'literature' },
+            { id: '3', label: 'Картина "Вихрь"', sphere: 'art' },
+            { id: '4', label: 'Музыкальный альбом "Ноктюрн"', sphere: 'music' },
+            { id: '5', label: 'Научная статья по физике', sphere: 'science' },
+            { id: '6', label: 'Игра-платформер "Кот"', sphere: 'programming' },
+            { id: '7', label: 'Скрипт для анализа данных', sphere: 'programming' }
+        ],
+        edges: [
+            { from: '1', to: '2' },
+            { from: '1', to: '3' },
+            { from: '2', to: '4' },
+            { from: '4', to: '6' },
+            { from: '5', to: '7' },
+            { from: '6', to: '7' }
+        ]
+    };
+
+    function initDemoGraph() {
+        const container = document.getElementById('graph-container');
+        if (!container) return;
+        container.innerHTML = '';
+
+        const elements = [];
+        graphData.nodes.forEach(node => {
+            elements.push({
+                data: {
+                    id: node.id,
+                    label: node.label,
+                    sphere: node.sphere
+                }
+            });
+        });
+        graphData.edges.forEach(edge => {
+            elements.push({
+                data: {
+                    id: `e${edge.from}-${edge.to}`,
+                    source: edge.from,
+                    target: edge.to
+                }
+            });
+        });
+
+        const cy = cytoscape({
+            container: container,
+            elements: elements,
+            style: [
+                {
+                    selector: 'node',
+                    style: {
+                        'background-color': function(ele) {
+                            const sphere = ele.data('sphere');
+                            const colors = {
+                                literature: '#e74c3c',
+                                art: '#f39c12',
+                                music: '#9b59b6',
+                                science: '#3498db',
+                                programming: '#2ecc71'
+                            };
+                            return colors[sphere] || '#888';
+                        },
+                        'label': 'data(label)',
+                        'text-valign': 'center',
+                        'text-halign': 'center',
+                        'color': '#fff',
+                        'text-outline-color': '#000',
+                        'text-outline-width': 2,
+                        'width': 50,
+                        'height': 50,
+                        'font-size': '10px'
+                    }
+                },
+                {
+                    selector: 'edge',
+                    style: {
+                        'width': 2,
+                        'line-color': '#ccc',
+                        'curve-style': 'bezier'
+                    }
+                }
+            ],
+            layout: {
+                name: 'cose',
+                idealEdgeLength: 100,
+                nodeRepulsion: 400000,
+                gravity: 80,
+                numIter: 500
+            }
+        });
+    }
+
+    // Инициализация
+    document.addEventListener('DOMContentLoaded', () => {
+        new Presentation();
+        // Если активный слайд содержит граф, инициализируем
+        const activeSlide = document.querySelector('.slide.active');
+        if (activeSlide && activeSlide.querySelector('#graph-container')) {
+            setTimeout(initDemoGraph, 500);
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тёплые лучи рассвета | примеры тем</title>
+    <meta name="description" content="Коллекция карточек в разных стилях: от cutecore до киберпанка. Каждая карточка имеет уникальный hover-эффект.">
+    <!-- Импорты шрифтов для всех тем -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand:wght@300..700&family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;700;900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Glitch&family=PT+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Prata&family=Noto+Serif+Display:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <style>
+        /* Базовый сброс */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f5f7fa;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        /* Основная сетка */
+        main {
+            max-width: 1400px;
+            width: 100%;
+            margin: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.8rem;
+        }
+
+        /* Карточка-ссылка — вся кликабельна, фиксированная высота */
+        a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            height: 200px;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            transition: box-shadow 0.25s ease, transform 0.2s ease;
+        }
+
+        .card {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 1rem;
+            box-sizing: border-box;
+            transition: box-shadow 0.25s ease, filter 0.25s ease, border-color 0.2s, transform 0.3s ease;
+            word-break: break-word;
+            line-height: 1.4;
+        }
+
+        /* ===== УНИКАЛЬНЫЕ СТИЛИ КАЖДОЙ КАРТОЧКИ ===== */
+
+        /* --- default --- */
+        .card-default {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: #1a1a1a;
+            background-color: #ffffff;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-top: 4px solid #ea53c9;
+        }
+
+        /* --- dark --- */
+        .card-dark {
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            color: #f8f9fa;
+            background-color: #1a1a1a;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            border-top: 4px solid #ea53c9;
+        }
+
+        /* --- cyberpunk --- */
+        .card-cyberpunk {
+            background-color: #0a0a0a;
+            border: 1px solid #ff2d95;
+            box-shadow: 0 0 10px #ff2d95, 0 0 20px #00ffff;
+            font-family: 'Courier New', monospace;
+            color: #ffffff;
+            border-radius: 0.5rem;
+        }
+
+        /* --- creative --- */
+        .card-creative {
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+            color: white;
+            background: linear-gradient(135deg, #8660dd 0%, #ea53c9 100%);
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            font-weight: bold;
+            font-size: 2rem;
+        }
+
+        /* --- minimal --- */
+        .card-minimal {
+            background-color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+            color: #1a1a1a;
+            border-top: 4px solid #ea53c9;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            font-size: 2.2rem;
+            font-weight: 600;
+            border-radius: 0;
+        }
+
+        /* --- professional --- */
+        .card-professional {
+            font-family: 'Roboto', 'Helvetica Neue', system-ui, sans-serif;
+            background: linear-gradient(135deg, #2c5aa0, #3a6cc8);
+            color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            font-size: 2.5rem;
+            font-weight: 500;
+        }
+
+        /* --- opium --- */
+        .card-opium {
+            font-family: 'Comic Sans MS', 'Papyrus', fantasy;
+            color: #ff00ff;
+            background: repeating-linear-gradient(45deg, #88ffff, #88ffff 10px, #ffff88 10px, #ffff88 20px);
+            border: 5px wavy #ff8800;
+            border-radius: 3rem 1rem 2rem 0.5rem;
+            box-shadow: 10px 10px 0 #ff00ff, -5px -5px 15px #00ffff;
+            transform: perspective(500px) rotateX(2deg) rotateY(1deg) rotate(0.5deg);
+            filter: blur(0.3px);
+            text-shadow: 3px 3px 0 #00ff00;
+            transition: all 0.3s ease;
+        }
+
+        /* --- cutecore --- */
+        .card-cutecore {
+            font-family: 'Quicksand', sans-serif;
+            color: #4a4a4a;
+            background-color: #ffe4ec;
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(255, 150, 200, 0.2);
+            border: 2px solid white;
+            font-size: 1.8rem;
+            font-weight: 500;
+        }
+
+        /* --- greenwolf --- */
+        .card-greenwolf {
+            font-family: 'Source Code Pro', monospace;
+            color: #00d600;
+            background-color: #444444;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(126, 255, 67, 0.5);
+            border-top: 4px solid #00880b;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        /* --- vorkuta --- */
+        .card-vorkuta {
+            font-family: 'PT Mono', monospace;
+            color: #d4d4d4;
+            background-color: #2e2e2e;
+            border-radius: 0.5rem;
+            border: 1px solid #b85e3a;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 2px, rgba(0,0,0,0.02) 2px, rgba(0,0,0,0.02) 4px);
+        }
+
+        /* --- cemetery --- */
+        .card-cemetery {
+            font-family: 'UnifrakturMaguntia', cursive;
+            color: #e0e0e0;
+            background-color: #1a1a1a;
+            border: 2px solid #8b0000;
+            border-radius: 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* --- classic --- */
+        .card-classic {
+            font-family: 'Noto Serif Display', serif;
+            color: #2c2c2c;
+            background-color: #f5efe8;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+            border-bottom: 3px solid #b68b5c;
+            font-size: 2rem;
+            font-weight: 400;
+            font-style: italic;
+        }
+
+        /* ===== ОБЩИЙ БАЗОВЫЙ HOVER (для всех, кроме opium) ===== */
+        a:hover .card:not(.card-opium) {
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.15);
+            filter: brightness(1.02);
+            border-color: #ff80d5;
+        }
+
+        /* ===== ИНДИВИДУАЛЬНЫЕ HOVER-ЭФФЕКТЫ ===== */
+
+        /* --- default --- */
+        a:hover .card-default {
+            transform: translateY(-6px) scale(1.02);
+            background: linear-gradient(145deg, #ffffff, #fff5fb);
+            border-top-color: #ffa0e6;
+            border-bottom: 2px solid rgba(234, 83, 201, 0.3);
+            box-shadow: 0 25px 35px -10px rgba(234, 83, 201, 0.3), 0 0 0 1px rgba(234, 83, 201, 0.2);
+            transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.3, 1.1), background 0.2s;
+        }
+
+        /* --- dark --- */
+        a:hover .card-dark {
+            box-shadow: 0 0 30px rgba(234, 83, 201, 0.7), 0 15px 30px rgba(0, 0, 0, 0.8);
+            filter: brightness(1.3) contrast(1.1);
+            border-top-color: #ffb0ec;
+            border-bottom: 1px solid #ea53c9;
+            transform: scale(1.02);
+            background-color: #222;
+        }
+
+        /* --- cyberpunk --- */
+        @keyframes cyberpunkNeonPulse {
+            0% { box-shadow: 0 0 5px #ff2d95, 0 0 15px #ff2d95, 0 0 30px #00ffff, 0 0 60px #00ffff; }
+            100% { box-shadow: 0 0 10px #ff2d95, 0 0 25px #ff2d95, 0 0 50px #00ffff, 0 0 90px #00ffff; }
+        }
+        @keyframes cyberpunkGlitch {
+            0% { text-shadow: 2px 0 #ff2d95, -2px 0 #00ffff, 0 0 5px #ffffff; }
+            20% { text-shadow: -3px 1px #ff2d95, 3px -1px #00ffff, 0 0 8px #ffffff; }
+            40% { text-shadow: 2px -2px #ff2d95, -2px 2px #00ffff, 0 0 3px #ffffff; }
+            60% { text-shadow: -2px 2px #ff2d95, 2px -2px #00ffff, 0 0 10px #ffffff; }
+            80% { text-shadow: 3px 0 #ff2d95, -3px 0 #00ffff, 0 0 6px #ffffff; }
+            100% { text-shadow: 2px 0 #ff2d95, -2px 0 #00ffff, 0 0 5px #ffffff; }
+        }
+        a:hover .card-cyberpunk {
+            animation: cyberpunkNeonPulse 0.8s infinite alternate, cyberpunkGlitch 0.2s infinite;
+            border-color: #ffffff;
+            filter: brightness(1.3) contrast(1.2);
+            transform: scale(1.02) skewX(-0.5deg);
+            transition: transform 0.2s;
+        }
+
+        /* --- creative --- */
+        a:hover .card-creative {
+            box-shadow: 0 20px 40px rgba(134, 96, 221, 0.5);
+            transform: perspective(500px) rotateX(15deg) rotateY(12deg) rotate(3deg) scale(1.05);
+            transition: transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+        }
+
+        /* --- minimal --- */
+        a:hover .card-minimal {
+            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.15), 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-top-color: #ffb0ec;
+            transform: translateY(-2px);
+            background-color: blanchedalmond;
+            font-family: "Space Mono", monospace;
+        }
+
+        /* --- professional (с тайпинг-эффектом) --- */
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        a:hover .card-professional {
+            filter: brightness(1.15) saturate(1.2);
+            box-shadow: 0 20px 35px -5px rgba(44, 90, 160, 0.6);
+            transform: translateY(-4px);
+            background: linear-gradient(135deg, #2e5fb0, #427ad0);
+        }
+        a:hover .card-professional::after {
+            content: "|";
+            display: inline-block;
+            animation: blink 1s step-end infinite;
+            margin-left: 0.25rem;
+            font-weight: 400;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* --- opium (безумная анимация + оверлей) --- */
+        @keyframes opiumFlicker {
+            0% { background: repeating-linear-gradient(45deg, #88ffff, #88ffff 10px, #ffff88 10px, #ffff88 20px); border-color: #ff8800; box-shadow: 10px 10px 0 #ff00ff, -5px -5px 15px #00ffff; }
+            20% { background: repeating-linear-gradient(45deg, #ff88ff, #ff88ff 10px, #88ff88 10px, #88ff88 20px); border-color: #00ffaa; box-shadow: 15px 15px 0 #ffff00, -10px -10px 20px #ff00aa; }
+            40% { background: repeating-linear-gradient(45deg, #ffff88, #ffff88 10px, #ff88ff 10px, #ff88ff 20px); border-color: #aa00ff; box-shadow: 5px 5px 0 #00ffff, -15px -15px 25px #ffaa00; }
+            60% { background: repeating-linear-gradient(45deg, #88ff88, #88ff88 10px, #8888ff 10px, #8888ff 20px); border-color: #ff00aa; box-shadow: 20px 20px 0 #ff8800, -5px -5px 30px #88ff00; }
+            80% { background: repeating-linear-gradient(45deg, #ff8888, #ff8888 10px, #88ffff 10px, #88ffff 20px); border-color: #ffff00; box-shadow: -10px -10px 0 #ff44ff, 15px 15px 25px #44ff44; }
+            100% { background: repeating-linear-gradient(45deg, #88ffff, #88ffff 10px, #ffff88 10px, #ffff88 20px); border-color: #ff8800; box-shadow: 10px 10px 0 #ff00ff, -5px -5px 15px #00ffff; }
+        }
+        a:hover .card-opium {
+            animation: opiumFlicker 0.3s infinite !important;
+            transform: perspective(500px) rotateX(11.5deg) rotateY(0.5deg) rotate(0.7deg) scale(1.02);
+            filter: blur(0.2px) brightness(1.1);
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            mix-blend-mode: overlay;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.2s;
+            background: rgba(255, 0, 255, 0.2);
+        }
+        body:has(a:hover .card-opium)::before {
+            animation: pageFlicker 0.2s infinite;
+            opacity: 1;
+        }
+        @keyframes pageFlicker {
+            0% { background: rgba(255, 0, 255, 0.2); }
+            10% { background: rgba(0, 255, 255, 0.3); }
+            20% { background: rgba(255, 255, 0, 0.25); }
+            30% { background: rgba(0, 255, 0, 0.35); }
+            40% { background: rgba(255, 0, 0, 0.3); }
+            50% { background: rgba(0, 0, 255, 0.4); }
+            60% { background: rgba(255, 165, 0, 0.3); }
+            70% { background: rgba(128, 0, 128, 0.35); }
+            80% { background: rgba(0, 255, 255, 0.3); }
+            90% { background: rgba(255, 20, 147, 0.4); }
+            100% { background: rgba(255, 0, 255, 0.2); }
+        }
+
+        /* --- cutecore (сердечко + покачивание) --- */
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        a:hover .card-cutecore {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 30px -5px rgba(255, 150, 200, 0.5), 0 0 0 2px #ffb6c1 inset;
+            filter: brightness(1.05);
+        }
+        a:hover .card-cutecore::after {
+            content: "❤️";
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.5rem;
+            opacity: 0.6;
+            animation: heartBeat 1s infinite;
+        }
+
+        /* --- greenwolf (зелёное свечение) --- */
+        a:hover .card-greenwolf {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 0 20px #00d600, 0 0 40px #00d600;
+            border-color: #b8ff47;
+            filter: brightness(1.2) contrast(1.1);
+            background-color: #2a2a2a;
+        }
+
+        /* --- vorkuta (ржавчина и шатание) --- */
+        @keyframes rustShake {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(1px, -1px); }
+            75% { transform: translate(-1px, 1px); }
+        }
+        a:hover .card-vorkuta {
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.9), 0 0 0 2px #b85e3a inset;
+            filter: brightness(1.1) contrast(1.2);
+            border-color: #d47c4e;
+        }
+        a:hover .card-vorkuta::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(45deg, rgba(184,94,58,0.1) 0px, rgba(184,94,58,0.1) 2px, transparent 2px, transparent 4px);
+            pointer-events: none;
+            animation: rustShake 0.2s infinite;
+        }
+
+        /* --- cemetery (кровавое свечение и надгробие) --- */
+        a:hover .card-cemetery {
+            transform: translateY(-8px) rotate(0.5deg);
+            box-shadow: 0 20px 30px -5px rgba(139, 0, 0, 0.5), 0 0 0 2px #8b0000 inset;
+            filter: grayscale(30%) brightness(1.1);
+            border-color: #a52a2a;
+        }
+        a:hover .card-cemetery::after {
+            content: "🪦";
+            position: absolute;
+            bottom: 10px;
+            right: 15px;
+            font-size: 1.5rem;
+            opacity: 0.3;
+        }
+
+        /* --- classic (элегантный подъём) --- */
+        a:hover .card-classic {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 30px 40px -15px rgba(182, 139, 92, 0.4), 0 0 0 1px #b68b5c inset;
+            background-color: #faf5ec;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 600px) {
+            a {
+                height: 180px;
+            }
+            .card-creative, .card-minimal, .card-professional,
+            .card-cutecore, .card-greenwolf, .card-vorkuta,
+            .card-cemetery, .card-classic {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <!-- default -->
+        <a href="/events/SoRUPP_presentation/examples/default/">
+            <div class="card card-default">default</div>
+        </a>
+        <!-- dark -->
+        <a href="/events/SoRUPP_presentation/examples/dark/">
+            <div class="card card-dark">dark</div>
+        </a>
+        <!-- cyberpunk -->
+        <a href="/events/SoRUPP_presentation/examples/cyberpunk/">
+            <div class="card card-cyberpunk">cyberpunk</div>
+        </a>
+        <!-- creative -->
+        <a href="/events/SoRUPP_presentation/examples/creative/">
+            <div class="card card-creative">creative</div>
+        </a>
+        <!-- minimal -->
+        <a href="/events/SoRUPP_presentation/examples/minimal/">
+            <div class="card card-minimal">minimal</div>
+        </a>
+        <!-- professional -->
+        <a href="/events/SoRUPP_presentation/examples/professional/">
+            <div class="card card-professional">professional</div>
+        </a>
+        <!-- opium -->
+        <a href="/events/SoRUPP_presentation/examples/opium/">
+            <div class="card card-opium">opium</div>
+        </a>
+        <!-- cutecore -->
+        <a href="/events/SoRUPP_presentation/examples/cutecore/">
+            <div class="card card-cutecore">cutecore</div>
+        </a>
+        <!-- greenwolf -->
+        <a href="/events/SoRUPP_presentation/examples/greenwolf/">
+            <div class="card card-greenwolf">greenwolf</div>
+        </a>
+        <!-- vorkuta -->
+        <a href="/events/SoRUPP_presentation/examples/vorkuta/">
+            <div class="card card-vorkuta">vorkuta</div>
+        </a>
+        <!-- cemetery -->
+        <a href="/events/SoRUPP_presentation/examples/cemetery/">
+            <div class="card card-cemetery">cemetery</div>
+        </a>
+        <!-- classic -->
+        <a href="/events/SoRUPP_presentation/examples/classic/">
+            <div class="card card-classic">classic</div>
+        </a>
+    </main>
+</body>
+</html>
