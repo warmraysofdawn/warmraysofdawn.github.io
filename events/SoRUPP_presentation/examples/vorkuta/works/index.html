@@ -1,168 +1,128 @@
 <!DOCTYPE html>
+
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мои работы - Фрэнсис Скотт Фицджеральд | SoRUPP</title>
-    <link rel="stylesheet" href="/styles.css">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Мои работы - Фрэнсис Скотт Фицджеральд | SoRUPP</title>
+<link href="../styles.css" rel="stylesheet"/>
 </head>
 <body>
-    <div class="container">
-        <header class="portfolio-header">
-            
-            <img src="/portrait/portrait_1772140492.037678_1645517905_f-scott-fitzgerald.webp" alt="Фрэнсис Скотт Фицджеральд " class="portfolio-avatar">
-            
-            <h1 class="portfolio-title">Фрэнсис Скотт Фицджеральд </h1>
-            <p class="portfolio-quote">Если тебе вдруг захочется осудить кого-то, вспомни, что не все люди на свете обладают теми преимуществами, которыми обладал ты. </p>
-        </header>
-        
-        <nav class="portfolio-nav">
-            <ul>
-                <li><a href="/">Обо мне</a></li>
-                <li><a href="/works" class="active">Мои работы</a></li>
-                <li><a href="/graph">Дерево творчества</a></li>
-                <li><a href="/downloads">Скачать все работы</a></li>
-                <li><a href="/gallery">Галереи</a></li>
-            </ul>
-        </nav>
-        
-        <main>
-            <div class="filters">
-                <select id="sphereFilter">
-                    <option value="">Все сферы</option>
-                    
-                    <option value="programming">Программирование</option>
-                    
-                    <option value="literature">Литература</option>
-                    
-                    <option value="science_pop">Научпоп / Педагогика</option>
-                    
-                    <option value="digital_art">Цифровое искусство</option>
-                    
-                    <option value="traditional_art">Изобразительное искусство</option>
-                    
-                    <option value="science_research">Научные работы</option>
-                    
-                </select>
-                
-                <select id="genreFilter">
-                    <option value="">Все жанры</option>
-                </select>
-                
-                <input type="text" id="searchInput" placeholder="Поиск по названию...">
-            </div>
-            
-            <div class="works-list">
-                
-                <div class="work-item" data-sphere="literature" data-genre="realism">
-                    
-                    <img src="/covers/1772139718.723162_This_Side_of_Paradise_dust_jacket.jpg" alt="По эту сторону рая">
-                    
-                    <div class="work-info">
-                        <h3>По эту сторону рая</h3>
-                        <p class="work-meta"> • </p>
-                        <p class="work-date">Создано: 1920-03-26</p>
-                        <p class="work-desc">История молодого человека, ищущего свой путь в жизни после Первой мировой войны. Стал манифестом &#34;потерянного поколения&#34;</p>
-                        
-                        
-                        <div class="work-actions">
-                            <a href="content/1772139718.722162_По эту сторону рая.pdf" target="_blank" class="btn">Открыть</a>
-                            <a href="content/1772139718.722162_По эту сторону рая.pdf" download class="btn btn-download">
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                                    <path d="M8 10.5L4 6.5H6V2H10V6.5H12L8 10.5Z"/>
-                                    <path d="M14 12V14H2V12H0V14C0 15.1 0.9 16 2 16H14C15.1 16 16 15.1 16 14V12H14Z"/>
-                                </svg>
+<div class="container">
+<header class="portfolio-header">
+<img alt="Фрэнсис Скотт Фицджеральд " class="portfolio-avatar" src="../portrait/portrait_1772140492.037678_1645517905_f-scott-fitzgerald.webp"/>
+<h1 class="portfolio-title">Фрэнсис Скотт Фицджеральд </h1>
+<p class="portfolio-quote">Если тебе вдруг захочется осудить кого-то, вспомни, что не все люди на свете обладают теми преимуществами, которыми обладал ты. </p>
+</header>
+<nav class="portfolio-nav">
+<ul>
+<li><a href="..">Обо мне</a></li>
+<li><a class="active" href=".">Мои работы</a></li>
+<li><a href="../graph">Дерево творчества</a></li>
+<li><a href="../downloads">Скачать все работы</a></li>
+<li><a href="../gallery">Галереи</a></li>
+</ul>
+</nav>
+<main>
+<div class="filters">
+<select id="sphereFilter">
+<option value="">Все сферы</option>
+<option value="programming">Программирование</option>
+<option value="literature">Литература</option>
+<option value="science_pop">Научпоп / Педагогика</option>
+<option value="digital_art">Цифровое искусство</option>
+<option value="traditional_art">Изобразительное искусство</option>
+<option value="science_research">Научные работы</option>
+</select>
+<select id="genreFilter">
+<option value="">Все жанры</option>
+</select>
+<input id="searchInput" placeholder="Поиск по названию..." type="text"/>
+</div>
+<div class="works-list">
+<div class="work-item" data-genre="realism" data-sphere="literature">
+<img alt="По эту сторону рая" src="../covers/1772139718.723162_This_Side_of_Paradise_dust_jacket.jpg"/>
+<div class="work-info">
+<h3>По эту сторону рая</h3>
+<p class="work-meta"> • </p>
+<p class="work-date">Создано: 1920-03-26</p>
+<p class="work-desc">История молодого человека, ищущего свой путь в жизни после Первой мировой войны. Стал манифестом "потерянного поколения"</p>
+<div class="work-actions">
+<a class="btn" href="content/1772139718.722162_По эту сторону рая.pdf" target="_blank">Открыть</a>
+<a class="btn btn-download" download="" href="content/1772139718.722162_По эту сторону рая.pdf">
+<svg fill="currentColor" height="16" viewbox="0 0 16 16" width="16">
+<path d="M8 10.5L4 6.5H6V2H10V6.5H12L8 10.5Z"></path>
+<path d="M14 12V14H2V12H0V14C0 15.1 0.9 16 2 16H14C15.1 16 16 15.1 16 14V12H14Z"></path>
+</svg>
                                 Скачать
                             </a>
-                        </div>
-                        
-                    </div>
-                </div>
-                
-                <div class="work-item" data-sphere="literature" data-genre="realism">
-                    
-                    <img src="/covers/1772139918.549162_The_Great_Gatsby_Cover_1925_Retouched.jpg" alt="Великий Гэтсби">
-                    
-                    <div class="work-info">
-                        <h3>Великий Гэтсби</h3>
-                        <p class="work-meta"> • </p>
-                        <p class="work-date">Создано: 1925-04-10</p>
-                        <p class="work-desc">Главный шедевр писателя. Кристально чистая по форме и глубокая по содержанию история о любви, богатстве и крушении иллюзий, развенчивающая миф об &#34;американской мечте&#34;</p>
-                        
-                        
-                        <div class="work-actions">
-                            <a href="content/1772139918.549162_Великий Гэтсби.pdf" target="_blank" class="btn">Открыть</a>
-                            <a href="content/1772139918.549162_Великий Гэтсби.pdf" download class="btn btn-download">
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                                    <path d="M8 10.5L4 6.5H6V2H10V6.5H12L8 10.5Z"/>
-                                    <path d="M14 12V14H2V12H0V14C0 15.1 0.9 16 2 16H14C15.1 16 16 15.1 16 14V12H14Z"/>
-                                </svg>
+</div>
+</div>
+</div>
+<div class="work-item" data-genre="realism" data-sphere="literature">
+<img alt="Великий Гэтсби" src="../covers/1772139918.549162_The_Great_Gatsby_Cover_1925_Retouched.jpg"/>
+<div class="work-info">
+<h3>Великий Гэтсби</h3>
+<p class="work-meta"> • </p>
+<p class="work-date">Создано: 1925-04-10</p>
+<p class="work-desc">Главный шедевр писателя. Кристально чистая по форме и глубокая по содержанию история о любви, богатстве и крушении иллюзий, развенчивающая миф об "американской мечте"</p>
+<div class="work-actions">
+<a class="btn" href="content/1772139918.549162_Великий Гэтсби.pdf" target="_blank">Открыть</a>
+<a class="btn btn-download" download="" href="content/1772139918.549162_Великий Гэтсби.pdf">
+<svg fill="currentColor" height="16" viewbox="0 0 16 16" width="16">
+<path d="M8 10.5L4 6.5H6V2H10V6.5H12L8 10.5Z"></path>
+<path d="M14 12V14H2V12H0V14C0 15.1 0.9 16 2 16H14C15.1 16 16 15.1 16 14V12H14Z"></path>
+</svg>
                                 Скачать
                             </a>
-                        </div>
-                        
-                    </div>
-                </div>
-                
-                <div class="work-item" data-sphere="literature" data-genre="realism">
-                    
-                    <img src="/covers/1772140122.376039_Tender_Is_the_Night_(1934_1st_ed_dust_jacket).jpg" alt="Ночь нежна">
-                    
-                    <div class="work-info">
-                        <h3>Ночь нежна</h3>
-                        <p class="work-meta"> • </p>
-                        <p class="work-date">Создано: 1934-01-01</p>
-                        <p class="work-desc">Сложный, автобиографичный роман о талантливом психиатре, чья жизнь и дарование разрушаются под влиянием богатства и болезненной жены. Исследование истощения души</p>
-                        
-                        
-                        <div class="work-actions">
-                            <a href="content/1772140122.376039_Ночь нежна.pdf" target="_blank" class="btn">Открыть</a>
-                            <a href="content/1772140122.376039_Ночь нежна.pdf" download class="btn btn-download">
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                                    <path d="M8 10.5L4 6.5H6V2H10V6.5H12L8 10.5Z"/>
-                                    <path d="M14 12V14H2V12H0V14C0 15.1 0.9 16 2 16H14C15.1 16 16 15.1 16 14V12H14Z"/>
-                                </svg>
+</div>
+</div>
+</div>
+<div class="work-item" data-genre="realism" data-sphere="literature">
+<img alt="Ночь нежна" src="../covers/1772140122.376039_Tender_Is_the_Night_(1934_1st_ed_dust_jacket).jpg"/>
+<div class="work-info">
+<h3>Ночь нежна</h3>
+<p class="work-meta"> • </p>
+<p class="work-date">Создано: 1934-01-01</p>
+<p class="work-desc">Сложный, автобиографичный роман о талантливом психиатре, чья жизнь и дарование разрушаются под влиянием богатства и болезненной жены. Исследование истощения души</p>
+<div class="work-actions">
+<a class="btn" href="content/1772140122.376039_Ночь нежна.pdf" target="_blank">Открыть</a>
+<a class="btn btn-download" download="" href="content/1772140122.376039_Ночь нежна.pdf">
+<svg fill="currentColor" height="16" viewbox="0 0 16 16" width="16">
+<path d="M8 10.5L4 6.5H6V2H10V6.5H12L8 10.5Z"></path>
+<path d="M14 12V14H2V12H0V14C0 15.1 0.9 16 2 16H14C15.1 16 16 15.1 16 14V12H14Z"></path>
+</svg>
                                 Скачать
                             </a>
-                        </div>
-                        
-                    </div>
-                </div>
-                
-                <div class="work-item" data-sphere="literature" data-genre="realism">
-                    
-                    <img src="/covers/1772140243.353849_Beautifuldamned.jpg" alt="Прекрасные и проклятые">
-                    
-                    <div class="work-info">
-                        <h3>Прекрасные и проклятые</h3>
-                        <p class="work-meta"> • </p>
-                        <p class="work-date">Создано: 1920-01-01</p>
-                        <p class="work-desc">Горькая история супружеской пары из высшего общества, прожигающей жизнь в ожидании наследства. Исследование декаданса и морального разложения</p>
-                        
-                        
-                        <div class="work-actions">
-                            <a href="content/1772140243.351799_Fitzgerald_Prekrasnye_i_proklyatye.pdf" target="_blank" class="btn">Открыть</a>
-                            <a href="content/1772140243.351799_Fitzgerald_Prekrasnye_i_proklyatye.pdf" download class="btn btn-download">
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                                    <path d="M8 10.5L4 6.5H6V2H10V6.5H12L8 10.5Z"/>
-                                    <path d="M14 12V14H2V12H0V14C0 15.1 0.9 16 2 16H14C15.1 16 16 15.1 16 14V12H14Z"/>
-                                </svg>
+</div>
+</div>
+</div>
+<div class="work-item" data-genre="realism" data-sphere="literature">
+<img alt="Прекрасные и проклятые" src="../covers/1772140243.353849_Beautifuldamned.jpg"/>
+<div class="work-info">
+<h3>Прекрасные и проклятые</h3>
+<p class="work-meta"> • </p>
+<p class="work-date">Создано: 1920-01-01</p>
+<p class="work-desc">Горькая история супружеской пары из высшего общества, прожигающей жизнь в ожидании наследства. Исследование декаданса и морального разложения</p>
+<div class="work-actions">
+<a class="btn" href="content/1772140243.351799_Fitzgerald_Prekrasnye_i_proklyatye.pdf" target="_blank">Открыть</a>
+<a class="btn btn-download" download="" href="content/1772140243.351799_Fitzgerald_Prekrasnye_i_proklyatye.pdf">
+<svg fill="currentColor" height="16" viewbox="0 0 16 16" width="16">
+<path d="M8 10.5L4 6.5H6V2H10V6.5H12L8 10.5Z"></path>
+<path d="M14 12V14H2V12H0V14C0 15.1 0.9 16 2 16H14C15.1 16 16 15.1 16 14V12H14Z"></path>
+</svg>
                                 Скачать
                             </a>
-                        </div>
-                        
-                    </div>
-                </div>
-                
-            </div>
-        </main>
-        
-        <footer class="portfolio-footer">
-            <a href="https://github.com/warmraysofdawn/SoRUPP" target="blank">Сайт создан при помощи СРКЦН</a>
-        </footer>
-    </div>
-    
-    <script>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer class="portfolio-footer">
+<a href="https://github.com/warmraysofdawn/SoRUPP" target="blank">Сайт создан при помощи СРКЦН</a>
+</footer>
+</div>
+<script>
         // Скрипт для фильтрации работ
         document.addEventListener('DOMContentLoaded', function() {
             const sphereFilter = document.getElementById('sphereFilter');

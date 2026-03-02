@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Галереи - Фрэнсис Скотт Фицджеральд | SoRUPP</title>
-    <link rel="stylesheet" href="/styles.css">
-    <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Галереи - Фрэнсис Скотт Фицджеральд | SoRUPP</title>
+<link href="../styles.css" rel="stylesheet"/>
+<style>
         .gallery-section {
             margin-bottom: 40px;
             padding: 20px;
@@ -39,79 +40,53 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <header class="portfolio-header">
-            
-            <img src="/portrait/portrait_1772140492.037678_1645517905_f-scott-fitzgerald.webp" alt="Фрэнсис Скотт Фицджеральд " class="portfolio-avatar">
-            
-            <h1 class="portfolio-title">Фрэнсис Скотт Фицджеральд </h1>
-            <p class="portfolio-quote">Если тебе вдруг захочется осудить кого-то, вспомни, что не все люди на свете обладают теми преимуществами, которыми обладал ты. </p>
-        </header>
-        
-        <nav class="portfolio-nav">
-            <ul>
-                <li><a href="/">Обо мне</a></li>
-                <li><a href="/works">Мои работы</a></li>
-                <li><a href="/graph">Дерево творчества</a></li>
-                <li><a href="/downloads">Скачать все работы</a></li>
-                <li><a href="/gallery" class="active">Галереи</a></li>
-            </ul>
-        </nav>
-        
-        <main>
-            <section class="portfolio-section">
-                <h2>Галереи изображений</h2>
-                <p>Здесь представлены все мои галереи изображений.</p>
-                
-                
-                    
-                    <div class="gallery-section">
-                        <h3>Портреты</h3>
-                        
-                        <p>Портретные фото литератора при жизни</p>
-                        
-                        
-                        <div class="gallery-images">
-                            
-                            <img src="/galleries/gallery_1772140635.637089_images (1).jfif" alt="Портреты - Изображение 1" 
-                                 onclick="openLightbox('gallery-1', 'gallery_1772140635.637089_images (1).jfif')">
-                            
-                            <img src="/galleries/gallery_1772140635.637392_images.jfif" alt="Портреты - Изображение 2" 
-                                 onclick="openLightbox('gallery-1', 'gallery_1772140635.637392_images.jfif')">
-                            
-                            <img src="/galleries/gallery_1772140635.637392_upload-AP_00101102637-pic905-895x505-75276.jpg" alt="Портреты - Изображение 3" 
-                                 onclick="openLightbox('gallery-1', 'gallery_1772140635.637392_upload-AP_00101102637-pic905-895x505-75276.jpg')">
-                            
-                            <img src="/galleries/gallery_1772140635.637392_F._Scott_Fitzgerald_(1929_photo_portrait_by_Nickolas_Muray)_Cropped.jpg" alt="Портреты - Изображение 4" 
-                                 onclick="openLightbox('gallery-1', 'gallery_1772140635.637392_F._Scott_Fitzgerald_(1929_photo_portrait_by_Nickolas_Muray)_Cropped.jpg')">
-                            
-                            <img src="/galleries/gallery_1772140635.637392_1645517905_f-scott-fitzgerald.webp" alt="Портреты - Изображение 5" 
-                                 onclick="openLightbox('gallery-1', 'gallery_1772140635.637392_1645517905_f-scott-fitzgerald.webp')">
-                            
-                        </div>
-                    </div>
-                    
-                
-            </section>
-        </main>
-        
-        <footer class="portfolio-footer">
-            <a href="https://github.com/warmraysofdawn/SoRUPP" target="blank">Сайт создан при помощи СРКЦН</a>
-        </footer>
-    </div>
-    
-    <!-- Лайтбокс для просмотра изображений -->
-    <div id="lightbox" class="lightbox hidden">
-        <div class="lightbox-content">
-            <span class="close" onclick="closeLightbox()">&times;</span>
-            <img id="lightbox-img" src="" alt="">
-            <div class="lightbox-nav">
-                <button id="lightbox-prev" onclick="navigateLightbox(-1)">&#10094;</button>
-                <button id="lightbox-next" onclick="navigateLightbox(1)">&#10095;</button>
-            </div>
-        </div>
-    </div>
-
+<div class="container">
+<header class="portfolio-header">
+<img alt="Фрэнсис Скотт Фицджеральд " class="portfolio-avatar" src="../portrait/portrait_1772140492.037678_1645517905_f-scott-fitzgerald.webp"/>
+<h1 class="portfolio-title">Фрэнсис Скотт Фицджеральд </h1>
+<p class="portfolio-quote">Если тебе вдруг захочется осудить кого-то, вспомни, что не все люди на свете обладают теми преимуществами, которыми обладал ты. </p>
+</header>
+<nav class="portfolio-nav">
+<ul>
+<li><a href="..">Обо мне</a></li>
+<li><a href="../works">Мои работы</a></li>
+<li><a href="../graph">Дерево творчества</a></li>
+<li><a href="../downloads">Скачать все работы</a></li>
+<li><a class="active" href=".">Галереи</a></li>
+</ul>
+</nav>
+<main>
+<section class="portfolio-section">
+<h2>Галереи изображений</h2>
+<p>Здесь представлены все мои галереи изображений.</p>
+<div class="gallery-section">
+<h3>Портреты</h3>
+<p>Портретные фото литератора при жизни</p>
+<div class="gallery-images">
+<img alt="Портреты - Изображение 1" onclick="openLightbox('gallery-1', 'gallery_1772140635.637089_images (1).jfif')" src="../galleries/gallery_1772140635.637089_images (1).jfif"/>
+<img alt="Портреты - Изображение 2" onclick="openLightbox('gallery-1', 'gallery_1772140635.637392_images.jfif')" src="../galleries/gallery_1772140635.637392_images.jfif"/>
+<img alt="Портреты - Изображение 3" onclick="openLightbox('gallery-1', 'gallery_1772140635.637392_upload-AP_00101102637-pic905-895x505-75276.jpg')" src="../galleries/gallery_1772140635.637392_upload-AP_00101102637-pic905-895x505-75276.jpg"/>
+<img alt="Портреты - Изображение 4" onclick="openLightbox('gallery-1', 'gallery_1772140635.637392_F._Scott_Fitzgerald_(1929_photo_portrait_by_Nickolas_Muray)_Cropped.jpg')" src="../galleries/gallery_1772140635.637392_F._Scott_Fitzgerald_(1929_photo_portrait_by_Nickolas_Muray)_Cropped.jpg"/>
+<img alt="Портреты - Изображение 5" onclick="openLightbox('gallery-1', 'gallery_1772140635.637392_1645517905_f-scott-fitzgerald.webp')" src="../galleries/gallery_1772140635.637392_1645517905_f-scott-fitzgerald.webp"/>
+</div>
+</div>
+</section>
+</main>
+<footer class="portfolio-footer">
+<a href="https://github.com/warmraysofdawn/SoRUPP" target="blank">Сайт создан при помощи СРКЦН</a>
+</footer>
+</div>
+<!-- Лайтбокс для просмотра изображений -->
+<div class="lightbox hidden" id="lightbox">
+<div class="lightbox-content">
+<span class="close" onclick="closeLightbox()">×</span>
+<img alt="" id="lightbox-img" src=""/>
+<div class="lightbox-nav">
+<button id="lightbox-prev" onclick="navigateLightbox(-1)">❮</button>
+<button id="lightbox-next" onclick="navigateLightbox(1)">❯</button>
+</div>
+</div>
+</div>
 <script>
     // Данные галерей для JavaScript
     const galleryData = [{"created_date": "2026-02-27T00:17:15.643015", "description": "\u041f\u043e\u0440\u0442\u0440\u0435\u0442\u043d\u044b\u0435 \u0444\u043e\u0442\u043e \u043b\u0438\u0442\u0435\u0440\u0430\u0442\u043e\u0440\u0430 \u043f\u0440\u0438 \u0436\u0438\u0437\u043d\u0438", "id": 1, "images": ["gallery_1772140635.637089_images (1).jfif", "gallery_1772140635.637392_images.jfif", "gallery_1772140635.637392_upload-AP_00101102637-pic905-895x505-75276.jpg", "gallery_1772140635.637392_F._Scott_Fitzgerald_(1929_photo_portrait_by_Nickolas_Muray)_Cropped.jpg", "gallery_1772140635.637392_1645517905_f-scott-fitzgerald.webp"], "title": "\u041f\u043e\u0440\u0442\u0440\u0435\u0442\u044b", "type": "slider"}];
@@ -208,6 +183,5 @@
         }
     });
 </script>
-    
 </body>
 </html>
