@@ -3,483 +3,1387 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Тёплые лучи рассвета | примеры тем</title>
-    <meta name="description" content="Коллекция карточек в разных стилях: от cutecore до киберпанка. Каждая карточка имеет уникальный hover-эффект.">
-    <!-- Импорты шрифтов для всех тем -->
+    <title>Коллекция тем | Тёплые лучи рассвета</title>
+    <meta name="description" content="29 уникальных стилей карточек от поэта и web-разработчика. Каждая карточка — как строка в стихотворении.">
+
+    <!-- Импорты шрифтов -->
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand:wght@300..700&family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;700;900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Rubik+Glitch&family=PT+Mono&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Prata&family=Noto+Serif+Display:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@300;400;700&family=Rock+Salt&family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=PT+Sans+Narrow:wght@400;700&family=Oswald:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Cutive+Mono&family=Rubik+Glitch&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Special+Elite&family=VT323&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Inconsolata:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;600;700&family=Staatliches&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;500;600;700&family=Comfortaa:wght@300;400;500;600;700&family=Cormorant+Garamond:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Noto+Sans+Arabic:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
     <style>
-        /* Базовый сброс */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* ===== ГЛОБАЛЬНЫЕ СТИЛИ ===== */
+        :root {
+            --header-bg: rgba(151, 46, 81, 0.85);
+            --header-bg-solid: #972e51;
+            --accent-pink: #ea53c9;
+            --accent-gold: #d4af37;
+            --text-light: #f8f9fa;
+            --text-dark: #1a1a1a;
+            --transition-smooth: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow-soft: 0 10px 40px -15px rgba(0,0,0,0.15);
+            --shadow-glow: 0 0 30px rgba(234, 83, 201, 0.4);
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
         body {
-            background: #f5f7fa;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8eeff 100%);
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
         }
 
-        /* Основная сетка */
+        /* ===== ХЕДЕР ===== */
+        header {
+            position: sticky; top: 0; z-index: 1000;
+            background: var(--header-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 1rem 2rem;
+            display: flex; align-items: center; justify-content: space-between;
+            flex-wrap: wrap; gap: 1rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+        }
+        .header-left { display: flex; align-items: center; gap: 1rem; }
+        .header-logo {
+            height: 48px; width: auto;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+            transition: var(--transition-smooth);
+        }
+        .header-logo:hover { transform: scale(1.05) rotate(-2deg); filter: drop-shadow(0 4px 12px rgba(255,255,255,0.4)); }
+        .site-title {
+            color: var(--text-light);
+            font-family: 'Playfair Display SC', serif;
+            font-size: 1.6rem; font-weight: 700; letter-spacing: 0.5px;
+        }
+        .site-title span {
+            display: block; font-family: 'Great Vibes', cursive;
+            font-size: 1.1rem; font-weight: 400; opacity: 0.9; margin-top: -4px;
+        }
+        .author-badge {
+            background: rgba(255,255,255,0.15); color: var(--text-light);
+            padding: 0.4rem 0.9rem; border-radius: 2rem;
+            font-size: 0.85rem; font-weight: 500;
+            border: 1px solid rgba(255,255,255,0.25);
+            display: flex; align-items: center; gap: 0.4rem;
+        }
+        .author-badge::before { content: "✦"; color: var(--accent-gold); }
+        .header-controls { display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap; }
+        .sort-btn {
+            background: rgba(255,255,255,0.12); color: var(--text-light);
+            border: 1px solid rgba(255,255,255,0.25);
+            padding: 0.5rem 1rem; border-radius: 0.5rem;
+            font-size: 0.9rem; font-weight: 500; cursor: pointer;
+            transition: var(--transition-smooth);
+            display: flex; align-items: center; gap: 0.4rem;
+        }
+        .sort-btn:hover, .sort-btn.active {
+            background: rgba(255,255,255,0.25); transform: translateY(-2px); border-color: var(--accent-pink);
+        }
+        .sort-btn.active { box-shadow: 0 0 0 2px var(--accent-pink); }
+        .sort-btn svg { width: 16px; height: 16px; transition: transform 0.2s; }
+        .sort-btn.asc svg { transform: rotate(180deg); }
+        .search-input {
+            background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 0.5rem; padding: 0.5rem 1rem;
+            color: var(--text-light); font-size: 0.95rem; width: 200px;
+            transition: var(--transition-smooth);
+        }
+        .search-input::placeholder { color: rgba(255,255,255,0.6); }
+        .search-input:focus { outline: none; background: rgba(255,255,255,0.25); border-color: var(--accent-pink); width: 240px; }
+
+        /* ===== ОСНОВНОЙ КОНТЕНТ ===== */
         main {
-            max-width: 1400px;
-            width: 100%;
-            margin: 2rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1.8rem;
+            max-width: 1400px; width: 100%; margin: 2rem auto; padding: 0 2rem;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;
         }
 
-        /* Карточка-ссылка — вся кликабельна, фиксированная высота */
-        a {
-            text-decoration: none;
-            color: inherit;
-            display: block;
-            height: 200px;
-            border-radius: 0.75rem;
-            overflow: hidden;
-            transition: box-shadow 0.25s ease, transform 0.2s ease;
+        /* ===== КАРТОЧКА ===== */
+        .card-wrapper {
+            position: relative; height: 240px; border-radius: 1rem;
+            overflow: visible; perspective: 1000px;
         }
-
+        .card-link {
+            display: block; height: 100%; border-radius: 1rem;
+            overflow: hidden; text-decoration: none; color: inherit;
+            position: relative; transition: var(--transition-smooth);
+        }
         .card {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 1rem;
-            box-sizing: border-box;
-            transition: box-shadow 0.25s ease, filter 0.25s ease, border-color 0.2s, transform 0.3s ease;
-            word-break: break-word;
-            line-height: 1.4;
+            width: 100%; height: 100%;
+            display: flex; align-items: center; justify-content: center;
+            text-align: center; padding: 1rem;
+            transition: var(--transition-smooth);
+            word-break: break-word; line-height: 1.4;
+            font-weight: 600; font-size: 1.5rem;
+            position: relative; z-index: 2; border-radius: 1rem;
         }
 
-        /* ===== УНИКАЛЬНЫЕ СТИЛИ КАЖДОЙ КАРТОЧКИ ===== */
+        /* ===== ОПИСАНИЕ ===== */
+        .card-description {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            background: linear-gradient(to top, rgba(26,26,26,0.95), rgba(26,26,26,0.85));
+            color: var(--text-light); padding: 1rem 1.2rem;
+            font-size: 0.9rem; line-height: 1.5;
+            transform: translateY(100%); transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 3; border-top: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(8px);
+        }
+        .card-wrapper:hover .card-description { transform: translateY(0); }
+        .card-description::before {
+            content: ""; position: absolute; top: -1px; left: 50%;
+            transform: translateX(-50%); width: 40px; height: 3px;
+            background: var(--accent-pink); border-radius: 2px; opacity: 0.8;
+        }
 
-        /* --- default --- */
+        /* ===== ОБЩИЕ ЭФФЕКТЫ НАВЕДЕНИЯ ===== */
+        .card-link::after {
+            content: ""; position: absolute; inset: 0;
+            background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+                        rgba(255,255,255,0.15), transparent 40%);
+            opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 1; border-radius: 1rem;
+        }
+        .card-wrapper:hover .card-link::after { opacity: 1; }
+        .card-wrapper:hover .card-link {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: var(--shadow-soft), var(--shadow-glow); z-index: 10;
+        }
+        .card-wrapper::before {
+            content: ""; position: absolute; inset: -2px;
+            background: linear-gradient(45deg, var(--accent-pink), #00ffff, var(--accent-gold), var(--accent-pink));
+            background-size: 400% 400%; border-radius: 1.1rem; z-index: -1;
+            opacity: 0; transition: opacity 0.3s; animation: gradientFlow 3s ease infinite;
+        }
+        .card-wrapper:hover::before { opacity: 1; }
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* ===== БАЗОВЫЕ ТЕМЫ ===== */
         .card-default {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            color: #1a1a1a;
-            background-color: #ffffff;
-            border-radius: 0.5rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            border-top: 4px solid #ea53c9;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            color: var(--text-dark);
+            background: linear-gradient(145deg, #ffffff, #fff9fc);
+            border-radius: 1rem; border-top: 4px solid var(--accent-pink);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .card-wrapper:hover .card-default {
+            background: linear-gradient(145deg, #fff5fb, #ffffff);
+            border-top-color: #ff8fd9;
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 25px 50px -12px rgba(234, 83, 201, 0.35);
         }
 
-        /* --- dark --- */
         .card-dark {
-            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-            color: #f8f9fa;
-            background-color: #1a1a1a;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            border-top: 4px solid #ea53c9;
+            font-family: 'Inter', sans-serif; color: var(--text-light);
+            background: linear-gradient(145deg, #1a1a1a, #252525);
+            border-radius: 1rem; border-top: 4px solid var(--accent-pink);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+        }
+        .card-wrapper:hover .card-dark {
+            background: linear-gradient(145deg, #222, #2a2a2a);
+            box-shadow: 0 0 40px rgba(234, 83, 201, 0.6), 0 25px 50px -12px rgba(0,0,0,0.5);
+            border-top-color: #ff8fd9;
         }
 
-        /* --- cyberpunk --- */
+        /* 🔥 CYBERPUNK - УСИЛЕННЫЙ ГЛИТЧ 🔥 */
         .card-cyberpunk {
-            background-color: #0a0a0a;
-            border: 1px solid #ff2d95;
-            box-shadow: 0 0 10px #ff2d95, 0 0 20px #00ffff;
-            font-family: 'Courier New', monospace;
-            color: #ffffff;
-            border-radius: 0.5rem;
+            background: linear-gradient(135deg, #0a0a0a, #151515);
+            border: 2px solid #ff2d95;
+            font-family: 'Space Mono', monospace;
+            color: #ffffff; border-radius: 1rem;
+            text-shadow: 0 0 10px rgba(255,45,149,0.5);
+            position: relative; overflow: hidden;
         }
+        .card-cyberpunk::before {
+            content: ""; position: absolute; inset: 0;
+            background: repeating-linear-gradient(0deg, rgba(0,255,255,0.03) 0px, rgba(0,255,255,0.03) 1px, transparent 2px, transparent 4px);
+            pointer-events: none; opacity: 0.6;
+        }
+        .card-cyberpunk::after {
+            content: ""; position: absolute; inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,45,149,0.1), transparent);
+            animation: cyberScan 3s linear infinite; opacity: 0; transition: opacity 0.2s;
+        }
+        @keyframes cyberScan { 0% { transform: translateY(-100%); } 100% { transform: translateY(500%); } }
+        
+        @keyframes cyberGlitch {
+            0% { text-shadow: 2px 0 #ff2d95, -2px 0 #00ffff; filter: hue-rotate(0deg); }
+            25% { text-shadow: -3px 1px #00ffff, 3px -1px #ff00ff; transform: translateX(-2px) skewX(1deg); }
+            50% { text-shadow: 2px -1px #ff2d95, -2px 1px #00ffff; filter: hue-rotate(180deg); }
+            75% { text-shadow: -2px 2px #00ffff, 2px -2px #ff2d95; transform: translateX(2px) skewX(-1deg); }
+            100% { text-shadow: 2px 0 #ff2d95, -2px 0 #00ffff; filter: hue-rotate(0deg); }
+        }
+        @keyframes cyberPulse {
+            0%,100% { box-shadow: 0 0 15px #ff2d95, 0 0 30px #00ffff, inset 0 0 20px rgba(0,255,255,0.1); border-color: #ff2d95; }
+            50% { box-shadow: 0 0 35px #ff2d95, 0 0 60px #00ffff, inset 0 0 40px rgba(255,45,149,0.3); border-color: #00ffff; }
+        }
+        .card-wrapper:hover .card-cyberpunk {
+            animation: cyberGlitch 0.15s infinite, cyberPulse 1.2s ease-in-out infinite;
+            transform: translateY(-12px) scale(1.04) skewX(-1.5deg);
+            border-color: #ff66b8;
+        }
+        .card-wrapper:hover .card-cyberpunk::after { opacity: 1; }
+        .card-wrapper:hover .card-cyberpunk::before { opacity: 1; animation: scanFlicker 0.1s infinite; }
+        @keyframes scanFlicker { 0%,100% { opacity: 0.6; } 50% { opacity: 1; } }
 
-        /* --- creative --- */
         .card-creative {
-            font-family: 'Poppins', 'Segoe UI', sans-serif;
-            color: white;
-            background: linear-gradient(135deg, #8660dd 0%, #ea53c9 100%);
-            border-radius: 1rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            font-weight: bold;
-            font-size: 2rem;
+            font-family: 'Quicksand', sans-serif; color: white;
+            background: linear-gradient(135deg, #8660dd 0%, #ea53c9 50%, #ff6b9d 100%);
+            border-radius: 1.2rem; font-size: 1.8rem;
+            box-shadow: 0 10px 30px rgba(134, 96, 221, 0.4);
+        }
+        .card-wrapper:hover .card-creative {
+            transform: perspective(600px) rotateX(8deg) rotateY(-5deg) scale(1.04);
+            box-shadow: 0 30px 60px rgba(134, 96, 221, 0.6); filter: brightness(1.05);
         }
 
-        /* --- minimal --- */
+        /* ✨ MINIMAL - ЭЛЕГАНТНАЯ ТРАНСФОРМАЦИЯ ✨ */
         .card-minimal {
-            background-color: #ffffff;
-            font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
-            color: #1a1a1a;
-            border-top: 4px solid #ea53c9;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-            font-size: 2.2rem;
-            font-weight: 600;
-            border-radius: 0;
+            background: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+            color: var(--text-dark);
+            border-top: 4px solid var(--accent-pink);
+            font-size: 2rem; border-radius: 0.8rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            position: relative; overflow: hidden;
+        }
+        .card-minimal::before {
+            content: ""; position: absolute; top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(234,83,201,0.08), transparent);
+            transition: left 0.6s ease;
+        }
+        .card-wrapper:hover .card-minimal {
+            background: linear-gradient(145deg, #fffefc, #fff5e6);
+            border-top-color: #ffb0ec;
+            transform: translateY(-14px) scale(1.04);
+            box-shadow: 0 40px 60px -20px rgba(0,0,0,0.15), 0 0 0 1px rgba(234,83,201,0.2) inset;
+        }
+        .card-wrapper:hover .card-minimal::before { left: 100%; transition: left 0.8s ease; }
+        .card-wrapper:hover .card-minimal::after {
+            content: ""; position: absolute; inset: -2px;
+            border: 2px solid rgba(234,83,201,0.3); border-radius: 1rem;
+            animation: minimalGlow 2s ease-in-out infinite; pointer-events: none;
+        }
+        @keyframes minimalGlow {
+            0%,100% { box-shadow: 0 0 0 rgba(234,83,201,0); opacity: 0.5; }
+            50% { box-shadow: 0 0 20px rgba(234,83,201,0.3); opacity: 1; }
         }
 
-        /* --- professional --- */
         .card-professional {
-            font-family: 'Roboto', 'Helvetica Neue', system-ui, sans-serif;
-            background: linear-gradient(135deg, #2c5aa0, #3a6cc8);
-            color: white;
-            border-radius: 0.5rem;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-            font-size: 2.5rem;
-            font-weight: 500;
+            font-family: 'Inter', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #2c5aa0, #3a7bc8);
+            color: white; border-radius: 1rem; font-size: 1.8rem;
+            box-shadow: 0 8px 25px rgba(44, 90, 160, 0.35);
         }
+        .card-wrapper:hover .card-professional {
+            background: linear-gradient(135deg, #3264b4, #4285d4);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 45px rgba(44, 90, 160, 0.5);
+        }
+        .card-wrapper:hover .card-professional::after {
+            content: "▍"; position: absolute; right: 1rem;
+            animation: blink 1s steps(1) infinite; color: rgba(255,255,255,0.9);
+        }
+        @keyframes blink { 50% { opacity: 0; } }
 
-        /* --- opium --- */
         .card-opium {
-            font-family: 'Comic Sans MS', 'Papyrus', fantasy;
-            color: #ff00ff;
-            background: repeating-linear-gradient(45deg, #88ffff, #88ffff 10px, #ffff88 10px, #ffff88 20px);
-            border: 5px wavy #ff8800;
-            border-radius: 3rem 1rem 2rem 0.5rem;
-            box-shadow: 10px 10px 0 #ff00ff, -5px -5px 15px #00ffff;
-            transform: perspective(500px) rotateX(2deg) rotateY(1deg) rotate(0.5deg);
-            filter: blur(0.3px);
-            text-shadow: 3px 3px 0 #00ff00;
-            transition: all 0.3s ease;
+            font-family: 'Space Mono', monospace; color: #ff00ff;
+            background: repeating-linear-gradient(45deg, #88ffff22, #88ffff22 15px, #ffff8822 15px, #ffff8822 30px);
+            border: 3px dashed #ff88ff; border-radius: 1.5rem;
+            box-shadow: 0 0 20px rgba(255,0,255,0.3); filter: saturate(1.2);
+        }
+        @keyframes opiumGlow {
+            0%,100% { box-shadow: 0 0 20px rgba(255,0,255,0.3), 0 0 40px rgba(0,255,255,0.2); }
+            50% { box-shadow: 0 0 35px rgba(255,0,255,0.5), 0 0 60px rgba(255,255,0,0.3); }
+        }
+        .card-wrapper:hover .card-opium {
+            animation: opiumGlow 2s ease-in-out infinite;
+            transform: translateY(-10px) scale(1.03) rotate(0.5deg); border-style: solid;
         }
 
-        /* --- cutecore --- */
         .card-cutecore {
-            font-family: 'Quicksand', sans-serif;
-            color: #4a4a4a;
-            background-color: #ffe4ec;
-            border-radius: 20px;
-            box-shadow: 0 4px 12px rgba(255, 150, 200, 0.2);
-            border: 2px solid white;
-            font-size: 1.8rem;
-            font-weight: 500;
+            font-family: 'Quicksand', sans-serif; color: #5a4a6a;
+            background: linear-gradient(145deg, #ffe4ec, #ffd6e8);
+            border-radius: 1.5rem; border: 3px solid white;
+            font-size: 1.6rem; box-shadow: 0 8px 25px rgba(255,182,193,0.3);
+        }
+        .card-wrapper:hover .card-cutecore {
+            transform: translateY(-12px) scale(1.03);
+            box-shadow: 0 25px 50px -10px rgba(255,150,200,0.5);
+            background: linear-gradient(145deg, #fff0f5, #ffe4ec);
+        }
+        .card-wrapper:hover .card-cutecore::after {
+            content: "💖"; position: absolute; top: -15px; right: 20px;
+            font-size: 1.8rem; animation: floatHeart 1.5s ease-in-out infinite;
+        }
+        @keyframes floatHeart {
+            0%,100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-10px) scale(1.2); }
         }
 
-        /* --- greenwolf --- */
+        /* 🐺 GREENWOLF - ХАКЕРСКИЙ ТЕРМИНАЛ 🐺 */
         .card-greenwolf {
             font-family: 'Source Code Pro', monospace;
-            color: #00d600;
-            background-color: #444444;
-            border-radius: 0.5rem;
-            box-shadow: 0 2px 4px rgba(126, 255, 67, 0.5);
-            border-top: 4px solid #00880b;
-            font-size: 2rem;
-            font-weight: 700;
+            color: #00ff66;
+            background: linear-gradient(145deg, #0d1117, #161b22);
+            border-radius: 1rem; border-top: 4px solid #00cc33;
+            font-size: 1.8rem;
+            box-shadow: 0 0 20px rgba(0,255,102,0.2);
+            position: relative; overflow: hidden;
         }
+        .card-greenwolf::before {
+            content: "> "; position: absolute; left: 1rem; top: 50%;
+            transform: translateY(-50%); color: #00ff66;
+            opacity: 0; transition: opacity 0.2s; font-weight: 700;
+        }
+        .card-greenwolf::after {
+            content: ""; position: absolute; inset: 0;
+            background: repeating-linear-gradient(0deg, transparent 0px, transparent 2px, rgba(0,255,102,0.03) 3px, rgba(0,255,102,0.03) 4px);
+            opacity: 0; transition: opacity 0.2s; pointer-events: none;
+        }
+        @keyframes codeRain {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 100px; }
+        }
+        .card-wrapper:hover .card-greenwolf {
+            transform: translateY(-14px) scale(1.04);
+            box-shadow: 0 0 40px #00ff66, 0 0 80px rgba(0,255,102,0.4), inset 0 0 30px rgba(0,255,102,0.1);
+            border-top-color: #66ff99;
+            background: linear-gradient(145deg, #0a0f14, #121820);
+        }
+        .card-wrapper:hover .card-greenwolf::before { opacity: 1; animation: cursorBlink 1s steps(1) infinite; }
+        .card-wrapper:hover .card-greenwolf::after { opacity: 1; animation: codeRain 0.5s linear infinite; }
+        @keyframes cursorBlink { 50% { opacity: 0; } }
+        .card-wrapper:hover .card-greenwolf .card { text-shadow: 0 0 15px #00ff66, 0 0 30px rgba(0,255,102,0.5); }
 
-        /* --- vorkuta --- */
         .card-vorkuta {
             font-family: 'PT Mono', monospace;
             color: #d4d4d4;
-            background-color: #2e2e2e;
-            border-radius: 0.5rem;
-            border: 1px solid #b85e3a;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
-            font-size: 1.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 2px, rgba(0,0,0,0.02) 2px, rgba(0,0,0,0.02) 4px);
+            background: linear-gradient(145deg, #2e2e2e, #3a3a3a);
+            border-radius: 1rem; border: 2px solid #b85e3a;
+            font-size: 1.6rem; text-transform: uppercase; letter-spacing: 0.08em;
+            position: relative; overflow: hidden;
         }
+        .card-vorkuta::before {
+            content: ""; position: absolute; inset: 0;
+            background: repeating-linear-gradient(45deg, rgba(184,94,58,0.05) 0px, rgba(184,94,58,0.05) 3px, transparent 3px, transparent 6px);
+            opacity: 0; transition: opacity 0.2s; pointer-events: none;
+        }
+        @keyframes rustParticles {
+            0% { background-position: 0 0; }
+            100% { background-position: 50px 50px; }
+        }
+        @keyframes vorkutaShake {
+            0%,100% { transform: translate(0,0); }
+            20% { transform: translate(2px, -1px); }
+            40% { transform: translate(-1px, 2px); }
+            60% { transform: translate(1px, 1px); }
+            80% { transform: translate(-2px, -1px); }
+        }
+        .card-wrapper:hover .card-vorkuta {
+            animation: vorkutaShake 0.4s ease-in-out;
+            transform: translateY(-12px) scale(1.03);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.7), 0 0 0 3px #b85e3a inset, 0 0 30px rgba(184,94,58,0.4);
+            border-color: #d47c4e;
+            background: linear-gradient(145deg, #252525, #323232);
+        }
+        .card-wrapper:hover .card-vorkuta::before { opacity: 1; animation: rustParticles 2s linear infinite; }
+        .card-wrapper:hover .card-vorkuta::after {
+            content: "⚙"; position: absolute; bottom: 10px; left: 12px;
+            font-size: 1.2rem; color: #b85e3a; opacity: 0.6; animation: gearSpin 3s linear infinite;
+        }
+        @keyframes gearSpin { 100% { transform: rotate(360deg); } }
 
-        /* --- cemetery --- */
+        /* ⚰️ CEMETERY - ГОТИЧЕСКАЯ АТМОСФЕРА ⚰️ */
         .card-cemetery {
             font-family: 'UnifrakturMaguntia', cursive;
-            color: #e0e0e0;
-            background-color: #1a1a1a;
-            border: 2px solid #8b0000;
-            border-radius: 0;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
-            font-size: 2rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+            color: #e8e0d8;
+            background: linear-gradient(145deg, #1a1a1a, #25201f);
+            border: 2px solid #8b0000; border-radius: 0.8rem;
+            font-size: 1.8rem; box-shadow: 0 8px 25px rgba(139,0,0,0.3);
+            position: relative; overflow: hidden;
+        }
+        .card-cemetery::before {
+            content: ""; position: absolute; inset: 0;
+            background: radial-gradient(ellipse at bottom, rgba(139,0,0,0.15), transparent 70%);
+            opacity: 0; transition: opacity 0.3s; pointer-events: none;
+        }
+        .card-cemetery::after {
+            content: ""; position: absolute; inset: 0;
+            background: repeating-radial-gradient(circle at 50% 50%, transparent 0px, transparent 2px, rgba(255,255,255,0.02) 3px, rgba(255,255,255,0.02) 4px);
+            opacity: 0; transition: opacity 0.3s; pointer-events: none;
+        }
+        @keyframes fogDrift {
+            0%,100% { transform: translateX(0); opacity: 0.3; }
+            50% { transform: translateX(20px); opacity: 0.5; }
+        }
+        @keyframes candleFlicker {
+            0%,100% { opacity: 0.8; transform: scale(1); text-shadow: 0 0 10px rgba(255,180,100,0.6); }
+            25% { opacity: 1; transform: scale(1.02); text-shadow: 0 0 20px rgba(255,200,120,0.9); }
+            75% { opacity: 0.9; transform: scale(0.98); text-shadow: 0 0 15px rgba(255,160,80,0.7); }
+        }
+        .card-wrapper:hover .card-cemetery {
+            transform: translateY(-12px) rotate(0.4deg);
+            box-shadow: 0 35px 60px -15px rgba(139,0,0,0.6), 0 0 40px rgba(139,0,0,0.3);
+            border-color: #a52a2a;
+            background: linear-gradient(145deg, #222, #2a2524);
+        }
+        .card-wrapper:hover .card-cemetery::before { opacity: 1; animation: fogDrift 4s ease-in-out infinite; }
+        .card-wrapper:hover .card-cemetery::after { opacity: 1; }
+        .card-wrapper:hover .card-cemetery .card {
+            animation: candleFlicker 1.8s ease-in-out infinite;
+            text-shadow: 0 0 15px rgba(255,180,100,0.7);
+        }
+        .card-wrapper:hover .card-cemetery::after {
+            content: "🕯️"; position: absolute; bottom: 12px; right: 18px;
+            font-size: 1.6rem; animation: candleFlicker 1.5s ease-in-out infinite;
         }
 
-        /* --- classic --- */
         .card-classic {
             font-family: 'Noto Serif Display', serif;
-            color: #2c2c2c;
-            background-color: #f5efe8;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-            border-bottom: 3px solid #b68b5c;
-            font-size: 2rem;
-            font-weight: 400;
-            font-style: italic;
+            color: #3a3228;
+            background: linear-gradient(145deg, #f5efe8, #faf5ec);
+            border-radius: 1rem; border-bottom: 4px solid #b68b5c;
+            font-size: 1.7rem; font-style: italic;
+            box-shadow: 0 6px 20px rgba(182,139,92,0.2);
         }
-
-        /* ===== ОБЩИЙ БАЗОВЫЙ HOVER (для всех, кроме opium) ===== */
-        a:hover .card:not(.card-opium) {
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.15);
-            filter: brightness(1.02);
-            border-color: #ff80d5;
-        }
-
-        /* ===== ИНДИВИДУАЛЬНЫЕ HOVER-ЭФФЕКТЫ ===== */
-
-        /* --- default --- */
-        a:hover .card-default {
-            transform: translateY(-6px) scale(1.02);
-            background: linear-gradient(145deg, #ffffff, #fff5fb);
-            border-top-color: #ffa0e6;
-            border-bottom: 2px solid rgba(234, 83, 201, 0.3);
-            box-shadow: 0 25px 35px -10px rgba(234, 83, 201, 0.3), 0 0 0 1px rgba(234, 83, 201, 0.2);
-            transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.3, 1.1), background 0.2s;
-        }
-
-        /* --- dark --- */
-        a:hover .card-dark {
-            box-shadow: 0 0 30px rgba(234, 83, 201, 0.7), 0 15px 30px rgba(0, 0, 0, 0.8);
-            filter: brightness(1.3) contrast(1.1);
-            border-top-color: #ffb0ec;
-            border-bottom: 1px solid #ea53c9;
-            transform: scale(1.02);
-            background-color: #222;
-        }
-
-        /* --- cyberpunk --- */
-        @keyframes cyberpunkNeonPulse {
-            0% { box-shadow: 0 0 5px #ff2d95, 0 0 15px #ff2d95, 0 0 30px #00ffff, 0 0 60px #00ffff; }
-            100% { box-shadow: 0 0 10px #ff2d95, 0 0 25px #ff2d95, 0 0 50px #00ffff, 0 0 90px #00ffff; }
-        }
-        @keyframes cyberpunkGlitch {
-            0% { text-shadow: 2px 0 #ff2d95, -2px 0 #00ffff, 0 0 5px #ffffff; }
-            20% { text-shadow: -3px 1px #ff2d95, 3px -1px #00ffff, 0 0 8px #ffffff; }
-            40% { text-shadow: 2px -2px #ff2d95, -2px 2px #00ffff, 0 0 3px #ffffff; }
-            60% { text-shadow: -2px 2px #ff2d95, 2px -2px #00ffff, 0 0 10px #ffffff; }
-            80% { text-shadow: 3px 0 #ff2d95, -3px 0 #00ffff, 0 0 6px #ffffff; }
-            100% { text-shadow: 2px 0 #ff2d95, -2px 0 #00ffff, 0 0 5px #ffffff; }
-        }
-        a:hover .card-cyberpunk {
-            animation: cyberpunkNeonPulse 0.8s infinite alternate, cyberpunkGlitch 0.2s infinite;
-            border-color: #ffffff;
-            filter: brightness(1.3) contrast(1.2);
-            transform: scale(1.02) skewX(-0.5deg);
-            transition: transform 0.2s;
-        }
-
-        /* --- creative --- */
-        a:hover .card-creative {
-            box-shadow: 0 20px 40px rgba(134, 96, 221, 0.5);
-            transform: perspective(500px) rotateX(15deg) rotateY(12deg) rotate(3deg) scale(1.05);
-            transition: transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.2);
-        }
-
-        /* --- minimal --- */
-        a:hover .card-minimal {
-            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.15), 0 5px 15px rgba(0, 0, 0, 0.05);
-            border-top-color: #ffb0ec;
-            transform: translateY(-2px);
-            background-color: blanchedalmond;
-            font-family: "Space Mono", monospace;
-        }
-
-        /* --- professional (с тайпинг-эффектом) --- */
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-        a:hover .card-professional {
-            filter: brightness(1.15) saturate(1.2);
-            box-shadow: 0 20px 35px -5px rgba(44, 90, 160, 0.6);
-            transform: translateY(-4px);
-            background: linear-gradient(135deg, #2e5fb0, #427ad0);
-        }
-        a:hover .card-professional::after {
-            content: "|";
-            display: inline-block;
-            animation: blink 1s step-end infinite;
-            margin-left: 0.25rem;
-            font-weight: 400;
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        /* --- opium (безумная анимация + оверлей) --- */
-        @keyframes opiumFlicker {
-            0% { background: repeating-linear-gradient(45deg, #88ffff, #88ffff 10px, #ffff88 10px, #ffff88 20px); border-color: #ff8800; box-shadow: 10px 10px 0 #ff00ff, -5px -5px 15px #00ffff; }
-            20% { background: repeating-linear-gradient(45deg, #ff88ff, #ff88ff 10px, #88ff88 10px, #88ff88 20px); border-color: #00ffaa; box-shadow: 15px 15px 0 #ffff00, -10px -10px 20px #ff00aa; }
-            40% { background: repeating-linear-gradient(45deg, #ffff88, #ffff88 10px, #ff88ff 10px, #ff88ff 20px); border-color: #aa00ff; box-shadow: 5px 5px 0 #00ffff, -15px -15px 25px #ffaa00; }
-            60% { background: repeating-linear-gradient(45deg, #88ff88, #88ff88 10px, #8888ff 10px, #8888ff 20px); border-color: #ff00aa; box-shadow: 20px 20px 0 #ff8800, -5px -5px 30px #88ff00; }
-            80% { background: repeating-linear-gradient(45deg, #ff8888, #ff8888 10px, #88ffff 10px, #88ffff 20px); border-color: #ffff00; box-shadow: -10px -10px 0 #ff44ff, 15px 15px 25px #44ff44; }
-            100% { background: repeating-linear-gradient(45deg, #88ffff, #88ffff 10px, #ffff88 10px, #ffff88 20px); border-color: #ff8800; box-shadow: 10px 10px 0 #ff00ff, -5px -5px 15px #00ffff; }
-        }
-        a:hover .card-opium {
-            animation: opiumFlicker 0.3s infinite !important;
-            transform: perspective(500px) rotateX(11.5deg) rotateY(0.5deg) rotate(0.7deg) scale(1.02);
-            filter: blur(0.2px) brightness(1.1);
-        }
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            mix-blend-mode: overlay;
-            z-index: 9999;
-            opacity: 0;
-            transition: opacity 0.2s;
-            background: rgba(255, 0, 255, 0.2);
-        }
-        body:has(a:hover .card-opium)::before {
-            animation: pageFlicker 0.2s infinite;
-            opacity: 1;
-        }
-        @keyframes pageFlicker {
-            0% { background: rgba(255, 0, 255, 0.2); }
-            10% { background: rgba(0, 255, 255, 0.3); }
-            20% { background: rgba(255, 255, 0, 0.25); }
-            30% { background: rgba(0, 255, 0, 0.35); }
-            40% { background: rgba(255, 0, 0, 0.3); }
-            50% { background: rgba(0, 0, 255, 0.4); }
-            60% { background: rgba(255, 165, 0, 0.3); }
-            70% { background: rgba(128, 0, 128, 0.35); }
-            80% { background: rgba(0, 255, 255, 0.3); }
-            90% { background: rgba(255, 20, 147, 0.4); }
-            100% { background: rgba(255, 0, 255, 0.2); }
-        }
-
-        /* --- cutecore (сердечко + покачивание) --- */
-        @keyframes heartBeat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-        }
-        a:hover .card-cutecore {
+        .card-wrapper:hover .card-classic {
             transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 30px -5px rgba(255, 150, 200, 0.5), 0 0 0 2px #ffb6c1 inset;
-            filter: brightness(1.05);
-        }
-        a:hover .card-cutecore::after {
-            content: "❤️";
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 1.5rem;
-            opacity: 0.6;
-            animation: heartBeat 1s infinite;
+            box-shadow: 0 30px 55px -15px rgba(182,139,92,0.45);
+            background: linear-gradient(145deg, #faf5ec, #fffdf9);
+            border-bottom-color: #c9a57a;
         }
 
-        /* --- greenwolf (зелёное свечение) --- */
-        a:hover .card-greenwolf {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 0 20px #00d600, 0 0 40px #00d600;
-            border-color: #b8ff47;
-            filter: brightness(1.2) contrast(1.1);
-            background-color: #2a2a2a;
+        /* ===== НОВЫЕ ТЕМЫ ===== */
+        .card-prismatica {
+            font-family: 'Space Grotesk', sans-serif;
+            /* ✨ ПОСТОЯННЫЙ ГРАДИЕНТ, БЕЗ ВРАЩЕНИЯ ✨ */
+            background: linear-gradient(135deg, 
+                hsl(200, 30%, 92%) 0%, 
+                hsl(220, 25%, 88%) 25%, 
+                hsl(240, 20%, 85%) 50%, 
+                hsl(260, 25%, 88%) 75%, 
+                hsl(280, 30%, 92%) 100%);
+            color: hsl(0,15%,22%);
+            border: 1px solid hsl(30,40%,82%);
+            border-radius: 1.2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            position: relative; overflow: hidden;
+        }
+        .card-prismatica::before {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(120deg, 
+                transparent 0%, 
+                rgba(255,255,255,0.4) 45%, 
+                rgba(255,255,255,0.6) 50%, 
+                rgba(255,255,255,0.4) 55%, 
+                transparent 100%);
+            transform: translateX(-150%) skewX(-20deg);
+            transition: transform 0.6s ease; pointer-events: none;
+        }
+        .card-wrapper:hover .card-prismatica::before {
+            transform: translateX(150%) skewX(-20deg);
+        }
+        .card-wrapper:hover .card-prismatica {
+            transform: perspective(600px) rotateX(3deg) rotateY(5deg) scale(1.03);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15), 0 0 40px rgba(150,180,220,0.3);
+            border-color: hsl(220,50%,70%);
+        }
+        .card-wrapper:hover .card-prismatica::after {
+            content: "✨"; position: absolute; top: 10px; right: 15px;
+            font-size: 1.2rem; animation: sparkle 1.5s ease-in-out infinite;
+        }
+        @keyframes sparkle {
+            0%,100% { opacity: 0.6; transform: scale(1) rotate(0deg); }
+            50% { opacity: 1; transform: scale(1.3) rotate(180deg); }
         }
 
-        /* --- vorkuta (ржавчина и шатание) --- */
-        @keyframes rustShake {
-            0%, 100% { transform: translate(0, 0); }
-            25% { transform: translate(1px, -1px); }
-            75% { transform: translate(-1px, 1px); }
+        .card-r-y2k {
+            font-family: 'VT323', monospace;
+            background: linear-gradient(145deg, #0c0c0c, #151515);
+            color: #33ff66; border: 2px solid #33ff66;
+            box-shadow: 0 0 12px rgba(51,255,102,0.4);
+            text-shadow: 0 0 3px #33ff66; border-radius: 1rem;
         }
-        a:hover .card-vorkuta {
-            transform: translateY(-6px) scale(1.01);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.9), 0 0 0 2px #b85e3a inset;
-            filter: brightness(1.1) contrast(1.2);
-            border-color: #d47c4e;
+        @keyframes crtScan { 0% { background-position: 0 0; } 100% { background-position: 0 100%; } }
+        .card-r-y2k::after {
+            content: ''; position: absolute; inset: 0;
+            background: repeating-linear-gradient(0deg, rgba(51,255,102,0.04) 0px, rgba(51,255,102,0.04) 2px, transparent 2px, transparent 4px);
+            pointer-events: none; opacity: 0; transition: opacity 0.2s;
         }
-        a:hover .card-vorkuta::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: repeating-linear-gradient(45deg, rgba(184,94,58,0.1) 0px, rgba(184,94,58,0.1) 2px, transparent 2px, transparent 4px);
-            pointer-events: none;
-            animation: rustShake 0.2s infinite;
-        }
-
-        /* --- cemetery (кровавое свечение и надгробие) --- */
-        a:hover .card-cemetery {
-            transform: translateY(-8px) rotate(0.5deg);
-            box-shadow: 0 20px 30px -5px rgba(139, 0, 0, 0.5), 0 0 0 2px #8b0000 inset;
-            filter: grayscale(30%) brightness(1.1);
-            border-color: #a52a2a;
-        }
-        a:hover .card-cemetery::after {
-            content: "🪦";
-            position: absolute;
-            bottom: 10px;
-            right: 15px;
-            font-size: 1.5rem;
-            opacity: 0.3;
-        }
-
-        /* --- classic (элегантный подъём) --- */
-        a:hover .card-classic {
+        .card-wrapper:hover .card-r-y2k {
+            animation: flickerCRT 0.15s infinite;
+            box-shadow: 0 0 25px #33ff66, 0 0 50px rgba(51,255,102,0.5);
             transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 30px 40px -15px rgba(182, 139, 92, 0.4), 0 0 0 1px #b68b5c inset;
-            background-color: #faf5ec;
+        }
+        .card-wrapper:hover .card-r-y2k::after { opacity: 1; }
+        @keyframes flickerCRT { 0%,100% { opacity: 1; } 50% { opacity: 0.95; } }
+
+        .card-mint {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(145deg, #ffffff, #f8fcfb);
+            color: #2c4a45; border: 1px solid #c8e5e0;
+            border-radius: 1rem;
+            box-shadow: 0 6px 20px rgba(108,212,197,0.12);
+            font-weight: 600; position: relative; overflow: hidden;
+        }
+        .card-mint::before {
+            content: ""; position: absolute; top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(108,212,197,0.15) 0%, transparent 60%);
+            opacity: 0; transition: opacity 0.3s; pointer-events: none;
+        }
+        .card-mint::after {
+            content: "🌿"; position: absolute; bottom: -20px; right: 15px;
+            font-size: 2rem; opacity: 0; transition: all 0.4s ease;
+        }
+        .card-wrapper:hover .card-mint {
+            transform: translateY(-14px) scale(1.04);
+            box-shadow: 0 30px 55px rgba(108,212,197,0.35), 0 0 0 2px rgba(108,212,197,0.2) inset;
+            background: linear-gradient(145deg, #f8fcfb, #ffffff);
+            border-color: #6cd4c5;
+        }
+        .card-wrapper:hover .card-mint::before { opacity: 1; animation: mintBloom 2s ease-in-out infinite; }
+        .card-wrapper:hover .card-mint::after { opacity: 0.7; bottom: 15px; animation: leafFloat 3s ease-in-out infinite; }
+        @keyframes mintBloom {
+            0%,100% { transform: scale(1); opacity: 0.15; }
+            50% { transform: scale(1.1); opacity: 0.25; }
+        }
+        @keyframes leafFloat {
+            0%,100% { transform: translateY(0) rotate(-5deg); }
+            50% { transform: translateY(-8px) rotate(5deg); }
         }
 
-        /* Адаптивность */
+        /* 🎌 MANGA-STYLE - ДРАМАТИЧНЫЙ ЭФФЕКТ 🎌 */
+        .card-manga-style {
+            font-family: 'Gaegu', cursive;
+            background: linear-gradient(145deg, #fef9ef, #fff8e8);
+            color: #2a2218; border: 3px solid #2a2218;
+            box-shadow: 6px 6px 0 rgba(42,34,24,0.12);
+            border-radius: 1rem; position: relative; overflow: hidden;
+        }
+        .card-manga-style::before {
+            content: ""; position: absolute; inset: 0;
+            background: repeating-linear-gradient(45deg, 
+                transparent 0px, transparent 8px, 
+                rgba(42,34,24,0.04) 9px, rgba(42,34,24,0.04) 10px);
+            opacity: 0; transition: opacity 0.2s; pointer-events: none;
+        }
+        .card-manga-style::after {
+            content: "💥"; position: absolute; top: -30px; right: -10px;
+            font-size: 2.5rem; opacity: 0; transform: rotate(15deg);
+            transition: all 0.3s ease; filter: drop-shadow(2px 2px 0 rgba(42,34,24,0.3));
+        }
+        @keyframes mangaImpact {
+            0% { transform: translate(0,0) scale(1); }
+            20% { transform: translate(3px,-2px) scale(1.02); }
+            40% { transform: translate(-2px,2px) scale(0.99); }
+            60% { transform: translate(2px,1px) scale(1.01); }
+            80% { transform: translate(-1px,-1px) scale(1); }
+            100% { transform: translate(0,0) scale(1); }
+        }
+        @keyframes speedLines {
+            0% { transform: translateX(-100%); opacity: 0; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { transform: translateX(200%); opacity: 0; }
+        }
+        .card-wrapper:hover .card-manga-style {
+            animation: mangaImpact 0.3s ease-in-out;
+            box-shadow: 12px 12px 0 rgba(42,34,24,0.2), 0 20px 40px rgba(42,34,24,0.15);
+            transform: translate(6px, -4px) scale(1.03);
+            border-color: #1a1510;
+        }
+        .card-wrapper:hover .card-manga-style::before {
+            opacity: 1; animation: speedLines 0.4s ease-out;
+        }
+        .card-wrapper:hover .card-manga-style::after {
+            opacity: 1; top: 10px; right: 15px;
+            animation: impactPop 0.5s ease-out;
+        }
+        @keyframes impactPop {
+            0% { transform: scale(0) rotate(0deg); opacity: 0; }
+            50% { transform: scale(1.4) rotate(-10deg); opacity: 1; }
+            100% { transform: scale(1) rotate(0deg); opacity: 0.9; }
+        }
+
+        /* 🌅 HORIZON - ЗАКАТНЫЙ БЛИК 🌅 */
+        .card-horizon {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #FFF2E6, #FFE8DA, #FFDFCF);
+            color: #4a352f; border-radius: 1.5rem;
+            border: 1px solid rgba(230,126,74,0.25);
+            backdrop-filter: blur(6px); font-weight: 500;
+            box-shadow: 0 8px 25px rgba(230,126,74,0.15);
+            position: relative; overflow: hidden;
+        }
+        .card-horizon::before {
+            content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 40%;
+            background: linear-gradient(to top, rgba(230,126,74,0.15), transparent);
+            opacity: 0; transition: opacity 0.3s; pointer-events: none;
+        }
+        .card-horizon::after {
+            content: "🌅"; position: absolute; top: -25px; left: 50%;
+            transform: translateX(-50%); font-size: 2rem;
+            opacity: 0; transition: all 0.4s ease;
+            filter: drop-shadow(0 4px 8px rgba(230,126,74,0.4));
+        }
+        @keyframes sunsetGlow {
+            0%,100% { box-shadow: 0 8px 25px rgba(230,126,74,0.15); }
+            50% { box-shadow: 0 15px 40px rgba(230,126,74,0.35), 0 0 60px rgba(255,180,120,0.25); }
+        }
+        @keyframes horizonShimmer {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+        .card-wrapper:hover .card-horizon {
+            animation: sunsetGlow 2.5s ease-in-out infinite;
+            transform: translateY(-14px) scale(1.04);
+            background: linear-gradient(135deg, #FFE8DA, #FFDFCF, #FFD5C4);
+            box-shadow: 0 35px 60px rgba(230,126,74,0.3), 0 0 50px rgba(255,200,150,0.2);
+            border-color: #E67E4A;
+        }
+        .card-wrapper:hover .card-horizon::before {
+            opacity: 1; animation: horizonShimmer 4s ease-in-out infinite;
+        }
+        .card-wrapper:hover .card-horizon::after {
+            opacity: 0.9; top: 12px; animation: sunRise 1.5s ease-out;
+        }
+        @keyframes sunRise {
+            0% { transform: translateX(-50%) translateY(20px) scale(0.5); opacity: 0; }
+            100% { transform: translateX(-50%) translateY(0) scale(1); opacity: 0.9; }
+        }
+
+        /* 🎋 EASTERN - ЦВЕТЕНИЕ САКУРЫ 🎋 */
+        .card-eastern {
+            font-family: 'Noto Serif SC', 'Playfair Display', serif;
+            background: linear-gradient(145deg, #ffffff, #fffdf9);
+            color: #423f38; border: 1px solid #e8e2d8;
+            border-radius: 1.2rem;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+            font-style: italic; position: relative; overflow: hidden;
+        }
+        .card-eastern::before {
+            content: ""; position: absolute; inset: 0;
+            background: radial-gradient(circle at 20% 80%, rgba(199,125,94,0.08), transparent 50%);
+            opacity: 0; transition: opacity 0.3s; pointer-events: none;
+        }
+        .card-eastern::after {
+            content: "✿"; position: absolute; bottom: -20px; right: 15px;
+            font-size: 1.8rem; color: #c77d5e; opacity: 0;
+            transition: all 0.4s ease;
+        }
+        @keyframes blossomFall {
+            0% { transform: translateY(-10px) rotate(0deg); opacity: 0; }
+            20% { opacity: 1; }
+            100% { transform: translateY(30px) rotate(360deg); opacity: 0; }
+        }
+        @keyframes inkWash {
+            0%,100% { filter: brightness(1); }
+            50% { filter: brightness(1.05) contrast(1.02); }
+        }
+        .card-wrapper:hover .card-eastern {
+            animation: inkWash 2s ease-in-out infinite;
+            transform: translateY(-14px) scale(1.04);
+            box-shadow: 0 30px 55px rgba(199,125,94,0.25), 0 0 40px rgba(199,125,94,0.15);
+            border-color: #c77d5e;
+            background: linear-gradient(145deg, #fffdf9, #fff8f3);
+        }
+        .card-wrapper:hover .card-eastern::before { opacity: 1; }
+        .card-wrapper:hover .card-eastern::after {
+            opacity: 0.9; bottom: 12px;
+            animation: blossomFall 2.5s ease-in-out infinite;
+        }
+        .card-wrapper:hover .card-eastern .card {
+            text-shadow: 0 0 20px rgba(199,125,94,0.15);
+        }
+
+        .card-dreamcore {
+            font-family: 'Quicksand', cursive;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            border-radius: 2rem;
+            color: #4a455a;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.06);
+            font-weight: 500;
+        }
+        @keyframes dreamPulse {
+            0%,100% { backdrop-filter: blur(12px); background: rgba(255,255,255,0.45); }
+            50% { backdrop-filter: blur(20px); background: rgba(255,255,255,0.65); }
+        }
+        .card-wrapper:hover .card-dreamcore {
+            animation: dreamPulse 2s ease-in-out infinite;
+            transform: translateY(-12px) scale(1.03);
+            box-shadow: 0 30px 60px rgba(189,160,231,0.35);
+            border-color: #bda0e7;
+        }
+
+        .card-avant-garde {
+            font-family: 'Russo One', sans-serif;
+            background: linear-gradient(145deg, #fff9ef, #fff3e0);
+            color: #c22a2a; border: 4px solid #1e1e1e;
+            box-shadow: 6px 6px 0 rgba(0,0,0,0.18);
+            text-transform: uppercase; letter-spacing: 1.5px;
+            font-size: 1.5rem; border-radius: 0.8rem;
+        }
+        .card-wrapper:hover .card-avant-garde {
+            transform: translate(-5px, -5px);
+            box-shadow: 12px 12px 0 rgba(0,0,0,0.22);
+            background: linear-gradient(145deg, #fff3e0, #ffe8d5);
+            border-color: #c22a2a; color: #1e1e1e;
+        }
+
+        /* ===== НОВЫЕ ДОБАВЛЕННЫЕ ТЕМЫ (сокращённо) ===== */
+        .card-altcore {
+            font-family: 'Cutive Mono', monospace;
+            background: linear-gradient(145deg, #1a0b1a, #251025);
+            color: #ff66cc; border: 2px solid #882288;
+            border-radius: 1.5rem 0.5rem 1.5rem 0.5rem;
+            box-shadow: 0 0 12px rgba(255,102,204,0.35);
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+        .card-wrapper:hover .card-altcore {
+            background: linear-gradient(145deg, #2a102a, #351535);
+            box-shadow: 0 0 25px #ff66cc, inset 0 0 15px rgba(255,102,204,0.25);
+            transform: translateY(-10px) rotate(0.5deg) scale(1.02);
+            border-color: #ff66cc;
+        }
+
+        .card-autumn {
+            font-family: 'Cormorant Garamond', serif;
+            background: linear-gradient(145deg, #fef3e0, #fae6ce);
+            color: #8b3a1a; border: 1px solid #d4a017;
+            border-radius: 2rem 1rem 2rem 1rem;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.06); font-style: italic;
+        }
+        .card-wrapper:hover .card-autumn {
+            transform: translateY(-12px);
+            background: linear-gradient(145deg, #fff8ed, #fff5e8);
+            box-shadow: 0 25px 45px -10px rgba(212,160,23,0.35);
+            border-color: #b55a30;
+        }
+        .card-wrapper:hover .card-autumn::after {
+            content: "🍁"; position: absolute; bottom: 12px; right: 18px;
+            font-size: 1.4rem; animation: leafFall 2s ease-in-out infinite;
+        }
+        @keyframes leafFall {
+            0%,100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(15deg); }
+        }
+
+        .card-crypto {
+            font-family: 'Creepster', cursive;
+            background: linear-gradient(145deg, #0c0c0c, #150a0a);
+            color: #ff3333; border: 1px solid #4a1a1a;
+            text-shadow: 0 0 6px rgba(139,0,0,0.6); border-radius: 1rem;
+            overflow: hidden;
+        }
+        @keyframes horrorGlitch {
+            0% { transform: translate(0); text-shadow: 2px 0 #ff0000, -2px 0 #00ffff; }
+            25% { transform: translate(-1px,1px); }
+            50% { transform: translate(1px,-1px); text-shadow: -2px 0 #ff0000, 2px 0 #00ffff; }
+            75% { transform: translate(-1px,-1px); }
+            100% { transform: translate(0); text-shadow: 0 0 6px rgba(139,0,0,0.6); }
+        }
+        .card-wrapper:hover .card-crypto {
+            animation: horrorGlitch 0.2s infinite;
+            background: linear-gradient(145deg, #1a0a0a, #220f0f);
+            box-shadow: 0 0 30px rgba(139,0,0,0.6);
+            border-color: #ac2c2c; transform: translateY(-10px) scale(1.02);
+        }
+
+        .card-dripped {
+            font-family: 'Bangers', cursive;
+            background: linear-gradient(145deg, #0a0a0a, #121212);
+            color: #ff007f; border: 3px solid #00f0ff;
+            box-shadow: 0 0 0 4px #0a0a0a, 0 0 0 7px #ff007f;
+            text-transform: uppercase; letter-spacing: 2px; border-radius: 1rem;
+        }
+        .card-wrapper:hover .card-dripped {
+            transform: translateY(-10px) rotate(1deg) scale(1.02);
+            box-shadow: 0 0 30px #ff007f, 0 0 0 3px #00f0ff inset;
+            background: linear-gradient(145deg, #111, #1a1a1a);
+        }
+        .card-wrapper:hover .card-dripped::after {
+            content: "⛆"; position: absolute; bottom: -5px; right: 15px;
+            font-size: 2rem; color: #ffe600; animation: dripDown 0.6s ease-out;
+        }
+        @keyframes dripDown {
+            0% { transform: translateY(-20px); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(10px); opacity: 0.8; }
+        }
+
+        .card-faberge {
+            font-family: 'Cinzel', serif;
+            background: linear-gradient(145deg, #fef9e6, #fffdf5);
+            color: #aa7c2c; border: 2px solid #d4af37;
+            box-shadow: 0 0 0 3px #fef9e6, 0 0 0 6px #d4af37;
+            border-radius: 0.6rem; font-weight: 600;
+        }
+        .card-wrapper:hover .card-faberge {
+            transform: translateY(-10px);
+            background: linear-gradient(145deg, #fffdf5, #fffef9);
+            box-shadow: 0 20px 40px rgba(212,175,55,0.35), 0 0 0 4px #d4af37 inset;
+            border-color: #e6c97a;
+        }
+
+        .card-gamma {
+            font-family: 'Fira Code', monospace;
+            background: linear-gradient(145deg, #0d1117, #161b22);
+            color: #58a6ff; border: 1px solid #58a6ff;
+            border-radius: 0.8rem;
+            box-shadow: inset 0 0 12px rgba(88,166,255,0.2);
+            font-size: 1.3rem;
+        }
+        .card-wrapper:hover .card-gamma {
+            transform: translateY(-10px);
+            background: linear-gradient(145deg, #161b22, #1e242c);
+            box-shadow: 0 0 25px rgba(88,166,255,0.4);
+            border-color: #b392f0; color: #b392f0;
+        }
+
+        .card-military {
+            font-family: 'Staatliches', monospace;
+            background: linear-gradient(145deg, #d9cd9f, #e0d5a8);
+            color: #2c2e1e; border: 4px solid #4b5320;
+            box-shadow: 7px 7px 0 rgba(0,0,0,0.22);
+            text-transform: uppercase; letter-spacing: 1.5px; border-radius: 0.6rem;
+        }
+        .card-wrapper:hover .card-military {
+            transform: translate(-5px, -5px);
+            box-shadow: 12px 12px 0 rgba(0,0,0,0.28);
+            background: linear-gradient(145deg, #e0d5a8, #e8dfb5);
+            border-color: #cc7722;
+        }
+
+        .card-millat {
+            font-family: 'Montserrat Alternates', sans-serif;
+            background: linear-gradient(145deg, #f5ebd0, #f9f2e0);
+            color: #8b2a2a; border: 3px solid #b8860b;
+            border-radius: 2.5rem 0.8rem 2.5rem 0.8rem;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+        }
+        .card-wrapper:hover .card-millat {
+            transform: translateY(-12px);
+            background: linear-gradient(145deg, #f9f2e0, #fcf6e8);
+            border-color: #2a7b6e;
+            box-shadow: 0 20px 40px rgba(139,42,42,0.22);
+        }
+        .card-wrapper:hover .card-millat::before {
+            content: "🌷"; position: absolute; top: 8px; left: 15px;
+            font-size: 1.4rem; animation: tulipBloom 0.8s ease;
+        }
+        @keyframes tulipBloom {
+            0% { transform: scale(0.6); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .card-sabr {
+            font-family: 'Amiri', serif;
+            background: linear-gradient(145deg, #faf3e0, #fff8ec);
+            color: #1a6b5e; border: 1px solid #c9a03d;
+            border-radius: 1rem; box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+            position: relative;
+        }
+        .card-wrapper:hover .card-sabr {
+            transform: translateY(-10px);
+            background: linear-gradient(145deg, #fff8ec, #fffdf5);
+            border-color: #2c4c7a;
+            box-shadow: 0 20px 40px rgba(26,107,94,0.18);
+        }
+        .card-wrapper:hover .card-sabr::before {
+            content: "✦"; position: absolute; top: 10px; left: 15px;
+            font-size: 1.2rem; color: #c9a03d; animation: starSpin 0.8s ease;
+        }
+        @keyframes starSpin {
+            0% { transform: rotate(0deg) scale(0); opacity: 0; }
+            100% { transform: rotate(360deg) scale(1); opacity: 1; }
+        }
+
+        /* ===== АДАПТИВНОСТЬ ===== */
+        @media (max-width: 900px) {
+            header { padding: 0.8rem 1.5rem; }
+            .site-title { font-size: 1.4rem; }
+            .search-input { width: 160px; }
+            .search-input:focus { width: 180px; }
+        }
         @media (max-width: 600px) {
-            a {
-                height: 180px;
-            }
-            .card-creative, .card-minimal, .card-professional,
-            .card-cutecore, .card-greenwolf, .card-vorkuta,
-            .card-cemetery, .card-classic {
-                font-size: 1.8rem;
-            }
+            header { flex-direction: column; align-items: flex-start; }
+            .header-controls { width: 100%; justify-content: space-between; }
+            .search-input { width: 100%; max-width: 200px; }
+            main { padding: 0 1rem; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+            .card-wrapper { height: 220px; }
+            .card { font-size: 1.3rem; }
         }
+
+        /* ===== ФУТЕР ===== */
+        footer {
+            text-align: center; padding: 2.5rem 2rem 3rem;
+            color: #666; font-size: 0.95rem;
+        }
+        .author-signature {
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.8rem; color: var(--header-bg-solid);
+            margin: 0.5rem 0;
+        }
+        .poet-badge {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            background: rgba(151,46,81,0.08); padding: 0.4rem 1rem;
+            border-radius: 2rem; font-size: 0.9rem; margin-top: 0.5rem;
+        }
+
+        /* ===== ДЕКОРАТИВНЫЕ ЭЛЕМЕНТЫ ===== */
+        .particles {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: -1; overflow: hidden;
+        }
+        .particle {
+            position: absolute; width: 4px; height: 4px;
+            background: rgba(234,83,201,0.4); border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-20vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* ===== АНИМАЦИЯ ПОЯВЛЕНИЯ ===== */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .card-wrapper {
+            animation: fadeInUp 0.5s ease forwards;
+            animation-delay: calc(var(--i, 0) * 0.05s);
+        }
+
+        /* ===== AURORA ===== */
+.card-aurora {
+    font-family: 'Montserrat', 'Inter', sans-serif;
+    background: linear-gradient(135deg, #0b0f1a, #121829);
+    color: #e2e8f0; border-radius: 1rem;
+    border: 1px solid rgba(45,212,191,0.3);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+    position: relative; overflow: hidden;
+}
+.card-aurora::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 20%, rgba(45,212,191,0.15), transparent 50%),
+                radial-gradient(ellipse at 70% 80%, rgba(56,189,248,0.12), transparent 50%);
+    opacity: 0; transition: opacity 0.3s; pointer-events: none;
+}
+.card-wrapper:hover .card-aurora {
+    transform: translateY(-12px) scale(1.03);
+    border-color: #2dd4bf; box-shadow: 0 25px 50px rgba(45,212,191,0.25);
+}
+.card-wrapper:hover .card-aurora::before { opacity: 1; animation: auroraFlow 20s ease-in-out infinite alternate; }
+@keyframes auroraFlow {
+    0% { transform: translate(0,0) scale(1); filter: hue-rotate(0deg); }
+    100% { transform: translate(3%,-2%) scale(1.05); filter: hue-rotate(30deg); }
+}
+
+/* ===== DESERT-MIRAGE ===== */
+.card-desert-mirage {
+    font-family: 'Cormorant Garamond', serif;
+    background: linear-gradient(145deg, #1c1612, #262018);
+    color: #e6dcc8; border: 2px solid #3a2b1d;
+    border-radius: 1rem; box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+}
+.card-wrapper:hover .card-desert-mirage {
+    transform: translateY(-10px) scale(1.02);
+    border-color: #d4a76a; box-shadow: 0 20px 40px rgba(212,167,106,0.3);
+    animation: heatHaze 1.5s infinite alternate;
+}
+@keyframes heatHaze {
+    0% { text-shadow: 0 0 5px #d4a76a; filter: blur(0); }
+    100% { text-shadow: 0 0 10px #b88645; filter: blur(0.2px); }
+}
+
+/* ===== BRUTALIST ===== */
+.card-brutalist {
+    font-family: 'Space Grotesk', 'Archivo Black', sans-serif;
+    background: #fff; color: #000; border: 4px solid #000;
+    border-radius: 0.5rem; box-shadow: 8px 8px 0 #000;
+    font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+}
+.card-wrapper:hover .card-brutalist {
+    transform: translate(-4px, -4px);
+    box-shadow: 12px 12px 0 #ff2a55; border-color: #ff2a55;
+    background: #ff2a55; color: #fff;
+}
+
+/* ===== FILM-NOIR ===== */
+.card-film-noir {
+    font-family: 'Special Elite', 'Courier Prime', monospace;
+    background: linear-gradient(145deg, #0a0a0a, #141414);
+    color: #e8e8e8; border: 1px solid #333;
+    border-radius: 1rem; box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+    filter: contrast(1.2);
+}
+.card-wrapper:hover .card-film-noir {
+    transform: translateY(-10px) scale(1.02);
+    border-color: #8b0000; box-shadow: 0 15px 40px rgba(139,0,0,0.5);
+}
+.card-wrapper:hover .card-film-noir::after {
+    content: "🎬"; position: absolute; bottom: 12px; right: 15px;
+    font-size: 1.3rem; opacity: 0.7;
+}
+
+/* ===== ZEN-MINIMAL ===== */
+.card-zen-minimal {
+    font-family: 'Inter', 'Noto Sans JP', sans-serif;
+    background: #ffffff; color: #2d3748;
+    border-radius: 1rem; border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+    font-weight: 400; letter-spacing: 0.3px;
+}
+.card-wrapper:hover .card-zen-minimal {
+    transform: translateY(-14px) scale(1.04);
+    border-color: #4a7c6d; box-shadow: 0 30px 55px rgba(74,124,109,0.2);
+    background: linear-gradient(145deg, #fff, #faf9f6);
+}
+
+/* ===== FRACTAL-DREAM ===== */
+.card-fractal-dream {
+    font-family: 'Exo 2', 'Rajdhani', sans-serif;
+    background: linear-gradient(135deg, #0f0518, #1a0a2a);
+    color: #f1e8ff; border: 1px solid rgba(217,70,239,0.3);
+    border-radius: 1rem; box-shadow: 0 0 20px rgba(6,182,212,0.15);
+}
+.card-wrapper:hover .card-fractal-dream {
+    transform: translateY(-12px) scale(1.03) rotate(0.5deg);
+    border-color: #d946ef; box-shadow: 0 0 35px rgba(217,70,239,0.4);
+    animation: fractalSpin 0.5s ease-in-out;
+}
+@keyframes fractalSpin {
+    0%,100% { filter: hue-rotate(0deg); }
+    50% { filter: hue-rotate(45deg); }
+}
+
+/* ===== STEAMPUNK ===== */
+.card-steampunk {
+    font-family: 'Cinzel', 'Old Standard TT', serif;
+    background: linear-gradient(145deg, #1a1410, #241e16);
+    color: #e6dcc8; border: 3px double #c9a86a;
+    border-radius: 1rem; box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+}
+.card-wrapper:hover .card-steampunk {
+    transform: translateY(-10px) scale(1.02);
+    border-color: #b87333; box-shadow: 0 15px 35px rgba(184,115,51,0.4);
+}
+.card-wrapper:hover .card-steampunk::after {
+    content: "⚙"; position: absolute; top: 10px; right: 15px;
+    font-size: 1.2rem; color: #c9a86a; animation: gearSpin 3s linear infinite;
+}
+@keyframes gearSpin { 100% { transform: rotate(360deg); } }
+
+/* ===== NEBULA ===== */
+.card-nebula {
+    font-family: 'Orbitron', 'Exo 2', sans-serif;
+    background: linear-gradient(135deg, #05050a, #0b0c12);
+    color: #e2e8f0; border: 1px solid rgba(139,92,246,0.3);
+    border-radius: 1rem; box-shadow: 0 10px 40px rgba(0,0,0,0.7);
+}
+.card-wrapper:hover .card-nebula {
+    transform: translateY(-12px) scale(1.03);
+    border-color: #8b5cf6; box-shadow: 0 0 40px rgba(139,92,246,0.3), 0 25px 55px rgba(0,0,0,0.8);
+}
+.card-nebula::after {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(2px 2px at 50% 30%, rgba(255,255,255,0.8), transparent);
+    box-shadow: 15px 25px 0 rgba(255,255,255,0.1), 35px 10px 0 rgba(255,255,255,0.05);
+    opacity: 0; transition: opacity 0.3s; pointer-events: none;
+}
+.card-wrapper:hover .card-nebula::after { opacity: 0.6; animation: twinkle 3s steps(1) infinite; }
+@keyframes twinkle { 50% { opacity: 0.3; } }
+
+/* ===== LIQUID-GLASS ===== */
+.card-liquid-glass {
+    font-family: 'Manrope', 'Inter', sans-serif;
+    background: rgba(255,255,255,0.65);
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    color: #1e293b; border: 1px solid rgba(255,255,255,0.5);
+    border-radius: 1.2rem; box-shadow: 0 8px 32px rgba(31,38,135,0.1);
+}
+.card-wrapper:hover .card-liquid-glass {
+    transform: translateY(-14px) scale(1.04);
+    border-color: rgba(59,130,246,0.4);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15), 0 0 0 1px rgba(59,130,246,0.2) inset;
+    background: rgba(255,255,255,0.75);
+}
+
+/* ===== SHADOW-PUPPET ===== */
+.card-shadow-puppet {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: linear-gradient(145deg, #050505, #111111);
+    color: #fff9e6; border: 2px solid #333;
+    border-radius: 1rem; box-shadow: 15px 15px 0 #000;
+    font-weight: 600;
+}
+.card-wrapper:hover .card-shadow-puppet {
+    transform: translate(-5px, -5px);
+    box-shadow: 20px 20px 0 #e6c200; border-color: #e6c200;
+    color: #e6c200;
+}
+.card-shadow-puppet::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(circle at 50% 30%, rgba(255,249,230,0.08), transparent 60%);
+    opacity: 0; transition: opacity 0.3s;
+}
+.card-wrapper:hover .card-shadow-puppet::before { opacity: 1; }
     </style>
 </head>
 <body>
-    <main>
-        <!-- default -->
-        <a href="/events/SoRUPP_presentation/examples/default/">
-            <div class="card card-default">default</div>
-        </a>
-        <!-- dark -->
-        <a href="/events/SoRUPP_presentation/examples/dark/">
-            <div class="card card-dark">dark</div>
-        </a>
-        <!-- cyberpunk -->
-        <a href="/events/SoRUPP_presentation/examples/cyberpunk/">
-            <div class="card card-cyberpunk">cyberpunk</div>
-        </a>
-        <!-- creative -->
-        <a href="/events/SoRUPP_presentation/examples/creative/">
-            <div class="card card-creative">creative</div>
-        </a>
-        <!-- minimal -->
-        <a href="/events/SoRUPP_presentation/examples/minimal/">
-            <div class="card card-minimal">minimal</div>
-        </a>
-        <!-- professional -->
-        <a href="/events/SoRUPP_presentation/examples/professional/">
-            <div class="card card-professional">professional</div>
-        </a>
-        <!-- opium -->
-        <a href="/events/SoRUPP_presentation/examples/opium/">
-            <div class="card card-opium">opium</div>
-        </a>
-        <!-- cutecore -->
-        <a href="/events/SoRUPP_presentation/examples/cutecore/">
-            <div class="card card-cutecore">cutecore</div>
-        </a>
-        <!-- greenwolf -->
-        <a href="/events/SoRUPP_presentation/examples/greenwolf/">
-            <div class="card card-greenwolf">greenwolf</div>
-        </a>
-        <!-- vorkuta -->
-        <a href="/events/SoRUPP_presentation/examples/vorkuta/">
-            <div class="card card-vorkuta">vorkuta</div>
-        </a>
-        <!-- cemetery -->
-        <a href="/events/SoRUPP_presentation/examples/cemetery/">
-            <div class="card card-cemetery">cemetery</div>
-        </a>
-        <!-- classic -->
-        <a href="/events/SoRUPP_presentation/examples/classic/">
-            <div class="card card-classic">classic</div>
-        </a>
+    <div class="particles" id="particles"></div>
+
+    <header>
+        <div class="header-left">
+            <a href="/"><img class="header-logo" src="/img/logo.svg" alt="Лого"></a>
+            <div>
+                <h1 class="site-title">Тёплые лучи рассвета</h1>
+                <span>коллекция тем</span>
+            </div>
+        </div>
+        <div class="author-badge">Во славу Господа!</div>
+        <div class="header-controls">
+            <input type="search" class="search-input" id="searchInput" placeholder="🔍 Поиск темы...">
+            <button class="sort-btn active" data-sort="default" title="По порядку">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h18M3 12h12M3 20h6"/></svg>
+            </button>
+            <button class="sort-btn" data-sort="az" title="А-Я">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h18M3 12h12M3 17h6"/></svg>
+            </button>
+            <button class="sort-btn" data-sort="za" title="Я-А">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17h18M3 12h12M3 7h6"/></svg>
+            </button>
+        </div>
+    </header>
+
+    <main id="cardsContainer">
+        <!-- Базовые темы (12) -->
+        <div class="card-wrapper" style="--i:0"><a href="/events/SoRUPP_presentation/examples/default/" class="card-link"><div class="card card-default">default</div><div class="card-description">Обычная тема для ребят, ценящих мягкость и отсутствие лишнего.</div></a></div>
+        <div class="card-wrapper" style="--i:1"><a href="/events/SoRUPP_presentation/examples/dark/" class="card-link"><div class="card card-dark">dark</div><div class="card-description">Та же обычная тема, но тёмная. Вампиры здесь? Мы о вас заботимся между прочим</div></a></div>
+        <div class="card-wrapper" style="--i:2"><a href="/events/SoRUPP_presentation/examples/cyberpunk/" class="card-link"><div class="card card-cyberpunk">cyberpunk</div><div class="card-description">Эстетика, как я надеюсь, ближайшего будущего - настоящий киберпанк. Интересные формы и цвета. Неон, подсветка... Зацени</div></a></div>
+        <div class="card-wrapper" style="--i:3"><a href="/events/SoRUPP_presentation/examples/creative/" class="card-link"><div class="card card-creative">creative</div><div class="card-description">Отличается от обычной градиентом сзади и цветами. </div></a></div>
+        <div class="card-wrapper" style="--i:4"><a href="/events/SoRUPP_presentation/examples/minimal/" class="card-link"><div class="card card-minimal">minimal</div><div class="card-description">Для тех, кому уже надоели мои причудливые стилизации. Все дороги ведут сюда.</div></a></div>
+        <div class="card-wrapper" style="--i:5"><a href="/events/SoRUPP_presentation/examples/professional/" class="card-link"><div class="card card-professional">professional</div><div class="card-description">Если вы научный работник, выбирайте это. Сухо, серьёзно, но с сохранением стиля. Но лучше будет cutecore</div></a></div>
+        <div class="card-wrapper" style="--i:6"><a href="/events/SoRUPP_presentation/examples/opium/" class="card-link"><div class="card card-opium">opium</div><div class="card-description">Это нечитаемо. Людям с эпилепсией рекомендуется не открывать. Но это стилёво!</div></a></div>
+        <div class="card-wrapper" style="--i:7"><a href="/events/SoRUPP_presentation/examples/cutecore/" class="card-link"><div class="card card-cutecore">cutecore</div><div class="card-description">"Ф-Фрэнсис... Ты такая няшка!". Мило. Брутальным дядям на заметку.</div></a></div>
+        <div class="card-wrapper" style="--i:8"><a href="/events/SoRUPP_presentation/examples/greenwolf/" class="card-link"><div class="card card-greenwolf">greenwolf</div><div class="card-description">Темнота. И зелёный. Любите такое? А вы из гринписа, да?</div></a></div>
+        <div class="card-wrapper" style="--i:9"><a href="/events/SoRUPP_presentation/examples/vorkuta/" class="card-link"><div class="card card-vorkuta">vorkuta</div><div class="card-description">Это не совсем про ГУЛАГ. Это наше мрачное, громадное постсоветское наследие. Хрущёв постарался</div></a></div>
+        <div class="card-wrapper" style="--i:10"><a href="/events/SoRUPP_presentation/examples/cemetery/" class="card-link"><div class="card card-cemetery">cemetery</div><div class="card-description">Вдохновлено кладбищами. Не столь пафосно, но мрачным типам, предпочитающим паркур личной жизнни - самое то.</div></a></div>
+        <div class="card-wrapper" style="--i:11"><a href="/events/SoRUPP_presentation/examples/classic/" class="card-link"><div class="card card-classic">classic</div><div class="card-description">Изящно. Элегантно. Хочу жить на этой странице!</div></a></div>
+
+        <!-- Расширенные темы (8) -->
+        <div class="card-wrapper" style="--i:12"><a href="/events/SoRUPP_presentation/examples/prismatica/" class="card-link"><div class="card card-prismatica">prismatica</div><div class="card-description">Кто сказал, что цвета должны быть статичны? Кстати, прикол - тут сайдбар</div></a></div>
+        <div class="card-wrapper" style="--i:13"><a href="/events/SoRUPP_presentation/examples/r-y2k/" class="card-link"><div class="card card-r-y2k">r-y2k</div><div class="card-description">Это... Первый компьютер с элементами y2k? Ретро-y2k?</div></a></div>
+        <div class="card-wrapper" style="--i:14"><a href="/events/SoRUPP_presentation/examples/mint/" class="card-link"><div class="card card-mint">mint</div><div class="card-description">Мятно. Как жвачка. Как голубая кнопка в фильтре сигарет. Рекламирую стих про блок ментальных сигарет. Ментальных</div></a></div>
+        <div class="card-wrapper" style="--i:15"><a href="/events/SoRUPP_presentation/examples/manga/" class="card-link"><div class="card card-manga-style">manga-style</div><div class="card-description">Скетчево. Ч/б.</div></a></div>
+        <div class="card-wrapper" style="--i:16"><a href="/events/SoRUPP_presentation/examples/horizon/" class="card-link"><div class="card card-horizon">horizon</div><div class="card-description">Цвета ласкают глаза. Никакого дискомфорта! Пойдёт, наверное, всем</div></a></div>
+        <div class="card-wrapper" style="--i:17"><a href="/events/SoRUPP_presentation/examples/eastern/" class="card-link"><div class="card card-eastern">eastern</div><div class="card-description">Восток, но не совсем? Нет, восток.</div></a></div>
+        <div class="card-wrapper" style="--i:18"><a href="/events/SoRUPP_presentation/examples/dreamcore/" class="card-link"><div class="card card-dreamcore">dreamcore</div><div class="card-description">Те самые странные воспоминания из детства ожили, пришли ко мне и залезли сюда. Помогите </div></a></div>
+        <div class="card-wrapper" style="--i:19"><a href="/events/SoRUPP_presentation/examples/avant-garde/" class="card-link"><div class="card card-avant-garde">avant‑garde</div><div class="card-description">Преврати сайт в советский плакат!</div></a></div>
+
+        <!-- Новые темы (9) -->
+        <div class="card-wrapper" style="--i:20"><a href="/events/SoRUPP_presentation/examples/altcore/" class="card-link"><div class="card card-altcore">altcore</div><div class="card-description">Альтушки, залезайте ко мне под пледик. Я в подъезде один.</div></a></div>
+        <div class="card-wrapper" style="--i:21"><a href="/events/SoRUPP_presentation/examples/autumn/" class="card-link"><div class="card card-autumn">autumn</div><div class="card-description">Осень! Осыпаются алые клёны, полыхают вдали небеса. Солнцем розовым залиты склоны - это я открываю глаза (Борис Рыжий)</div></a></div>
+        <div class="card-wrapper" style="--i:22"><a href="/events/SoRUPP_presentation/examples/crypto/" class="card-link"><div class="card card-crypto">crypto</div><div class="card-description">Бу! Испугался? Не рекомендовано эпилептикам.</div></a></div>
+        <div class="card-wrapper" style="--i:23"><a href="/events/SoRUPP_presentation/examples/dripped/" class="card-link"><div class="card card-dripped">dripped</div><div class="card-description">Читай своей пассии мои стихи - она потечёт также, как этот стиль.</div></a></div>
+        <div class="card-wrapper" style="--i:24"><a href="/events/SoRUPP_presentation/examples/faberge/" class="card-link"><div class="card card-faberge">fabergé</div><div class="card-description">Изящно. Золото. Восхитительно.</div></a></div>
+        <div class="card-wrapper" style="--i:25"><a href="/events/SoRUPP_presentation/examples/gamma/" class="card-link"><div class="card card-gamma">gamma</div><div class="card-description">Любите математику? Я не гуманитарий, если чё. Вот доказательство.</div></a></div>
+        <div class="card-wrapper" style="--i:26"><a href="/events/SoRUPP_presentation/examples/military/" class="card-link"><div class="card card-military">military</div><div class="card-description">Мы против того, чтобы человек поднимал оружие против человека. Но стиль сделали.</div></a></div>
+        <div class="card-wrapper" style="--i:27"><a href="/events/SoRUPP_presentation/examples/millat/" class="card-link"><div class="card card-millat">millät</div><div class="card-description">Алга! По заказу дорогого брата - татарский стайл</div></a></div>
+        <div class="card-wrapper" style="--i:28"><a href="/events/SoRUPP_presentation/examples/sabr/" class="card-link"><div class="card card-sabr">sabr</div><div class="card-description">Сабр, братья - я делаю шаблоны. Это наш. Братский!</div></a></div>
+
+        <!-- 🔥 НОВЫЕ ТЕМЫ (продолжение, --i:29..38) 🔥 -->
+
+<div class="card-wrapper" style="--i:29">
+    <a href="/events/SoRUPP_presentation/examples/aurora/" class="card-link">
+        <div class="card card-aurora">aurora</div>
+        <div class="card-description">Северное сияние в коде. Плавные градиенты, мягкое свечение, магия полярной ночи.</div>
+    </a>
+</div>
+
+<div class="card-wrapper" style="--i:30">
+    <a href="/events/SoRUPP_presentation/examples/desert-mirage/" class="card-link">
+        <div class="card card-desert-mirage">desert‑mirage</div>
+        <div class="card-description">Зной, тишина, мираж. Тёплые песчаные тона и дрожание воздуха в каждом пикселе.</div>
+    </a>
+</div>
+
+<div class="card-wrapper" style="--i:31">
+    <a href="/events/SoRUPP_presentation/examples/brutalist/" class="card-link">
+        <div class="card card-brutalist">brutalist</div>
+        <div class="card-description">Вызов. Честность. Архитектура. Жирные границы, смещение, инверсия — нео-брутализм в чистом виде.</div>
+    </a>
+</div>
+
+<div class="card-wrapper" style="--i:32">
+    <a href="/events/SoRUPP_presentation/examples/film-noir/" class="card-link">
+        <div class="card card-film-noir">film‑noir</div>
+        <div class="card-description">Чёрно-белая драма. Зерно плёнки, виньетка, высокая контрастность. Детектив в каждой строке.</div>
+    </a>
+</div>
+
+<div class="card-wrapper" style="--i:33">
+    <a href="/events/SoRUPP_presentation/examples/zen-minimal/" class="card-link">
+        <div class="card card-zen-minimal">zen‑minimal</div>
+        <div class="card-description">Воздух. Ясность. Медитация. Сверхплавные переходы и ничего лишнего. Дзен в вебе.</div>
+    </a>
+</div>
+
+<div class="card-wrapper" style="--i:34">
+    <a href="/events/SoRUPP_presentation/examples/fractal-dream/" class="card-link">
+        <div class="card card-fractal-dream">fractal‑dream</div>
+        <div class="card-description">Гипноз. Бесконечность. Исследование. Повторяющиеся паттерны и калейдоскоп при наведении.</div>
+    </a>
+</div>
+
+<div class="card-wrapper" style="--i:35">
+    <a href="/events/SoRUPP_presentation/examples/steampunk/" class="card-link">
+        <div class="card card-steampunk">steampunk</div>
+        <div class="card-description">Пар, латунь, викторианский шрифт. Механика и приключение. Ретро-футуризм в каждом элементе.</div>
+    </a>
+</div>
+
+<div class="card-wrapper" style="--i:36">
+    <a href="/events/SoRUPP_presentation/examples/nebula/" class="card-link">
+        <div class="card card-nebula">nebula</div>
+        <div class="card-description">Космос. Тайна. Масштаб. Звёздная пыль, мерцание, глубокие градиенты туманности.</div>
+    </a>
+</div>
+
+<div class="card-wrapper" style="--i:37">
+    <a href="/events/SoRUPP_presentation/examples/liquid-glass/" class="card-link">
+        <div class="card card-liquid-glass">liquid‑glass</div>
+        <div class="card-description">Текучесть. Современность. Глубина. Glassmorphism, блюр, мягкие переливы жидкого стекла.</div>
+    </a>
+</div>
+
+<div class="card-wrapper" style="--i:38">
+    <a href="/events/SoRUPP_presentation/examples/shadow-puppet/" class="card-link">
+        <div class="card card-shadow-puppet">shadow‑puppet</div>
+        <div class="card-description">Театр. Загадка. Игра света. Резкие тени, силуэты, контраст — как в театре теней.</div>
+    </a>
+</div>
     </main>
+
+    <footer>
+        <div class="author-signature">~ тёплые лучи рассвета ~</div>
+        <div class="poet-badge">✦ создано с душой • webdev поэзия ✦</div>
+        <p style="margin-top:1rem; opacity:0.7">29 уникальных стилей • каждый ховер — как строка в стихотворении</p>
+    </footer>
+
+    <script>
+        const container = document.getElementById('cardsContainer');
+        const searchInput = document.getElementById('searchInput');
+        const sortButtons = document.querySelectorAll('.sort-btn');
+        let originalOrder = Array.from(container.children);
+
+        document.querySelectorAll('.card-link').forEach(link => {
+            link.addEventListener('mousemove', (e) => {
+                const rect = link.getBoundingClientRect();
+                link.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+                link.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+            });
+        });
+
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            for(let i = 0; i < 25; i++) {
+                const p = document.createElement('div');
+                p.className = 'particle';
+                p.style.left = Math.random() * 100 + '%';
+                p.style.animationDelay = Math.random() * 15 + 's';
+                p.style.animationDuration = (12 + Math.random() * 10) + 's';
+                p.style.background = `hsla(${280 + Math.random() * 60}, 80%, 70%, ${0.3 + Math.random() * 0.4})`;
+                particlesContainer.appendChild(p);
+            }
+        }
+        createParticles();
+
+        function sortCards(type) {
+            const cards = Array.from(container.children);
+            let sorted;
+            switch(type) {
+                case 'az':
+                    sorted = cards.sort((a, b) => {
+                        const nameA = a.querySelector('.card').textContent.trim().toLowerCase();
+                        const nameB = b.querySelector('.card').textContent.trim().toLowerCase();
+                        return nameA.localeCompare(nameB, 'ru');
+                    }); break;
+                case 'za':
+                    sorted = cards.sort((a, b) => {
+                        const nameA = a.querySelector('.card').textContent.trim().toLowerCase();
+                        const nameB = b.querySelector('.card').textContent.trim().toLowerCase();
+                        return nameB.localeCompare(nameA, 'ru');
+                    }); break;
+                default: sorted = [...originalOrder];
+            }
+            container.style.opacity = '0'; container.style.transform = 'translateY(10px)';
+            setTimeout(() => {
+                sorted.forEach(card => container.appendChild(card));
+                container.style.transition = 'opacity 0.3s, transform 0.3s';
+                container.style.opacity = '1'; container.style.transform = 'translateY(0)';
+            }, 200);
+        }
+        sortButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                sortButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active'); sortCards(btn.dataset.sort);
+            });
+        });
+
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+            Array.from(container.children).forEach(card => {
+                const name = card.querySelector('.card').textContent.toLowerCase();
+                const match = name.includes(query);
+                card.style.transition = 'opacity 0.2s, transform 0.2s';
+                if(match) { card.style.opacity = '1'; card.style.transform = 'scale(1)'; card.style.display = ''; }
+                else { card.style.opacity = '0'; card.style.transform = 'scale(0.9)'; setTimeout(() => { if(!match) card.style.display = 'none'; }, 200); }
+            });
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if(entry.isIntersecting) { entry.target.style.animationPlayState = 'running'; observer.unobserve(entry.target); } });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.card-wrapper').forEach(card => { card.style.animationPlayState = 'paused'; observer.observe(card); });
+
+        document.addEventListener('keydown', (e) => {
+            if(e.target === searchInput) return;
+            if(e.key === '1') { sortButtons[0].click(); }
+            if(e.key === '2') { sortButtons[1].click(); }
+            if(e.key === '3') { sortButtons[2].click(); }
+        });
+    </script>
 </body>
 </html>
