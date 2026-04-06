@@ -3,865 +3,1173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>СРКЦН - Презентация</title>
+    <title>СРКЦН: Система резервирования контента и цифрового наследия</title>
+    
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@200;300;400;500&display=swap">
+    
+    <!-- QR Code Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
     <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --dream-1: #ffb7c5;
+            --dream-2: #c9b1ff;
+            --dream-3: #b8e0f2;
+            --dream-4: #ffd6e0;
+            --dream-5: #e0bbff;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.1);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        :root {
-            --coral: #FF6B6B;
-            --dark-bg: #1a1a1a;
-            --text-light: #ffffff;
-            --accent: #4ECDC4;
-            --secondary: #45B7AF;
-        }
-
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(rgba(26, 26, 26, 0.9), rgba(26, 26, 26, 0.9)),
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" opacity="0.1"><rect width="100%" height="100%" fill="none" stroke="%23FF6B6B" stroke-width="2"/></svg>'),
-                        #2d2d2d;
-            color: var(--text-light);
+            font-family: 'Cormorant Garamond', serif;
+            background: var(--bg-color);
+            color: var(--text-primary);
             overflow: hidden;
             height: 100vh;
+            cursor: default;
         }
 
-        .presentation-container {
-            width: 100vw;
-            height: 100vh;
-            position: relative;
-            perspective: 1000px;
-        }
-
-        .slides-wrapper {
-            display: flex;
-            width: 1500vw;
-            height: 100vh;
-            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            transform-style: preserve-3d;
-        }
-
-        .slide {
-            width: 100vw;
-            height: 100vh;
-            position: relative;
-            padding: 4rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: transparent;
-        }
-
-        .logo-background {
-            position: absolute;
+        /* Noise Overlay for Texture */
+        .noise-overlay {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            margin-top: 10vw;
-            opacity: 0.6;
             pointer-events: none;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="%23FF6B6B"><circle cx="100" cy="100" r="80" stroke="%234ECDC4" stroke-width="4" fill="none"/><path d="M70,70 L130,130 M130,70 L70,130" stroke="%234ECDC4" stroke-width="4"/></svg>') center/30% no-repeat;
-            filter: drop-shadow(0 0 30px var(--coral));
-            z-index: 1;
+            z-index: 9999;
+            opacity: 0.05;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIj48ZmlsdGVyIGlkPSJnoiPjxmZVR1cmJ1bGVuY2UgdHlwZT0iZnJhY3RhbE5vaXNlIiBiYXNlRnJlcXVlbmN5PSIwLjY1IiBudW1PY3RhdmVzPSIzIiBzdGl0Y2hUaWxlcz0ic3RpdGNoIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsdGVyPSJ1cmwoI2cpIiBvcGFjaXR5PSIxIi8+PC9zdmc+');
         }
 
-        .content-container {
-            max-width: 1200px;
-            width: 90%;
-            height: 80%;
-            position: relative;
-            z-index: 2;
-            background: rgba(45, 45, 45, 0.8);
-            border-radius: 20px;
-            padding: 3rem;
-            border: 1px solid var(--coral);
-            box-shadow: 0 0 50px rgba(255, 107, 107, 0.3);
-            backdrop-filter: blur(10px);
-            overflow-y: auto;
-        }
-
-        .code-placeholder {
-            background: #2d2d2d;
-            border: 2px dashed var(--coral);
-            border-radius: 10px;
-            padding: 2rem;
-            margin: 1rem 0;
-            min-height: 200px;
-            color: var(--text-light);
-            font-family: 'Courier New', monospace;
-        }
-
-        .progress-bar {
+        /* Parallax Background */
+        #parallax-bg {
             position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 6px;
-            background: rgba(255, 107, 107, 0.3);
-            z-index: 1000;
+            top: -10%;
+            left: -10%;
+            width: 120%;
+            height: 120%;
+            z-index: 0;
+            pointer-events: none;
+            transition: transform 0.1s ease-out;
         }
 
-        .progress-fill {
-            height: 100%;
-            background: var(--coral);
-            width: 10%;
-            transition: width 0.3s ease;
-        }
-
-        .nav-buttons {
-            position: fixed;
-            top: 50%;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            padding: 0 2rem;
-            z-index: 1000;
-            transform: translateY(-50%);
-        }
-
-        .nav-btn {
-            background: rgba(255, 107, 107, 0.8);
-            border: none;
-            color: white;
-            width: 50px;
-            height: 50px;
+        .orb {
+            position: absolute;
             border-radius: 50%;
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
+            filter: blur(80px);
+            opacity: 0.6;
+            animation: float 20s infinite ease-in-out;
         }
 
-        .nav-btn:hover {
-            background: var(--coral);
-            transform: scale(1.1);
-        }
+        .orb-1 { width: 50vw; height: 50vw; background: var(--dream-1); top: 10%; left: 20%; animation-delay: 0s; }
+        .orb-2 { width: 40vw; height: 40vw; background: var(--dream-2); top: 40%; left: 60%; animation-delay: -5s; }
+        .orb-3 { width: 45vw; height: 45vw; background: var(--dream-3); top: 70%; left: 10%; animation-delay: -10s; }
+        .orb-4 { width: 35vw; height: 35vw; background: var(--dream-4); top: 20%; left: 70%; animation-delay: -15s; }
 
-        h1, h2, h3 {
-            color: var(--coral);
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
-
-        h1 {
-            font-size: 3.5rem;
-            text-shadow: 0 0 20px rgba(255, 107, 107, 0.5);
-        }
-
-        h2 {
-            font-size: 2.5rem;
-        }
-
-        p {
-            font-size: 1.2rem;
-            line-height: 1.6;
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .feature-card {
-            background: rgba(78, 205, 196, 0.1);
-            padding: 1.5rem;
-            border-radius: 10px;
-            border: 1px solid var(--accent);
-        }
-
-        .tech-stack {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            justify-content: center;
-            margin: 2rem 0;
-        }
-
-        .tech-item {
-            background: rgba(255, 107, 107, 0.2);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            border: 1px solid var(--coral);
-        }
-
-        .qr-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-
-        .qr-placeholder {
-            background: rgba(255, 255, 255, 0.1);
-            height: 200px;
-            border: 2px dashed var(--coral);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--coral);
-        }
-
-        .interactive-demo {
-            background: rgba(45, 45, 45, 0.9);
-            border-radius: 10px;
-            padding: 2rem;
-            margin: 2rem 0;
-            border: 1px solid var(--accent);
-        }
-
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 2rem 0;
-        }
-
-        .comparison-table th, .comparison-table td {
-            padding: 1rem;
-            text-align: center;
-            border: 1px solid var(--coral);
-        }
-
-        .comparison-table th {
-            background: rgba(255, 107, 107, 0.2);
-            color: var(--coral);
-        }
-
-        .good { color: #4ECDC4; }
-        .medium { color: #FFD166; }
-        .bad { color: #FF6B6B; }
-
-        .highlight {
-            color: var(--accent);
-            font-weight: bold;
-        }
-
-        .steps-container {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-
-        .step {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-        }
-
-        .step-number {
-            background: var(--coral);
-            color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .step-content {
-            flex: 1;
-        }
-
-        .structure-tree {
-            background: rgba(45, 45, 45, 0.9);
-            border-radius: 10px;
-            padding: 1.5rem;
-            margin: 1rem 0;
-            border: 1px solid var(--accent);
-            font-family: 'Courier New', monospace;
-        }
-
-        .folder {
-            color: var(--accent);
-        }
-
-        .file {
-            color: var(--coral);
-        }
-
-        .tree-indent {
-            margin-left: 1.5rem;
-        }
-
-        /* Анимации */
         @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -40px) scale(1.05); }
+            66% { transform: translate(-20px, 30px) scale(0.95); }
         }
 
-        .floating {
-            animation: float 3s ease-in-out infinite;
+        /* Slides Container */
+        .slides-container {
+            position: relative;
+            z-index: 10;
+            height: 100vh;
+            width: 100vw;
         }
 
-        .parallax-bg {
+        .slide {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" opacity="0.05"><polygon points="100,100 150,200 50,300" fill="%23FF6B6B"/><circle cx="800" cy="300" r="50" fill="%234ECDC4"/><rect x="700" y="600" width="100" height="100" fill="%23FF6B6B"/></svg>');
-            background-size: cover;
-            z-index: -1;
-        }
-
-        .slide {
-            transform: translateX(0);
-            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            transform: scale(0.95);
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            top: 0;
+            left: 0;
+            right: 0;          /* ← добавить */
         }
 
         .slide.active {
-            transform: translateX(0);
+            opacity: 1;
+            pointer-events: all;
+            transform: scale(1);
+            z-index: 20;
         }
 
-        .slide.next {
-            transform: translateX(100vw);
+        /* Typography */
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 300;
+            letter-spacing: 0.1em;
+            text-align: center;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fff 0%, var(--dream-1) 50%, var(--dream-2) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 50px rgba(255, 255, 255, 0.2);
+            animation: titlePulse 6s infinite ease-in-out;
         }
 
-        .slide.prev {
-            transform: translateX(-100vw);
+        @keyframes titlePulse {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.2); }
         }
 
+        h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 400;
+            color: var(--dream-3);
+            margin-bottom: 2rem;
+            text-align: center;
+            text-shadow: 0 0 20px rgba(184, 224, 242, 0.3);
+            animation: fadeIn 1s ease 0.3s both;
+        }
+
+        p {
+            font-size: 1.4rem;
+            line-height: 1.6;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-secondary);
+            letter-spacing: 0.15em;
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeIn 1s ease 0.5s both;
+        }
+
+        /* Content Box */
+        .content-box {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--card-border);
+            border-radius: 30px;
+            padding: 40px;
+            max-width: 1100px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: slideUp 0.8s ease 0.2s both;
+            margin: 0 auto;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 25px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 1s ease 0.4s both;
+        }
+
+        .card:nth-child(1) { animation-delay: 0.3s; }
+        .card:nth-child(2) { animation-delay: 0.4s; }
+        .card:nth-child(3) { animation-delay: 0.5s; }
+        .card:nth-child(4) { animation-delay: 0.6s; }
+        .card:nth-child(5) { animation-delay: 0.7s; }
+        .card:nth-child(6) { animation-delay: 0.8s; }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            border-color: var(--dream-2);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: block;
+            filter: drop-shadow(0 0 10px var(--dream-1));
+            animation: iconGlow 3s infinite;
+        }
+
+        @keyframes iconGlow {
+            0%, 100% { filter: drop-shadow(0 0 5px var(--dream-1)); }
+            50% { filter: drop-shadow(0 0 15px var(--dream-2)); }
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: var(--dream-4);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .card-text {
+            font-size: 1rem;
+            opacity: 0.8;
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.5;
+        }
+
+        /* UI Mockups */
+        .ui-mockup {
+            width: 100%;
+            max-width: 800px;
+            background: #1a1a1a;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            margin-top: 20px;
+            animation: fadeIn 1s ease 0.3s both;
+        }
+
+        .ui-header {
+            background: #252525;
+            padding: 10px 15px;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .ui-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            animation: dotPulse 2s infinite;
+        }
+        .ui-dot.r { background: #ff5f56; animation-delay: 0s; }
+        .ui-dot.y { background: #ffbd2e; animation-delay: 0.2s; }
+        .ui-dot.g { background: #27c93f; animation-delay: 0.4s; }
+
+        @keyframes dotPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .ui-title {
+            color: #888;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            margin-left: 10px;
+        }
+
+        .ui-body {
+            padding: 20px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .ui-tabs {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        .ui-tab {
+            color: #666;
+            font-size: 0.9rem;
+            padding: 5px 10px;
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+        .ui-tab:hover {
+            color: #aaa;
+            background: rgba(255,255,255,0.1);
+        }
+        .ui-tab.active {
+            background: var(--dream-1);
+            color: #1a1a1a;
+        }
+
+        .ui-form-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            align-items: flex-end;
+        }
+
+        .ui-field {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .ui-label {
+            color: #aaa;
+            font-size: 0.75rem;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .ui-input {
+            width: 100%;
+            background: #333;
+            border: 1px solid #444;
+            color: #fff;
+            padding: 8px 10px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+        }
+
+        .ui-select {
+            width: 100%;
+            background: #333;
+            border: 1px solid #444;
+            color: #fff;
+            padding: 8px 10px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23888888%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.7-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 10px;
+        }
+
+        .ui-btn {
+            background: var(--dream-2);
+            color: #000;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: default;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .ui-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(201, 177, 255, 0.4);
+        }
+
+        /* Gallery Slide Art */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.5s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            animation: galleryFadeIn 0.8s ease both;
+        }
+
+        .gallery-item:nth-child(1) { animation-delay: 0.1s; }
+        .gallery-item:nth-child(2) { animation-delay: 0.2s; }
+        .gallery-item:nth-child(3) { animation-delay: 0.3s; }
+        .gallery-item:nth-child(4) { animation-delay: 0.4s; }
+        .gallery-item:nth-child(5) { animation-delay: 0.5s; }
+        .gallery-item:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes galleryFadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            z-index: 10;
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.2) 50%, transparent 60%);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%); }
+            100% { transform: translateX(100%) translateY(100%); }
+        }
+
+        /* Generated CSS Art for images */
+        .art-1 { background: linear-gradient(45deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%); }
+        .art-2 { background: linear-gradient(120deg, #a18cd1 0%, #fbc2eb 100%); }
+        .art-3 { background: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%); }
+        .art-4 { background: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%); }
+        .art-5 { background: linear-gradient(to right, #43e97b 0%, #38f9d7 100%); }
+        .art-6 { background: linear-gradient(to top, #5ee7df 0%, #b490ca 100%); }
+
+        /* QR Codes */
+        .qr-section {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .qr-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.4s;
+            animation: fadeIn 1s ease 0.5s both;
+        }
+
+        .qr-card:hover {
+            transform: translateY(-10px);
+        }
+
+        #qr1, #qr2, #qr3 {
+            background: #fff;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+        
+        .qr-link {
+            display: block;
+            margin-top: 10px;
+            color: var(--dream-4);
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            transition: color 0.3s;
+        }
+        .qr-link:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        /* Navigation */
+        .nav-arrow {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3rem;
+            color: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.3s;
+            user-select: none;
+        }
+        .nav-arrow:hover { color: rgba(255, 255, 255, 0.9); }
+        .nav-prev { left: 30px; }
+        .nav-next { right: 30px; }
+
+        .nav-dots {
+            position: fixed;
+            right: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .dot.active {
+            background: var(--dream-1);
+            transform: scale(1.4);
+            box-shadow: 0 0 15px var(--dream-1);
+        }
+
+        /* Speaker Notes */
+        .speaker-notes {
+            position: fixed;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            max-width: 900px;
+            background: rgba(10, 10, 15, 0.85);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 15px 25px;
+            z-index: 500;
+            transition: opacity 0.5s;
+        }
+        
+        .speaker-notes .label {
+            display: block;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            color: var(--dream-3);
+            font-size: 0.8rem;
+            margin-bottom: 5px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .speaker-notes .text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.4;
+        }
+
+        .hide-notes .speaker-notes {
+            display: none;
+        }
+
+        /* Tech Stack */
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .tech-badge {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            animation: fadeIn 0.8s ease both;
+        }
+        .tech-badge:hover {
+            background: var(--dream-2);
+            color: #000;
+            transform: translateY(-2px);
+        }
+
+        /* Code Snippet Style */
+        .code-block {
+            background: #0f0f0f;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: #a8b2d1;
+            margin-top: 15px;
+            text-align: left;
+            overflow-x: auto;
+        }
+        .code-keyword { color: #ff79c6; }
+        .code-string { color: #f1fa8c; }
+
+        /* Animation for list items */
+        ul.dream-list {
+            list-style: none;
+            text-align: left;
+            width: 100%;
+            max-width: 800px;
+        }
+        ul.dream-list li {
+            padding: 10px 0;
+            padding-left: 25px;
+            position: relative;
+            font-size: 1.2rem;
+            font-family: 'Montserrat', sans-serif;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            animation: fadeInLeft 0.8s ease both;
+        }
+        ul.dream-list li:nth-child(1) { animation-delay: 0.1s; }
+        ul.dream-list li:nth-child(2) { animation-delay: 0.2s; }
+        ul.dream-list li:nth-child(3) { animation-delay: 0.3s; }
+        ul.dream-list li:nth-child(4) { animation-delay: 0.4s; }
+        ul.dream-list li:nth-child(5) { animation-delay: 0.5s; }
+
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        ul.dream-list li:last-child { border-bottom: none; }
+        ul.dream-list li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: var(--dream-1);
+            animation: sparkle 3s infinite;
+        }
+        @keyframes sparkle {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.3); }
+        }
+
+        /* Graph Visualization */
+        .graph-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            height: 350px;
+            overflow: hidden;
+        }
+
+        .graph-node {
+            position: absolute;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: bold;
+            font-family: sans-serif;
+            font-size: 0.8rem;
+            animation: nodeFloat 6s ease-in-out infinite;
+            cursor: default;
+        }
+
+        @keyframes nodeFloat {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-5px) scale(1.02); }
+        }
+
+        .graph-legend {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.7);
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            z-index: 10;
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            .slide {
-                padding: 2rem 1rem;
-            }
-            
-            .content-container {
-                padding: 1.5rem;
-            }
-            
-            h1 {
-                font-size: 2.5rem;
-            }
-            
-            h2 {
-                font-size: 2rem;
-            }
-            
-            .nav-btn {
-                width: 40px;
-                height: 40px;
-                font-size: 1.2rem;
-            }
+            .slide { padding: 15px; max-width: 100%; }
+            .content-box { width: 95%; padding: 25px; }
+            .grid { grid-template-columns: 1fr; gap: 15px; }
+            .ui-form-row { flex-direction: column; }
+            .qr-section { gap: 15px; }
+            .nav-dots { right: 15px; }
+            .speaker-notes { width: 90%; padding: 10px 15px; }
         }
     </style>
 </head>
 <body>
-    <div class="presentation-container">
-        <div class="parallax-bg"></div>
-        
-        <div class="slides-wrapper">
-            <!-- Слайд 1: Титульный -->
-            <section class="slide active">
-                <div class="logo-background"></div>
-                <div class="content-container floating">
-                    <h1>СРКЦН</h1>
-                    <h2>Система резервирования контента и цифрового наследия</h2>
-                    <p>Программное решение для систематизации, сохранения и публикации творческих работ</p>
-                    <div style="margin-top: 2rem;">
-                        <div class="tech-item">Python</div>
-                        <div class="tech-item">Flask</div>
-                        <div class="tech-item">pywebview</div>
-                        <div class="tech-item">JavaScript</div>
-                    </div>
-                </div>
-            </section>
 
-            <!-- Слайд 2: Идея и предпосылки -->
-            <section class="slide">
-                <div class="logo-background"></div>
-                <div class="content-container">
-                    <h2>Идея создания</h2>
-                    <p>Множество творческих людей создают материалы, но часто сталкиваются с проблемой их упорядочивания и представления широкой аудитории.</p>
-                    <div class="feature-grid">
-                        <div class="feature-card">
-                            <h3>🎯 Проблема</h3>
-                            <p>Существующие платформы требуют навыков разработки, навязывают стиль, не дают полного контроля или смешивают личное с профессиональным.</p>
-                        </div>
-                        <div class="feature-card">
-                            <h3>💡 Решение</h3>
-                            <p>Объединить функции каталогизатора, архиватора и генератора сайтов в одном простом приложении.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+    <div class="noise-overlay"></div>
 
-            <!-- Слайд 3: Целевая аудитория -->
-            <section class="slide">
-                <div class="logo-background"></div>
-                <div class="content-container">
-                    <h2>Кому это нужно?</h2>
-                    <div class="feature-grid">
-                        <div class="feature-card">
-                            <h3>🎨 Художники</h3>
-                            <p>Хранение изображений, описаний техник, создание галерей.</p>
-                        </div>
-                        <div class="feature-card">
-                            <h3>✍️ Писатели и поэты</h3>
-                            <p>Структурирование рассказов, стихов, романов с обложками.</p>
-                        </div>
-                        <div class="feature-card">
-                            <h3>🎵 Музыканты</h3>
-                            <p>Демо-записи, ноты, описания проектов.</p>
-                        </div>
-                        <div class="feature-card">
-                            <h3>💻 Программисты-любители</h3>
-                            <p>Код, скриншоты, документация к проектам.</p>
-                        </div>
-                        <div class="feature-card">
-                            <h3>🔬 Научные сотрудники</h3>
-                            <p>Публикации, учебные материалы, презентации.</p>
-                        </div>
-                        <div class="feature-card">
-                            <h3>📚 Школьники и студенты</h3>
-                            <p>Портфолио достижений для конкурсов и олимпиад.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Слайд 4: Почему программа, а не фреймворк -->
-            <section class="slide">
-                <div class="logo-background"></div>
-                <div class="content-container">
-                    <h2>Готовое приложение</h2>
-                    <p>Изначально планировалась библиотека для разработчиков, но анализ показал: большинство пользователей — не программисты.</p>
-                    <div class="feature-grid">
-                        <div class="feature-card">
-                            <h3>🚀 Запуск двойным щелчком</h3>
-                            <p>Не требует установки интерпретаторов, управления зависимостями, знания кода.</p>
-                        </div>
-                        <div class="feature-card">
-                            <h3>🖥️ Графический интерфейс</h3>
-                            <p>Интуитивные формы заполнения, встроенный веб-сервер и база данных скрыты от пользователя.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Слайд 5: Обзор функциональности -->
-            <section class="slide">
-                <div class="logo-background"></div>
-                <div class="content-container">
-                    <h2>Основные разделы</h2>
-                    <div class="feature-grid">
-                        <div class="feature-card">📁 Работы</div>
-                        <div class="feature-card">👤 Портфолио</div>
-                        <div class="feature-card">🖼️ Галереи</div>
-                        <div class="feature-card">💾 Резервные копии</div>
-                        <div class="feature-card">🔒 Целостность</div>
-                        <div class="feature-card">🐙 Git</div>
-                        <div class="feature-card">📤 Экспорт</div>
-                        <div class="feature-card">📊 Граф связей</div>
-                    </div>
-                    <p>Все данные хранятся в JSON-файлах в папке <strong>data</strong> — простота резервирования и переносимости.</p>
-                </div>
-            </section>
-
-            <!-- Слайд 6: Раздел «Работы» -->
-            <section class="slide">
-                <div class="logo-background"></div>
-                <div class="content-container">
-                    <h2>Каталогизация работ</h2>
-                    <p>При добавлении работы указываются:</p>
-                    <div class="feature-grid">
-                        <div class="feature-card">Название, описание, дата</div>
-                        <div class="feature-card">Сфера → Жанр → Тема (единообразная классификация)</div>
-                        <div class="feature-card">Произвольные теги</div>
-                        <div class="feature-card">Основной контент, обложка, README (Markdown)</div>
-                        <div class="feature-card">Автоматическое переименование файлов + SHA-256 хеш</div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Слайд 7: Связи и граф зависимостей -->
-            <section class="slide">
-                <div class="logo-background"></div>
-                <div class="content-container">
-                    <h2>Визуализация связей</h2>
-                    <p>Поле «Связанные ID» создаёт граф зависимостей между работами (серии рассказов, модули проекта).</p>
-                    <div id="graph-container" style="height: 300px; background: #2d2d2d; border-radius: 5px; border: 1px solid var(--coral); margin: 1rem 0;"></div>
-                    <p style="font-size: 1rem;">Пример: связи между работами разных сфер (литература, программирование, искусство)</p>
-                </div>
-            </section>
-
-            <!-- Слайд 8: Портфолио и шаблоны -->
-            <section class="slide">
-                <div class="logo-background"></div>
-                <div class="content-container">
-                    <h2>Настройка портфолио</h2>
-                    <div class="feature-grid">
-                        <div class="feature-card">Фото, имя, цитата, биография</div>
-                        <div class="feature-card">Цветовая акцентная гамма</div>
-                        <div class="feature-card">Выбор шаблона из папки static/templates</div>
-                        <div class="feature-card">SEO-метатеги для генерируемых страниц</div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Слайд 9: Галереи изображений -->
-            <section class="slide">
-                <div class="logo-background"></div>
-                <div class="content-container">
-                    <h2>Галереи</h2>
-                    <p>Создание галерей с множеством изображений, названием, описанием, типом отображения (сетка/список). Изображения хешируются.</p>
-                    <div class="qr-placeholder" style="height:150px;">Пример галереи</div>
-                </div>
-            </section>
-
-            <!-- Слайд 10: Резервное копирование и целостность -->
-            <section class="slide">
-                <div class="logo-background"></div>
-                <div class="content-container">
-                    <h2>Надёжность данных</h2>
-                    <div class="feature-grid">
-                        <div class="feature-card">
-                            <h3>💾 Автоматические бэкапы</h3>
-                            <p>ZIP-архивы всех данных и файлов при каждом изменении, ротация (10 копий), ручное создание с комментарием.</p>
-                        </div>
-                        <div class="feature-card">
-                            <h3>🔍 Проверка целостности</h3>
-                            <p>Сравнение SHA-256 хешей, выявление отсутствующих или повреждённых файлов, восстановление из бэкапа.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Слайд 11: Экспорт статического сайта и Git -->
-            <section class="slide">
-                <div class="logo-background"></div>
-                <div class="content-container">
-                    <h2>Публикация и версионирование</h2>
-                    <div class="feature-grid">
-                        <div class="feature-card">
-                            <h3>📦 Экспорт сайта</h3>
-                            <p>Генерация полноценного статического сайта (HTML, «красивые» URL, .htaccess/_redirects) в ZIP-архиве.</p>
-                        </div>
-                        <div class="feature-card">
-                            <h3>🐙 Git-интеграция</h3>
-                            <p>Опционально: подключение GitHub/GitLab, история коммитов, push/pull, восстановление файлов из прошлых версий.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Слайд 12: Технологический стек -->
-            <section class="slide">
-                <div class="logo-background"></div>
-                <div class="content-container">
-                    <h2>Технологии</h2>
-                    <div class="tech-stack">
-                        <div class="tech-item">Python</div>
-                        <div class="tech-item">Flask</div>
-                        <div class="tech-item">pywebview</div>
-                        <div class="tech-item">JSON</div>
-                        <div class="tech-item">cryptography (Fernet)</div>
-                        <div class="tech-item">PyGithub / python-gitlab</div>
-                        <div class="tech-item">markdown</div>
-                        <div class="tech-item">hashlib</div>
-                        <div class="tech-item">JavaScript (vanilla)</div>
-                    </div>
-                    <p>Кроссплатформенность, простой GUI через встроенный браузер, минимум зависимостей.</p>
-                </div>
-            </section>
-
-            <!-- Слайд 13: Архитектура -->
-            <section class="slide">
-                <div class="logo-background"></div>
-                <div class="content-container">
-                    <h2>Архитектура приложения</h2>
-                    <div class="structure-tree">
-                        <div class="folder">СРКЦН/</div>
-                        <div class="tree-indent">
-                            <div class="file">launch.py</div>
-                            <div class="file">app.py (Flask)</div>
-                            <div class="folder">data/</div>
-                            <div class="tree-indent">
-                                <div class="file">content.json</div>
-                                <div class="file">portfolio.json</div>
-                                <div class="file">galleries.json</div>
-                            </div>
-                            <div class="folder">uploads/</div>
-                            <div class="folder">static/</div>
-                            <div class="tree-indent">
-                                <div class="folder">templates/</div>
-                                <div class="file">app.js (фронтенд)</div>
-                            </div>
-                            <div class="folder">backups/</div>
-                        </div>
-                    </div>
-                    <p>Flask обрабатывает API, фронтенд на чистом JS обновляет интерфейс.</p>
-                </div>
-            </section>
-
-            <!-- Слайд 14: Перспективы развития -->
-            <section class="slide">
-                <div class="logo-background"></div>
-                <div class="content-container">
-                    <h2>Планы на будущее</h2>
-                    <ul style="text-align: left; font-size: 1.2rem; line-height: 2;">
-                        <li>📚 Расширение библиотеки шаблонов, конструктор тем</li>
-                        <li>🔗 Улучшение интерактивного графа связей</li>
-                        <li>☁️ Интеграция с облачными хранилищами (Google Drive, Dropbox)</li>
-                        <li>🌐 Мультиязычность (уже есть английская ветка)</li>
-                        <li>📄 Экспорт в PDF-портфолио</li>
-                        <li>🚀 Публикация сайта прямо из программы (FTP, Netlify)</li>
-                        <li>🧩 Система плагинов</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Слайд 15: Заключительный -->
-            <section class="slide">
-                <div class="logo-background"></div>
-                <div class="content-container floating">
-                    <h1>Готово к использованию!</h1>
-                    <p>Просто, надёжно, бесплатно. Сохраните своё цифровое наследие.</p>
-                    <div style="margin-top: 2rem;">
-                        <div class="tech-item">Кроссплатформенность</div>
-                        <div class="tech-item">Не требует программирования</div>
-                        <div class="tech-item">Открытый исходный код</div>
-                    </div>
-                    <a href="/events/SoRUPP_presentation/examples/" style="font-size: 1rem; color: #FF6B6B; text-decoration: none;">Примеры</a>
-                    <p style="margin-top: 2rem;">Запуск: <span class="highlight">python launch.py</span></p>
-                </div>
-            </section>
-        </div>
-
-        <!-- Навигация -->
-        <div class="nav-buttons">
-            <button class="nav-btn prev-btn">←</button>
-            <button class="nav-btn next-btn">→</button>
-        </div>
-
-        <!-- Прогресс-бар -->
-        <div class="progress-bar">
-            <div class="progress-fill"></div>
-        </div>
+    <!-- Parallax Background -->
+    <div id="parallax-bg">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="orb orb-4"></div>
     </div>
 
-<script src="https://unpkg.com/cytoscape@3.23.0/dist/cytoscape.min.js"></script>
-<script>
-    class Presentation {
-        constructor() {
-            this.currentSlide = 0;
-            this.totalSlides = document.querySelectorAll('.slide').length;
-            this.slidesWrapper = document.querySelector('.slides-wrapper');
-            this.progressFill = document.querySelector('.progress-fill');
+    <!-- Navigation -->
+    <div class="nav-arrow nav-prev" onclick="changeSlide(-1)">‹</div>
+    <div class="nav-arrow nav-next" onclick="changeSlide(1)">›</div>
+    <div class="nav-dots" id="dots"></div>
+
+    <!-- Speaker Notes -->
+    <div class="speaker-notes" id="speakerNotes">
+        <span class="label">Дополнительная информация</span>
+        <span class="text" id="noteText">...</span>
+    </div>
+
+    <div class="slides-container">
+        
+        <!-- Slide 1: Title -->
+        <div class="slide active" data-note="СРКЦН — кроссплатформенное решение на Python и Flask, использующее pywebview для графического интерфейса. Встроенный веб-сервер и система хранения данных в JSON обеспечивают автономность без сложной настройки. Приложение объединяет криптографию для защиты токенов, Cytoscape.js для визуализации связей и Vanilla JS для фронтенда.">
+            <h1>СРКЦН</h1>
+            <div class="subtitle">Система резервирования контента<br>и цифрового наследия</div>
+            <div class="content-box">
+                <p style="font-size: 1.6rem; text-align: center; font-style: italic; margin-bottom: 30px;">
+                    Программное решение для систематизации, сохранения<br>и публикации творческих работ
+                </p>
+                <div class="tech-stack">
+                    <span class="tech-badge">Python</span>
+                    <span class="tech-badge">Flask</span>
+                    <span class="tech-badge">pywebview</span>
+                    <span class="tech-badge">cryptography (Fernet)</span>
+                    <span class="tech-badge">Vanilla JS</span>
+                    <span class="tech-badge">Cytoscape.js</span>
+                    <span class="tech-badge">JSON</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Problem & Solution -->
+        <div class="slide" data-note="Творцы сталкиваются с отсутствием единого места для хранения контента и необходимостью навыков программирования для создания портфолио. Социальные сети смешивают личный и профессиональный контент. СРКЦН объединяет каталогизатор, архиватор и генератор сайтов в одном приложении с запуском в один клик и интуитивным интерфейсом без технических требований.">
+            <h2>Идея создания</h2>
+            <div class="grid">
+                <div class="card">
+                    <span class="card-icon">🎯</span>
+                    <div class="card-title">Проблема</div>
+                    <div class="card-text">Творцы создают контент, но не имеют единого места для его хранения. Портфолио требуют навыков кода, а соцсети смешивают личное и профессиональное.</div>
+                </div>
+                <div class="card">
+                    <span class="card-icon">💡</span>
+                    <div class="card-title">Решение</div>
+                    <div class="card-text">Единый инструмент: каталогизатор + архиватор + генератор сайтов. Запуск в один клик. Навигация через графический интерфейс без знаний программирования.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Target Audience -->
+        <div class="slide" data-note="Универсальность системы охватывает художников, писателей, дизайнеров, программистов, учёных и студентов. Каждый пользователь находит применение в зависимости от сферы: от портфолио для конкурсов до архивации исследовательских данных. Система адаптируется к любой творческой дисциплине.">
+            <h2>Целевая аудитория</h2>
+            <div class="grid">
+                <div class="card"><span class="card-icon">🎨</span><div class="card-title">Художники</div><div class="card-text">Галереи, описания техник, сохранение авторства.</div></div>
+                <div class="card"><span class="card-icon">✍️</span><div class="card-title">Писатели</div><div class="card-text">Сборники рассказов, стихи, черновики.</div></div>
+                <div class="card"><span class="card-icon">🪭</span><div class="card-title">Дизайнеры</div><div class="card-text">Концепты, работы, каталоги, эскизы</div></div>
+                <div class="card"><span class="card-icon">💻</span><div class="card-title">Программисты</div><div class="card-text">Исходный код, документация, скриншоты.</div></div>
+                <div class="card"><span class="card-icon">🔬</span><div class="card-title">Ученые</div><div class="card-text">Публикации, статьи, исследовательские данные.</div></div>
+                <div class="card"><span class="card-icon">📚</span><div class="card-title">Студенты</div><div class="card-text">Портфолио достижений для конкурсов.</div></div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Interface Mockup (General) -->
+        <div class="slide" data-note="Интерфейс приложения организован через вкладки в верхней части окна: добавление, управление, портфолио, галереи, бэкапы, Git, граф, экспорт. Данные хранятся локально в JSON-файлах в папке data, что обеспечивает переносимость между устройствами без необходимости установки СУБД.">
+            <h2>Интерфейс приложения</h2>
+            <div class="content-box" style="padding: 20px;">
+                <div class="ui-mockup">
+                    <div class="ui-header">
+                        <div class="ui-dot r"></div><div class="ui-dot y"></div><div class="ui-dot g"></div>
+                        <div class="ui-title">СРКЦН - Каталогизатор творческих работ</div>
+                    </div>
+                    <div class="ui-body">
+                        <div class="ui-tabs">
+                            <span class="ui-tab active">➕ Добавление</span>
+                            <span class="ui-tab">✏️ Управление</span>
+                            <span class="ui-tab">🎨 Портфолио</span>
+                            <span class="ui-tab">🖼️ Галереи</span>
+                            <span class="ui-tab">💾 Бэкапы</span>
+                            <span class="ui-tab">📦 Экспорт</span>
+                        </div>
+                        <div style="color: #777; text-align: center; padding: 30px; border: 1px dashed #444; border-radius: 8px;">
+                            Область контента активной вкладки...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Adding Work (Details) -->
+        <div class="slide" data-note="При добавлении работы используется иерархическая классификация: Сфера → Жанр → Тема. При выборе сферы программирования система автоматически определяет язык по расширению файла. К работе прикрепляются основной контент, обложка и README в Markdown. Связанные ID создают граф зависимостей. Все файлы переименовываются с временной меткой и хешируются SHA-256 для контроля целостности.">
+            <h2>Добавление работы</h2>
+            <div class="grid" style="grid-template-columns: 1fr 1fr; max-width: 1000px;">
+                <div class="ui-mockup" style="margin-top: 0;">
+                    <div class="ui-body">
+                        <div class="ui-form-row">
+                            <div class="ui-field">
+                                <span class="ui-label">Сфера</span>
+                                <div class="ui-select" style="color: var(--dream-4);">Программирование</div>
+                            </div>
+                        </div>
+                        <div class="ui-form-row">
+                            <div class="ui-field">
+                                <span class="ui-label">Жанр</span>
+                                <div class="ui-select" style="color: var(--dream-4);">Python</div>
+                            </div>
+                            <div class="ui-field">
+                                <span class="ui-label">Тема</span>
+                                <div class="ui-select">Веб-бэкенд</div>
+                            </div>
+                        </div>
+                        <div class="ui-form-row">
+                            <div class="ui-field">
+                                <span class="ui-label">Название</span>
+                                <div class="ui-input">Мой проект</div>
+                            </div>
+                        </div>
+                        <div class="ui-form-row">
+                            <div class="ui-field">
+                                <span class="ui-label">Теги</span>
+                                <div class="ui-input">flask, web</div>
+                            </div>
+                        </div>
+                        <div style="text-align: right; margin-top: 15px;">
+                            <span class="ui-btn">➕ Добавить</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="display: flex; flex-direction: column; justify-content: center;">
+                    <h3 style="color: var(--dream-4); margin-bottom: 15px;">Ключевые особенности</h3>
+                    <ul class="dream-list">
+                        <li>Иерархическая классификация</li>
+                        <li>Авто-определение языка по файлу</li>
+                        <li>Прикрепление Markdown README</li>
+                        <li>Связанные ID (граф зависимостей)</li>
+                        <li>SHA-256 хеширование файлов</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Portfolio & SEO -->
+        <div class="slide" data-note="Портфолио позволяет настроить персональную страницу с аватаром, именем, цитатой и биографией. Пользователь выбирает цветовую гамму и один из готовых шаблонов (Default, Minimal, Dark, Cyberpunk) или создаёт собственный в папке static/templates. Автоматическая генерация мета-тегов title, description и keywords обеспечивает SEO-оптимизацию для всех экспортируемых страниц.">
+            <h2>Портфолио и SEO</h2>
+            <div class="content-box">
+                <div class="grid">
+                    <div class="card">
+                        <span class="card-icon">👤</span>
+                        <div class="card-title">Персонализация</div>
+                        <div class="card-text">Загрузка аватара, имя, цитата, биография. Выбор цветовой гаммы и шаблона (Default, Minimal, Dark, Cyberpunk).</div>
+                    </div>
+                    <div class="card">
+                        <span class="card-icon">🔍</span>
+                        <div class="card-title">SEO Оптимизация</div>
+                        <div class="card-text">
+                            Автоматическая генерация мета-тегов для всех страниц:
+                            <br><br>
+                            <div class="code-block">
+<span class="code-keyword">&lt;meta</span> name="description" content="..."<span class="code-keyword">&gt;</span>
+<span class="code-keyword">&lt;meta</span> name="keywords" content="..."<span class="code-keyword">&gt;</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Gallery -->
+        <div class="slide" data-note="Галереи позволяют группировать изображения с названием, описанием и выбором типа отображения: сетка, слайдер или масонри. Каждое изображение хешируется SHA-256 и может быть добавлено или удалено независимо от основного каталога работ. Визуальная часть важна для художников, фотографов и дизайнеров.">
+            <h2>Галереи изображений</h2>
+            <div class="content-box" style="width: 95%;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap;">
+                    <div class="ui-tabs" style="border-bottom: none; padding-bottom: 0;">
+                        <span class="ui-tab active">Мои работы (2024)</span>
+                        <span class="ui-tab">Скетчи</span>
+                        <span class="ui-tab">Референсы</span>
+                    </div>
+                    <div style="color: #888; font-family: monospace; font-size: 0.8rem;">Отображение: Сетка</div>
+                </div>
+                <div class="gallery-grid">
+                    <div class="gallery-item art-1"></div>
+                    <div class="gallery-item art-2"></div>
+                    <div class="gallery-item art-3"></div>
+                    <div class="gallery-item art-4"></div>
+                    <div class="gallery-item art-5"></div>
+                    <div class="gallery-item art-6"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Reliability (Backups) -->
+        <div class="slide" data-note="Надёжность обеспечивается многоуровневой защитой: ZIP-архивы создаются автоматически при каждом изменении данных. Ротация ограничена 10 последними копиями с возможностью ручного создания с комментарием. Проверка целостности сравнивает SHA-256 хеши файлов с эталонами и выявляет повреждения. Восстановление возможно из любого архива полностью или выборочно.">
+            <h2>Надёжность данных</h2>
+            <div class="grid">
+                <div class="card">
+                    <span class="card-icon">💾</span>
+                    <div class="card-title">Резервные копии</div>
+                    <div class="card-text">
+                        ZIP-архив создается при каждом изменении.
+                        <br><br>
+                        <div class="code-block">
+backups/
+ ├── backup_20241012_1000.zip
+ ├── backup_20241013_1430.zip
+ └── ...
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <span class="card-icon">🔒</span>
+                    <div class="card-title">Целостность</div>
+                    <div class="card-text">
+                        Автоматическая проверка SHA-256 хешей всех файлов.
+                        <br>
+                        Мгновенное обнаружение изменений или повреждений.
+                        <br>
+                        Восстановление конкретного файла из архива.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Git Integration -->
+        <div class="slide" data-note="Интеграция с GitHub и GitLab доступна для продвинутых пользователей. Токен доступа защищается шифрованием Fernet. Пользователь может просматривать историю коммитов, выполнять push и pull, а также восстанавливать отдельные файлы из прошлых версий. Поддержка GitHub Pages позволяет опубликовать портфолио на бесплатном хостинге.">
+            <h2>Git интеграция</h2>
+            <div class="content-box">
+                <div class="ui-mockup" style="margin: 0;">
+                    <div class="ui-body">
+                        <div class="ui-form-row">
+                            <div class="ui-field"><span class="ui-label">Провайдер</span><div class="ui-select">GitHub</div></div>
+                            <div class="ui-field"><span class="ui-label">Токен (Fernet)</span><div class="ui-input" style="font-family: monospace;">gAAAAA...</div></div>
+                        </div>
+                        <div class="ui-form-row">
+                            <div class="ui-field"><span class="ui-label">Репозиторий</span><div class="ui-input">warmraysofdawn/SoRUPP</div></div>
+                        </div>
+                        <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 15px; flex-wrap: wrap;">
+                            <span class="ui-btn" style="background: #666;">🔌 Тест</span>
+                            <span class="ui-btn" style="background: #38f9d7;">📤 Push</span>
+                            <span class="ui-btn" style="background: #88b0ff;">📥 Pull</span>
+                        </div>
+                    </div>
+                </div>
+                <p style="margin-top: 20px; font-size: 1.1rem; text-align: center;">
+                    Безопасное хранение токена через шифрование. Поддержка GitHub Pages для хостинга.
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 10: Graph Visualization -->
+        <div class="slide" data-note="Граф связей визуализирует зависимости между работами с использованием Cytoscape.js. Каждый узел представляет работу, а связи показывают логические зависимости: серии рассказов, модули проекта или связанные исследования. Цвет узлов соответствует сфере деятельности: программирование — синий, литература — красный, научпоп — зелёный и так далее.">
+            <h2>Граф связей</h2>
+            <div class="content-box" style="position: relative; overflow: hidden; height: 400px;">
+                <div class="graph-legend">
+                    <div style="margin-bottom: 5px;"><span style="color: #3498db;">●</span> Программирование</div>
+                    <div style="margin-bottom: 5px;"><span style="color: #e74c3c;">●</span> Литература</div>
+                    <div style="margin-bottom: 5px;"><span style="color: #2ecc71;">●</span> Научпоп</div>
+                    <div style="margin-bottom: 5px;"><span style="color: #9b59b6;">●</span> Цифровое искусство</div>
+                </div>
+                
+                <div class="graph-container">
+                    <div class="graph-node" style="top: 30%; left: 40%; width: 100px; height: 50px; background: #3498db; box-shadow: 0 0 20px rgba(52,152,219,0.5); animation-delay: 0s;">Backend</div>
+                    
+                    <div class="graph-node" style="top: 60%; left: 20%; width: 120px; height: 50px; background: #e74c3c; box-shadow: 0 0 20px rgba(231,76,60,0.5); animation-delay: -1s;">Роман</div>
+                    
+                    <div class="graph-node" style="top: 40%; left: 70%; width: 140px; height: 50px; background: #9b59b6; box-shadow: 0 0 20px rgba(155,89,182,0.5); animation-delay: -2s;">Концепт-арт</div>
+                    
+                    <div class="graph-node" style="top: 70%; left: 60%; width: 110px; height: 50px; background: #2ecc71; box-shadow: 0 0 20px rgba(46,204,113,0.5); animation-delay: -3s;">Статья</div>
+
+                    <svg style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;">
+                        <line x1="45%" y1="35%" x2="25%" y2="60%" stroke="#888" stroke-width="2" />
+                        <line x1="48%" y1="35%" x2="75%" y2="45%" stroke="#888" stroke-width="2" />
+                        <line x1="72%" y1="45%" x2="65%" y2="70%" stroke="#888" stroke-width="2" />
+                        <line x1="30%" y1="60%" x2="55%" y2="70%" stroke="#888" stroke-width="2" stroke-dasharray="5,5" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: Export & Technology -->
+        <div class="slide" data-note="Экспорт генерирует полноценный статический сайт с HTML, CSS и JavaScript. URL делаются «чистыми» через .htaccess и _redirects файлы. Сайт упаковывается в ZIP-архив и готов к размещению на любом хостинге. Технологии: Python, Flask, Jinja2 для шаблонизации, Cytoscape.js для графов, Markdown для документации.">
+            <h2>Экспорт и Технологии</h2>
+            <div class="grid">
+                <div class="card" style="text-align: center;">
+                    <span class="card-icon">📦</span>
+                    <div class="card-title">Статический сайт</div>
+                    <div class="card-text">
+                        Генерация HTML, CSS, JS.<br>
+                        "Чистые" URL (без .html).<br>
+                        Файлы <code>.htaccess</code> и <code>_redirects</code>.
+                    </div>
+                </div>
+                <div class="card" style="text-align: center;">
+                    <span class="card-icon">🛠️</span>
+                    <div class="card-title">Стек</div>
+                    <div class="tech-stack" style="margin-top: 15px;">
+                        <span class="tech-badge">Python</span>
+                        <span class="tech-badge">Flask</span>
+                        <span class="tech-badge">Jinja2</span>
+                        <span class="tech-badge">Cytoscape.js</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: Future Plans -->
+        <div class="slide" data-note="Развитие проекта включает: конструктор тем оформления без редактирования CSS, интеграцию с облачными хранилищами (Google Drive, Яндекс.Диск), полноценную мультиязычную версию, экспорт портфолио в PDF для печати, прямую публикацию на FTP или Netlify, а также систему плагинов для расширения функциональности.">
+            <h2>Перспективы развития</h2>
+            <div class="content-box" style="width: 80%;">
+                <ul class="dream-list">
+                    <li>Визуальный конструктор тем без правки CSS</li>
+                    <li>Интеграция с облачными хранилищами</li>
+                    <li>Англоязычная версия</li>
+                    <li>Экспорт в PDF для печати портфолио</li>
+                    <li>Система плагинов для расширения функционала</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 13: QR Codes & Conclusion -->
+        <div class="slide" data-note="QR-коды предоставляют быстрый доступ к репозиторию проекта на GitHub, интерактивной версии презентации и примерам сгенерированных сайтов. Все ссылки кликабельны. Проект с открытым исходным кодом, бесплатен для использования и кроссплатформен. Запуск через python launch.py.">
+            <h2>Ссылки и Ресурсы</h2>
+            <p style="text-align: center; margin-bottom: 20px;">Сохраните своё цифровое наследие уже сегодня</p>
             
-            this.init();
-        }
+            <div class="qr-section">
+                <div class="qr-card">
+                    <div id="qr1"></div>
+                    <div style="font-weight: bold; color: var(--dream-4);">GitHub Репозиторий</div>
+                    <a href="https://github.com/warmraysofdawn/SoRUPP" target="_blank" class="qr-link">github.com/warmraysofdawn/SoRUPP</a>
+                </div>
+                
+                <div class="qr-card">
+                    <div id="qr2"></div>
+                    <div style="font-weight: bold; color: var(--dream-4);">Презентация</div>
+                    <a href="https://warmraysofdawn.github.io/events/SoRUPP_presentation/" target="_blank" class="qr-link">warmraysofdawn.github.io/events/SoRUPP_presentation/</a>
+                </div>
 
-        init() {
-            document.querySelector('.next-btn').addEventListener('click', () => this.next());
-            document.querySelector('.prev-btn').addEventListener('click', () => this.prev());
+                <div class="qr-card">
+                    <div id="qr3"></div>
+                    <div style="font-weight: bold; color: var(--dream-4);">Примеры сайтов</div>
+                    <a href="https://warmraysofdawn.github.io/events/SoRUPP_presentation/examples/" target="_blank" class="qr-link">warmraysofdawn.github.io/events/SoRUPP_presentation/examples/</a>
+                </div>
+            </div>
+        </div>
 
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'ArrowRight') this.next();
-                if (e.key === 'ArrowLeft') this.prev();
-                if (e.key === ' ') this.next();
-                if (e.key === 'Escape') this.goToSlide(0);
+    </div>
+
+    <script>
+        // --- Slide Logic ---
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dotsContainer = document.getElementById('dots');
+        const noteText = document.getElementById('noteText');
+
+        // Init Dots
+        slides.forEach((_, idx) => {
+            const dot = document.createElement('div');
+            dot.className = 'dot';
+            if (idx === 0) dot.classList.add('active');
+            dot.onclick = () => goToSlide(idx);
+            dotsContainer.appendChild(dot);
+        });
+
+        function updateUI() {
+            slides.forEach((slide, idx) => {
+                if (idx === currentSlideIndex) {
+                    slide.classList.add('active');
+                    noteText.textContent = slide.dataset.note || "";
+                } else {
+                    slide.classList.remove('active');
+                }
             });
 
-            this.setupTouchEvents();
-            this.setupParallax();
-            this.updateProgress();
-            this.setupGraphObserver();
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, idx) => {
+                dot.classList.toggle('active', idx === currentSlideIndex);
+            });
         }
 
-        next() {
-            if (this.currentSlide < this.totalSlides - 1) {
-                this.currentSlide++;
-                this.updateSlide();
-            }
+        function changeSlide(dir) {
+            currentSlideIndex += dir;
+            if (currentSlideIndex < 0) currentSlideIndex = slides.length - 1;
+            if (currentSlideIndex >= slides.length) currentSlideIndex = 0;
+            updateUI();
         }
 
-        prev() {
-            if (this.currentSlide > 0) {
-                this.currentSlide--;
-                this.updateSlide();
-            }
+        function goToSlide(idx) {
+            currentSlideIndex = idx;
+            updateUI();
         }
 
-        goToSlide(slideIndex) {
-            if (slideIndex >= 0 && slideIndex < this.totalSlides) {
-                this.currentSlide = slideIndex;
-                this.updateSlide();
-            }
-        }
+        // Keyboard Nav
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') changeSlide(1);
+            if (e.key === 'ArrowLeft') changeSlide(-1);
+            if (e.key === 'n' || e.key === 'N') document.body.classList.toggle('hide-notes');
+        });
 
-        updateSlide() {
-            const translateX = -this.currentSlide * 100;
-            this.slidesWrapper.style.transform = `translateX(${translateX}vw)`;
-            this.updateProgress();
+        // Touch support
+        let touchStartX = 0;
+        document.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; });
+        document.addEventListener('touchend', e => {
+            const diff = e.changedTouches[0].screenX - touchStartX;
+            if (diff < -50) changeSlide(1);
+            if (diff > 50) changeSlide(-1);
+        });
+
+        // --- Parallax Effect ---
+        document.addEventListener('mousemove', (e) => {
+            const bg = document.getElementById('parallax-bg');
+            const x = (e.clientX / window.innerWidth - 0.5) * 40;
+            const y = (e.clientY / window.innerHeight - 0.5) * 40;
+            bg.style.transform = `translate(${x}px, ${y}px)`;
+        });
+
+        // --- QR Codes Generation ---
+        window.addEventListener('load', () => {
+            const qrOptions = {
+                width: 160,
+                colorDark: "#2a2a2a",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            };
+
+            new QRCode(document.getElementById("qr1"), {
+                text: "https://github.com/warmraysofdawn/SoRUPP",
+                ...qrOptions
+            });
+
+            new QRCode(document.getElementById("qr2"), {
+                text: "https://warmraysofdawn.github.io/events/SoRUPP_presentation/",
+                ...qrOptions
+            });
+
+            new QRCode(document.getElementById("qr3"), {
+                text: "https://warmraysofdawn.github.io/events/SoRUPP_presentation/examples/",
+                ...qrOptions
+            });
             
-            document.querySelectorAll('.slide').forEach((slide, index) => {
-                slide.classList.toggle('active', index === this.currentSlide);
-                slide.classList.toggle('prev', index < this.currentSlide);
-                slide.classList.toggle('next', index > this.currentSlide);
-            });
-        }
-
-        updateProgress() {
-            const progress = ((this.currentSlide + 1) / this.totalSlides) * 100;
-            this.progressFill.style.width = `${progress}%`;
-        }
-
-        setupTouchEvents() {
-            let startX = 0;
-            document.addEventListener('touchstart', (e) => {
-                startX = e.changedTouches[0].screenX;
-            });
-            document.addEventListener('touchend', (e) => {
-                const endX = e.changedTouches[0].screenX;
-                const diff = startX - endX;
-                if (Math.abs(diff) > 50) {
-                    diff > 0 ? this.next() : this.prev();
-                }
-            });
-        }
-
-        setupParallax() {
-            document.addEventListener('mousemove', (e) => {
-                const x = (e.clientX / window.innerWidth) * 100;
-                const y = (e.clientY / window.innerHeight) * 100;
-                document.querySelector('.parallax-bg').style.transform = 
-                    `translate(${x * 0.05}px, ${y * 0.05}px)`;
-            });
-        }
-
-        setupGraphObserver() {
-            const observer = new MutationObserver((mutations) => {
-                mutations.forEach((mutation) => {
-                    if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-                        const slide = mutation.target;
-                        if (slide.classList.contains('active') && slide.querySelector('#graph-container')) {
-                            setTimeout(initDemoGraph, 100);
-                        }
-                    }
-                });
-            });
-            document.querySelectorAll('.slide').forEach(slide => {
-                observer.observe(slide, { attributes: true });
-            });
-        }
-    }
-
-    // Данные для демо-графа (разные сферы)
-    const graphData = {
-        nodes: [
-            { id: '1', label: 'Роман "Эпоха"', sphere: 'literature' },
-            { id: '2', label: 'Цикл стихов "Отражения"', sphere: 'literature' },
-            { id: '3', label: 'Картина "Вихрь"', sphere: 'art' },
-            { id: '4', label: 'Музыкальный альбом "Ноктюрн"', sphere: 'music' },
-            { id: '5', label: 'Научная статья по физике', sphere: 'science' },
-            { id: '6', label: 'Игра-платформер "Кот"', sphere: 'programming' },
-            { id: '7', label: 'Скрипт для анализа данных', sphere: 'programming' }
-        ],
-        edges: [
-            { from: '1', to: '2' },
-            { from: '1', to: '3' },
-            { from: '2', to: '4' },
-            { from: '4', to: '6' },
-            { from: '5', to: '7' },
-            { from: '6', to: '7' }
-        ]
-    };
-
-    function initDemoGraph() {
-        const container = document.getElementById('graph-container');
-        if (!container) return;
-        container.innerHTML = '';
-
-        const elements = [];
-        graphData.nodes.forEach(node => {
-            elements.push({
-                data: {
-                    id: node.id,
-                    label: node.label,
-                    sphere: node.sphere
-                }
-            });
+            updateUI();
         });
-        graphData.edges.forEach(edge => {
-            elements.push({
-                data: {
-                    id: `e${edge.from}-${edge.to}`,
-                    source: edge.from,
-                    target: edge.to
-                }
-            });
-        });
-
-        const cy = cytoscape({
-            container: container,
-            elements: elements,
-            style: [
-                {
-                    selector: 'node',
-                    style: {
-                        'background-color': function(ele) {
-                            const sphere = ele.data('sphere');
-                            const colors = {
-                                literature: '#e74c3c',
-                                art: '#f39c12',
-                                music: '#9b59b6',
-                                science: '#3498db',
-                                programming: '#2ecc71'
-                            };
-                            return colors[sphere] || '#888';
-                        },
-                        'label': 'data(label)',
-                        'text-valign': 'center',
-                        'text-halign': 'center',
-                        'color': '#fff',
-                        'text-outline-color': '#000',
-                        'text-outline-width': 2,
-                        'width': 50,
-                        'height': 50,
-                        'font-size': '10px'
-                    }
-                },
-                {
-                    selector: 'edge',
-                    style: {
-                        'width': 2,
-                        'line-color': '#ccc',
-                        'curve-style': 'bezier'
-                    }
-                }
-            ],
-            layout: {
-                name: 'cose',
-                idealEdgeLength: 100,
-                nodeRepulsion: 400000,
-                gravity: 80,
-                numIter: 500
-            }
-        });
-    }
-
-    // Инициализация
-    document.addEventListener('DOMContentLoaded', () => {
-        new Presentation();
-        // Если активный слайд содержит граф, инициализируем
-        const activeSlide = document.querySelector('.slide.active');
-        if (activeSlide && activeSlide.querySelector('#graph-container')) {
-            setTimeout(initDemoGraph, 500);
-        }
-    });
-</script>
+    </script>
 </body>
 </html>
+
