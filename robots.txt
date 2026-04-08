@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+Allow: /poems/
+Allow: /articles/
+Allow: /events/SoRUPP_presentation/examples/
+
+# Блокируем бэкапы и технические папки
+Disallow: /events/SoRUPP_presentation/examples_backup/
+Disallow: /events/SoRUPP_presentation/examples/downloads/
+Disallow: /.git/
+Disallow: /node_modules/
+
+
+Sitemap: https://warmraysofdawn.github.io/sitemap.xml

@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 | Страница потерялась в космосе</title>
+    <meta name="description" content="Упс! Страница, которую вы ищете, отправилась в межгалактическое путешествие.">
+
+    <!-- Шрифты -->
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/space-mono@5/index.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/great-vibes@5/index.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/quicksand@5/index.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/dancing-script@5/index.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/playfair-display-sc@5/index.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/source-code-pro@5/index.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/rubik-glitch@5/index.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/pt-mono@5/index.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/cinzel@5/index.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/cormorant-garamond@5/index.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/unifrakturmaguntia@5/index.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/prata@5/index.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-display@5/index.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/space-grotesk@5/index.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/vt323@5/index.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/share-tech-mono@5/index.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5/index.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/gaegu@5/index.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/rock-salt@5/index.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/kalam@5/index.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5/index.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5/index.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/russo-one@5/index.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/pt-sans-narrow@5/index.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/oswald@5/index.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/amatic-sc@5/index.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/cutive-mono@5/index.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/creepster@5/index.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/special-elite@5/index.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/bangers@5/index.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/courier-prime@5/index.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/fira-code@5/index.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/inconsolata@5/index.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/roboto-mono@5/index.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/staatliches@5/index.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/pt-sans@5/index.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat-alternates@5/index.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/comfortaa@5/index.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/amiri@5/index.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-arabic@5/index.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --header-bg: rgba(151, 46, 81, 0.88);
+            --header-bg-solid: #972e51;
+            --accent-pink: #ea53c9;
+            --accent-gold: #d4af37;
+            --text-light: #f8f9fa;
+            --text-dark: #1a1a1a;
+            --transition-smooth: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow-soft: 0 10px 40px -15px rgba(0,0,0,0.15);
+            --shadow-glow: 0 0 30px rgba(234, 83, 201, 0.4);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: #0f0f1a;
+            min-height: 100vh;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ===== АНИМИРОВАННЫЙ ФОН ===== */
+        .bg-gradient-orbs {
+            position: fixed; inset: 0; z-index: -2; overflow: hidden;
+            background: radial-gradient(ellipse at bottom, #1a1a2e 0%, #0f0f1a 50%, #0a0a12 100%);
+        }
+        .bg-gradient-orbs::before {
+            content: ''; position: absolute;
+            width: 800px; height: 800px;
+            background: radial-gradient(circle, rgba(234,83,201,0.12) 0%, transparent 70%);
+            top: -300px; left: -200px;
+            animation: orbFloat1 25s ease-in-out infinite;
+            filter: blur(40px);
+        }
+        .bg-gradient-orbs::after {
+            content: ''; position: absolute;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(94,234,212,0.08) 0%, transparent 70%);
+            bottom: -200px; right: -150px;
+            animation: orbFloat2 30s ease-in-out infinite;
+            filter: blur(30px);
+        }
+        @keyframes orbFloat1 {
+            0%,100% { transform: translate(0,0) scale(1); }
+            33% { transform: translate(150px,100px) scale(1.15); }
+            66% { transform: translate(-80px,180px) scale(0.9); }
+        }
+        @keyframes orbFloat2 {
+            0%,100% { transform: translate(0,0) scale(1); }
+            33% { transform: translate(-120px,-80px) scale(1.1); }
+            66% { transform: translate(90px,-150px) scale(1.05); }
+        }
+
+        .bg-stars {
+            position: fixed; inset: 0; z-index: -1; pointer-events: none;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,0.8), transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.6), transparent),
+                radial-gradient(1px 1px at 90px 40px, rgba(255,255,255,0.9), transparent),
+                radial-gradient(2px 2px at 160px 120px, rgba(255,255,255,0.7), transparent),
+                radial-gradient(1px 1px at 230px 80px, rgba(255,255,255,0.85), transparent);
+            background-size: 300px 200px;
+            animation: starsTwinkle 8s linear infinite;
+            opacity: 0.6;
+        }
+        @keyframes starsTwinkle {
+            0%,100% { opacity: 0.6; }
+            50% { opacity: 0.9; }
+        }
+
+        /* ===== ХЕДЕР ===== */
+        header {
+            position: sticky; top: 0; z-index: 1000;
+            background: var(--header-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 0.8rem 2rem;
+            display: flex; align-items: center; justify-content: space-between;
+            flex-wrap: wrap; gap: 1rem;
+            box-shadow: 0 8px 32px rgba(151,46,81,0.25);
+            border-bottom: 1px solid rgba(255,255,255,0.12);
+        }
+        header::before {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+            animation: headerShimmer 4s ease-in-out infinite;
+            pointer-events: none;
+        }
+        @keyframes headerShimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        .header-left { display: flex; align-items: center; gap: 1rem; position: relative; z-index: 1; }
+        .header-logo {
+            height: 48px; width: auto;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+            transition: var(--transition-smooth);
+            animation: logoPulse 3s ease-in-out infinite;
+        }
+        @keyframes logoPulse {
+            0%,100% { transform: scale(1); }
+            50% { transform: scale(1.03) rotate(-1deg); }
+        }
+        .header-logo:hover { transform: scale(1.08) rotate(-3deg); filter: drop-shadow(0 4px 12px rgba(255,255,255,0.4)); }
+        .site-title {
+            color: var(--text-light);
+            font-family: 'Playfair Display SC', serif;
+            font-size: 1.5rem; font-weight: 700; letter-spacing: 0.5px;
+        }
+        .site-title span {
+            display: block; font-family: 'Great Vibes', cursive;
+            font-size: 1.1rem; font-weight: 400; opacity: 0.9; margin-top: -4px;
+        }
+        .author-badge {
+            background: rgba(255,255,255,0.12); color: var(--text-light);
+            padding: 0.4rem 0.9rem; border-radius: 2rem;
+            font-size: 0.85rem; font-weight: 500;
+            border: 1px solid rgba(255,255,255,0.2);
+            display: flex; align-items: center; gap: 0.4rem;
+            position: relative; z-index: 1;
+            animation: badgeGlow 3s ease-in-out infinite;
+        }
+        @keyframes badgeGlow {
+            0%,100% { box-shadow: 0 0 0 rgba(212,175,55,0); }
+            50% { box-shadow: 0 0 15px rgba(212,175,55,0.3); }
+        }
+        .author-badge::before { content: "✦"; color: var(--accent-gold); }
+
+        /* ===== ОСНОВНОЙ КОНТЕНТ 404 ===== */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+            min-height: calc(100vh - 140px);
+        }
+
+        /* ===== КАРТОЧКА 404 ===== */
+        .error-card {
+            width: min(90vw, 1200px);
+            height: min(75vh, 700px);
+            border-radius: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition-smooth);
+            box-shadow: var(--shadow-soft), 0 0 60px rgba(234,83,201,0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.1);
+        }
+
+        .error-code {
+            font-size: clamp(8rem, 20vw, 16rem);
+            font-weight: 900;
+            line-height: 0.85;
+            letter-spacing: -0.05em;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 0 40px rgba(234,83,201,0.5);
+            animation: codeFloat 4s ease-in-out infinite;
+        }
+        @keyframes codeFloat {
+            0%,100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .error-message {
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            z-index: 2;
+            max-width: 600px;
+        }
+
+        .error-description {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            opacity: 0.85;
+            margin-bottom: 2rem;
+            max-width: 500px;
+            z-index: 2;
+            line-height: 1.5;
+        }
+
+        .error-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        .btn {
+            padding: 0.9rem 2rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-pink), #ff8fd9);
+            color: white;
+            box-shadow: 0 4px 20px rgba(234,83,201,0.4);
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 30px rgba(234,83,201,0.6);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.15);
+            color: var(--text-light);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-3px);
+        }
+
+        /* ===== СЕЛЕКТОР ТЕМ ВНИЗУ ===== */
+        .theme-selector {
+            margin-top: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.6rem;
+            padding: 1rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 1.5rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            max-width: 90%;
+            z-index: 2;
+        }
+
+        .theme-btn {
+            padding: 0.5rem 1rem;
+            border-radius: 1rem;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: var(--text-light);
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            min-width: 80px;
+        }
+        .theme-btn:hover, .theme-btn.active {
+            background: var(--accent-pink);
+            border-color: var(--accent-pink);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(234,83,201,0.4);
+        }
+        .theme-btn.active {
+            box-shadow: 0 0 0 2px var(--accent-gold), 0 4px 20px rgba(234,83,201,0.5);
+        }
+
+        /* ===== ДЕКОРАТИВНЫЕ ЭФФЕКТЫ КАРТОЧКИ ===== */
+        .error-card::before {
+            content: ""; position: absolute; inset: -2px;
+            background: linear-gradient(45deg, var(--accent-pink), #00ffff, var(--accent-gold), var(--accent-pink));
+            background-size: 400% 400%; border-radius: 2.1rem; z-index: -1;
+            opacity: 0.5; animation: gradientFlow 4s ease infinite;
+            filter: blur(15px);
+        }
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .error-card::after {
+            content: ""; position: absolute; inset: 0;
+            background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+                        rgba(255,255,255,0.08), transparent 40%);
+            opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 1; border-radius: 2rem;
+        }
+        .error-card:hover::after { opacity: 1; }
+
+        /* ===== ТЕМЫ КАРТОЧКИ ===== */
+        /* 🔥 CYBERPUNK */
+        .error-card.cyberpunk {
+            background: linear-gradient(135deg, #0a0a0a, #151515);
+            border: 2px solid #ff2d95;
+            font-family: 'Space Mono', monospace;
+        }
+        .error-card.cyberpunk .error-code {
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255,45,149,0.5), 0 0 20px rgba(0,255,255,0.3);
+            animation: codeFloat 4s ease-in-out infinite, cyberGlitch 3s infinite;
+        }
+        @keyframes cyberGlitch {
+            0%,100% { text-shadow: 2px 0 #ff2d95, -2px 0 #00ffff; }
+            25% { text-shadow: -3px 1px #00ffff, 3px -1px #ff00ff; transform: translateX(-2px) skewX(1deg); }
+            50% { text-shadow: 2px -1px #ff2d95, -2px 1px #00ffff; }
+            75% { text-shadow: -2px 2px #00ffff, 2px -2px #ff2d95; transform: translateX(2px) skewX(-1deg); }
+        }
+        .error-card.cyberpunk::before {
+            background: repeating-linear-gradient(0deg, rgba(0,255,255,0.03) 0px, rgba(0,255,255,0.03) 1px, transparent 2px, transparent 4px);
+            animation: cyberScan 3s linear infinite;
+            filter: none; opacity: 0.8;
+        }
+        @keyframes cyberScan { 0% { transform: translateY(-100%); } 100% { transform: translateY(500%); } }
+
+        /* ✨ MINIMAL */
+        .error-card.minimal {
+            background: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+            color: var(--text-dark);
+            border: 4px solid var(--accent-pink);
+        }
+        .error-card.minimal .error-code {
+            color: var(--text-dark);
+            text-shadow: none;
+            animation: codeFloat 4s ease-in-out infinite;
+        }
+        .error-card.minimal .error-message,
+        .error-card.minimal .error-description {
+            color: var(--text-dark);
+        }
+        .error-card.minimal::before {
+            background: linear-gradient(145deg, #fffefc, #fff5e6);
+            animation: none; opacity: 1; filter: none;
+        }
+
+        /* 🎨 CREATIVE */
+        .error-card.creative {
+            background: linear-gradient(135deg, #8660dd 0%, #ea53c9 50%, #ff6b9d 100%);
+            border: none;
+            font-family: 'Quicksand', sans-serif;
+        }
+        .error-card.creative .error-code {
+            color: white;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            animation: codeFloat 4s ease-in-out infinite, creativePulse 2s ease-in-out infinite;
+        }
+        @keyframes creativePulse {
+            0%,100% { filter: hue-rotate(0deg); }
+            50% { filter: hue-rotate(30deg); }
+        }
+
+        /* 🌙 DARK */
+        .error-card.dark {
+            background: linear-gradient(145deg, #1a1a1a, #252525);
+            border-top: 4px solid var(--accent-pink);
+            font-family: 'Inter', sans-serif;
+        }
+        .error-card.dark .error-code {
+            color: var(--text-light);
+            text-shadow: 0 0 30px rgba(234,83,201,0.6);
+        }
+
+        /* 🎋 EASTERN */
+        .error-card.eastern {
+            font-family: 'Noto Serif SC', 'Playfair Display', serif;
+            background: linear-gradient(145deg, #ffffff, #fffdf9);
+            color: #423f38;
+            border: 1px solid #e8e2d8;
+        }
+        .error-card.eastern .error-code {
+            color: #c77d5e;
+            text-shadow: 0 0 20px rgba(199,125,94,0.3);
+            font-family: 'Noto Serif SC', serif;
+        }
+        .error-card.eastern .error-message,
+        .error-card.eastern .error-description {
+            color: #423f38;
+        }
+        .error-card.eastern::before {
+            background: radial-gradient(circle at 20% 80%, rgba(199,125,94,0.15), transparent 50%);
+            animation: blossomFall 8s ease-in-out infinite;
+            filter: none; opacity: 1;
+        }
+        @keyframes blossomFall {
+            0%,100% { transform: translate(0,0); }
+            50% { transform: translate(20px, -10px); }
+        }
+
+        /* ⚰️ CEMETERY */
+        .error-card.cemetery {
+            font-family: 'UnifrakturMaguntia', cursive;
+            background: linear-gradient(145deg, #1a1a1a, #25201f);
+            border: 2px solid #8b0000;
+            color: #e8e0d8;
+        }
+        .error-card.cemetery .error-code {
+            color: #e8e0d8;
+            text-shadow: 0 0 15px rgba(255,180,100,0.5);
+            animation: codeFloat 4s ease-in-out infinite, candleFlicker 1.8s ease-in-out infinite;
+        }
+        @keyframes candleFlicker {
+            0%,100% { text-shadow: 0 0 10px rgba(255,180,100,0.6); }
+            25% { text-shadow: 0 0 20px rgba(255,200,120,0.9); }
+            75% { text-shadow: 0 0 15px rgba(255,160,80,0.7); }
+        }
+        .error-card.cemetery::before {
+            background: radial-gradient(ellipse at bottom, rgba(139,0,0,0.2), transparent 70%);
+            animation: fogDrift 6s ease-in-out infinite;
+            filter: none; opacity: 1;
+        }
+        @keyframes fogDrift {
+            0%,100% { transform: translateX(0); opacity: 0.3; }
+            50% { transform: translateX(30px); opacity: 0.5; }
+        }
+
+        /* 🌅 HORIZON */
+        .error-card.horizon {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #FFF2E6, #FFE8DA, #FFDFCF);
+            color: #4a352f;
+            border: 1px solid rgba(230,126,74,0.25);
+        }
+        .error-card.horizon .error-code {
+            color: #E67E4A;
+            text-shadow: 0 0 20px rgba(230,126,74,0.3);
+            animation: codeFloat 4s ease-in-out infinite, sunsetGlow 3s ease-in-out infinite;
+        }
+        .error-card.horizon .error-message,
+        .error-card.horizon .error-description {
+            color: #4a352f;
+        }
+        @keyframes sunsetGlow {
+            0%,100% { text-shadow: 0 0 20px rgba(230,126,74,0.3); }
+            50% { text-shadow: 0 0 40px rgba(255,180,120,0.5); }
+        }
+
+        /* 🧊 LIQUID-GLASS */
+        .error-card.liquid-glass {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.3);
+            font-family: 'Manrope', 'Inter', sans-serif;
+        }
+        .error-card.liquid-glass .error-code {
+            color: white;
+            text-shadow: 0 0 30px rgba(59,130,246,0.5);
+        }
+        .error-card.liquid-glass::before {
+            background: linear-gradient(135deg, rgba(59,130,246,0.2), rgba(234,83,201,0.2));
+            animation: liquidFlow 5s ease-in-out infinite;
+            filter: blur(25px); opacity: 0.8;
+        }
+        @keyframes liquidFlow {
+            0%,100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* 🐺 GREENWOLF */
+        .error-card.greenwolf {
+            font-family: 'Source Code Pro', monospace;
+            background: linear-gradient(145deg, #0d1117, #161b22);
+            border-top: 4px solid #00cc33;
+            color: #00ff66;
+        }
+        .error-card.greenwolf .error-code {
+            color: #00ff66;
+            text-shadow: 0 0 15px #00ff66, 0 0 30px rgba(0,255,102,0.5);
+            animation: codeFloat 4s ease-in-out infinite, terminalBlink 1s steps(1) infinite;
+        }
+        @keyframes terminalBlink { 50% { opacity: 0.9; } }
+        .error-card.greenwolf::before {
+            background: repeating-linear-gradient(0deg, transparent 0px, transparent 2px, rgba(0,255,102,0.04) 3px, rgba(0,255,102,0.04) 4px);
+            animation: codeRain 0.5s linear infinite;
+            filter: none; opacity: 1;
+        }
+        @keyframes codeRain {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 100px; }
+        }
+
+        /* 🎭 BRUTALIST */
+        .error-card.brutalist {
+            font-family: 'Space Grotesk', 'Archivo Black', sans-serif;
+            background: #fff; color: #000;
+            border: 6px solid #000;
+            font-weight: 900;
+        }
+        .error-card.brutalist .error-code {
+            color: #000;
+            text-shadow: none;
+            font-weight: 900;
+            letter-spacing: -0.08em;
+        }
+        .error-card.brutalist .error-message,
+        .error-card.brutalist .error-description {
+            color: #000;
+        }
+        .error-card.brutalist::before {
+            background: linear-gradient(45deg, #ff2a55, #000, #ff2a55);
+            animation: brutalShift 0.5s steps(2) infinite;
+            filter: none; opacity: 1;
+        }
+        @keyframes brutalShift {
+            0%,100% { transform: translate(0,0); }
+            25% { transform: translate(3px,3px); }
+            50% { transform: translate(0,6px); }
+            75% { transform: translate(-3px,3px); }
+        }
+
+        /* ===== ФУТЕР ===== */
+        footer {
+            text-align: center; padding: 1.5rem 2rem 2rem;
+            color: rgba(255,255,255,0.7); font-size: 0.9rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            background: rgba(15,15,26,0.8);
+            backdrop-filter: blur(10px);
+        }
+        footer::before {
+            content: ''; display: block; width: 60px; height: 2px;
+            background: linear-gradient(90deg, var(--accent-pink), var(--accent-gold));
+            margin: 0 auto 1rem; border-radius: 2px;
+        }
+        .author-signature {
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.8rem; color: var(--header-bg-solid);
+            margin: 0.3rem 0;
+        }
+
+        /* ===== АДАПТИВНОСТЬ ===== */
+        @media (max-width: 768px) {
+            header { padding: 0.8rem 1rem; flex-direction: column; }
+            .header-left { width: 100%; justify-content: center; }
+            .error-card { height: auto; min-height: 500px; padding: 1.5rem; }
+            .error-code { font-size: clamp(6rem, 25vw, 12rem); }
+            .theme-selector { flex-direction: row; overflow-x: auto; padding: 0.8rem; }
+            .theme-btn { min-width: 70px; font-size: 0.75rem; padding: 0.4rem 0.8rem; }
+        }
+
+        /* ===== АНИМАЦИЯ ПОЯВЛЕНИЯ ===== */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .error-card {
+            animation: fadeInUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        /* ===== ДЕКОРАТИВНЫЕ ЧАСТИЦЫ ===== */
+        .particles {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: -1; overflow: hidden;
+        }
+        .particle {
+            position: absolute; width: 3px; height: 3px;
+            background: rgba(234,83,201,0.6); border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-20vh) rotate(720deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-gradient-orbs"></div>
+    <div class="bg-stars"></div>
+    <div class="particles" id="particles"></div>
+
+    <header>
+        <div class="header-left">
+            <div>
+                <h1 class="site-title">Тёплые лучи рассвета</h1>
+                <span>404 — страница потерялась</span>
+            </div>
+        </div>
+        <div class="author-badge">Во славу Господа!</div>
+    </header>
+
+    <main>
+        <div class="error-card default" id="errorCard">
+            <div class="error-code">404</div>
+            <div class="error-message">Упс! Страница испарилась</div>
+            <div class="error-description">
+                Похоже, то, что вы ищете, отправилось в межгалактическое путешествие. 
+                Не переживайте — мы поможем вам вернуться на правильный путь.
+            </div>
+            <div class="error-actions">
+                <a href="/" class="btn btn-primary">🏠 На главную</a>
+                <a href="/events/SoRUPP_presentation/examples/demo.html" class="btn btn-secondary">✨ Коллекция тем</a>
+            </div>
+        </div>
+
+        <div class="theme-selector">
+            <button class="theme-btn active" data-theme="default">default</button>
+            <button class="theme-btn" data-theme="cyberpunk">cyberpunk</button>
+            <button class="theme-btn" data-theme="minimal">minimal</button>
+            <button class="theme-btn" data-theme="creative">creative</button>
+            <button class="theme-btn" data-theme="dark">dark</button>
+            <button class="theme-btn" data-theme="eastern">eastern</button>
+            <button class="theme-btn" data-theme="cemetery">cemetery</button>
+            <button class="theme-btn" data-theme="horizon">horizon</button>
+            <button class="theme-btn" data-theme="liquid-glass">liquid-glass</button>
+            <button class="theme-btn" data-theme="greenwolf">greenwolf</button>
+            <button class="theme-btn" data-theme="brutalist">brutalist</button>
+        </div>
+    </main>
+
+    <footer>
+        <div class="author-signature">~ тёплые лучи рассвета ~</div>
+        <p style="margin-top:0.5rem; opacity:0.8">✦ 404 — но красота остаётся ✦</p>
+        <p style="margin-top:0.3rem; opacity:0.6; font-size:0.85rem">Нажми на тему внизу, чтобы изменить стиль карточки</p>
+    </footer>
+
+    <script>
+        // ===== Mouse tracking for glow effect =====
+        const errorCard = document.getElementById('errorCard');
+        document.addEventListener('mousemove', (e) => {
+            const rect = errorCard.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            errorCard.style.setProperty('--mouse-x', `${x}px`);
+            errorCard.style.setProperty('--mouse-y', `${y}px`);
+        });
+
+        // ===== Particles animation =====
+        function createParticles() {
+            const container = document.getElementById('particles');
+            for(let i = 0; i < 30; i++) {
+                const p = document.createElement('div');
+                p.className = 'particle';
+                p.style.left = Math.random() * 100 + '%';
+                p.style.animationDelay = Math.random() * 20 + 's';
+                p.style.animationDuration = (15 + Math.random() * 15) + 's';
+                p.style.background = `hsla(${280 + Math.random() * 80}, 80%, 70%, ${0.4 + Math.random() * 0.4})`;
+                p.style.width = p.style.height = (2 + Math.random() * 3) + 'px';
+                container.appendChild(p);
+            }
+        }
+        createParticles();
+
+        // ===== Theme switching =====
+        const themeButtons = document.querySelectorAll('.theme-btn');
+        const themes = ['default', 'cyberpunk', 'minimal', 'creative', 'dark', 'eastern', 'cemetery', 'horizon', 'liquid-glass', 'greenwolf', 'brutalist'];
+        
+        themeButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all
+                themeButtons.forEach(b => b.classList.remove('active'));
+                // Add active to clicked
+                btn.classList.add('active');
+                
+                // Remove all theme classes
+                themes.forEach(theme => errorCard.classList.remove(theme));
+                // Add new theme
+                const theme = btn.dataset.theme;
+                errorCard.classList.add(theme);
+                
+                // Add subtle animation
+                errorCard.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    errorCard.style.transform = 'scale(1)';
+                }, 150);
+            });
+        });
+
+        // ===== Auto-cycle themes (optional - comment out if not wanted) =====
+        let autoCycle = true;
+        let cycleIndex = 0;
+        
+        function startAutoCycle() {
+            setInterval(() => {
+                if(!autoCycle) return;
+                cycleIndex = (cycleIndex + 1) % themes.length;
+                themeButtons.forEach(b => b.classList.remove('active'));
+                themeButtons[cycleIndex].classList.add('active');
+                themes.forEach(theme => errorCard.classList.remove(theme));
+                errorCard.classList.add(themes[cycleIndex]);
+            }, 8000);
+        }
+        
+        // Pause auto-cycle on hover
+        errorCard.addEventListener('mouseenter', () => autoCycle = false);
+        errorCard.addEventListener('mouseleave', () => {
+            setTimeout(() => autoCycle = true, 3000);
+        });
+        
+        // Start auto-cycle
+        startAutoCycle();
+
+        // ===== Keyboard navigation =====
+        document.addEventListener('keydown', (e) => {
+            if(e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+                e.preventDefault();
+                const direction = e.key === 'ArrowRight' ? 1 : -1;
+                cycleIndex = (cycleIndex + direction + themes.length) % themes.length;
+                themeButtons.forEach(b => b.classList.remove('active'));
+                themeButtons[cycleIndex].classList.add('active');
+                themes.forEach(theme => errorCard.classList.remove(theme));
+                errorCard.classList.add(themes[cycleIndex]);
+            }
+            if(e.key === 'Home') {
+                window.location.href = '/';
+            }
+        });
+
+        // ===== Easter egg: Konami code =====
+        let konamiCode = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+        let konamiIndex = 0;
+        
+        document.addEventListener('keydown', (e) => {
+            if(e.key === konamiCode[konamiIndex]) {
+                konamiIndex++;
+                if(konamiIndex === konamiCode.length) {
+                    // Activate random flashy theme
+                    const flashyThemes = ['cyberpunk', 'creative', 'brutalist'];
+                    const randomTheme = flashyThemes[Math.floor(Math.random() * flashyThemes.length)];
+                    themeButtons.forEach(b => b.classList.remove('active'));
+                    document.querySelector(`[data-theme="${randomTheme}"]`).classList.add('active');
+                    themes.forEach(theme => errorCard.classList.remove(theme));
+                    errorCard.classList.add(randomTheme);
+                    
+                    // Show message
+                    const msg = document.createElement('div');
+                    msg.textContent = '🎮 СЕКРЕТ РАЗБЛОКИРОВАН!';
+                    msg.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:linear-gradient(135deg,#ea53c9,#d4af37);color:white;padding:1rem 2rem;border-radius:2rem;font-weight:bold;font-size:1.2rem;z-index:9999;animation:fadeInUp 0.3s ease;box-shadow:0 10px 40px rgba(0,0,0,0.3);';
+                    document.body.appendChild(msg);
+                    setTimeout(() => msg.remove(), 2000);
+                    
+                    konamiIndex = 0;
+                }
+            } else {
+                konamiIndex = 0;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,3 +1,5 @@
 *.py
 /.vscode/
 events/SoRUPP_presentation/examples_backup/
+seo_audit_report.json
+/exaples_backup/
