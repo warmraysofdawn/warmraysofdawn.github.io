@@ -1,0 +1,505 @@
+/* =============================================
+   CUTECORE — Кавай-вселенная
+   Розовый. Круглый. Прыгающий. Милый до боли.
+   ============================================= */
+
+:root {
+    --bg-primary: #fff5f9;
+    --bg-secondary: #fff0f7;
+    --text-primary: #5a3d5c;
+    --text-secondary: #b8849e;
+    --accent: #ff6b9d;
+    --accent-secondary: #ff9ec6;
+    --accent-glow: rgba(255, 107, 157, 0.5);
+    --accent-tertiary: #ffb3d9;
+    --glass-bg: rgba(255, 255, 255, 0.85);
+    --glass-border: #ffcce0;
+    --glass-blur: 20px;
+    --radius: 40px;
+    --radius-sm: 24px;
+    --font-display: 'Quicksand', sans-serif;
+    --font-body: 'Quicksand', sans-serif;
+    --qr-fg: #ff3d8a;
+    --qr-bg: #ffffff;
+    --shadow-soft: 0 15px 50px rgba(255, 107, 157, 0.2);
+    --shadow-accent: 0 0 30px rgba(255, 107, 157, 0.6), 0 8px 32px rgba(255, 107, 157, 0.3);
+}
+
+/* ========== ФОН: градиент + сердечки + блёстки ========== */
+body {
+    background: 
+        /* Блёстки */
+        radial-gradient(1px 1px at 10% 20%, #ffb3d9 50%, transparent 50%),
+        radial-gradient(1px 1px at 30% 60%, #ffcce0 50%, transparent 50%),
+        radial-gradient(1.5px 1.5px at 50% 10%, #ff9ec6 50%, transparent 50%),
+        radial-gradient(1px 1px at 70% 80%, #ffb3d9 50%, transparent 50%),
+        radial-gradient(1.5px 1.5px at 90% 40%, #ffcce0 50%, transparent 50%),
+        radial-gradient(1px 1px at 15% 90%, #ff9ec6 50%, transparent 50%),
+        radial-gradient(1px 1px at 85% 15%, #ffb3d9 50%, transparent 50%),
+        radial-gradient(1.5px 1.5px at 45% 70%, #ffcce0 50%, transparent 50%),
+        /* Градиент */
+        linear-gradient(135deg, #fff5f9 0%, #ffe4ec 25%, #fff0f7 50%, #fce4ec 75%, #fff5f9 100%);
+    background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 400% 400%;
+    animation: cute-bg-drift 12s ease-in-out infinite;
+}
+
+@keyframes cute-bg-drift {
+    0%, 100% { background-position: 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0% 50%; }
+    50% { background-position: 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 100% 50%; }
+}
+
+/* Сердечки на фоне */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 52 C30 52 8 38 8 24 C8 16 14 10 20 10 C25 10 28 14 30 18 C32 14 35 10 40 10 C46 10 52 16 52 24 C52 38 30 52 30 52Z' fill='%23ffcce0' fill-opacity='0.4'/%3E%3C/svg%3E");
+    background-size: 100px 100px;
+    animation: hearts-scroll 25s linear infinite;
+    pointer-events: none;
+    opacity: 0.6;
+    z-index: 0;
+}
+
+@keyframes hearts-scroll {
+    0% { background-position: 0 0; }
+    100% { background-position: 100px 100px; }
+}
+
+/* ========== ЗАГОЛОВКИ: округлые, розовые, с тенью ========== */
+h1 {
+    font-size: clamp(3rem, 7vw, 5rem);
+    font-weight: 700;
+    color: var(--accent);
+    text-shadow: 
+        3px 3px 0 var(--accent-secondary),
+        6px 6px 0 var(--accent-tertiary),
+        0 0 30px rgba(255, 107, 157, 0.4);
+    letter-spacing: -0.02em;
+    animation: title-bounce-cute 2.5s ease-in-out infinite;
+    transform-origin: center bottom;
+}
+
+@keyframes title-bounce-cute {
+    0%, 100% { transform: translateY(0) scale(1) rotate(0deg); }
+    25% { transform: translateY(-8px) scale(1.02) rotate(-1deg); }
+    50% { transform: translateY(-4px) scale(1.01) rotate(0.5deg); }
+    75% { transform: translateY(-10px) scale(1.03) rotate(-0.5deg); }
+}
+
+h2 {
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    color: var(--accent);
+    text-shadow: 2px 2px 0 var(--accent-secondary);
+    margin-bottom: 1.5rem;
+}
+
+h2::before { content: '♡ '; font-size: 0.8em; }
+h2::after { content: ' ♡'; font-size: 0.8em; }
+
+h3 {
+    font-weight: 700;
+    color: var(--accent);
+    font-size: 1.3rem;
+}
+
+.subtitle {
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 1.15rem;
+    letter-spacing: 0.05em;
+    text-transform: none;
+}
+
+/* ========== КАРТОЧКИ: пухлые, с сердечками, при наведении — взрыв ========== */
+.card {
+    background: linear-gradient(145deg, #ffffff, #fff5f9);
+    border: 3px solid var(--accent-secondary);
+    border-radius: var(--radius);
+    padding: clamp(20px, 3vw, 30px);
+    box-shadow: 
+        0 8px 0 var(--accent-tertiary),
+        0 12px 40px rgba(255, 107, 157, 0.15);
+    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    overflow: visible;
+}
+
+/* Сердечко-декор в углу */
+.card::before {
+    content: '💗';
+    position: absolute;
+    top: -12px;
+    right: -8px;
+    font-size: 1.4rem;
+    opacity: 0;
+    transform: scale(0.3) rotate(-20deg);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 2;
+}
+
+.card:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 
+        0 12px 0 var(--accent),
+        0 20px 60px rgba(255, 107, 157, 0.25);
+    border-color: var(--accent);
+}
+
+.card:hover::before {
+    opacity: 1;
+    transform: scale(1.3) rotate(10deg);
+}
+
+/* ========== КОНТЕНТ-БОКС: как открытка ========== */
+.content-box {
+    background: linear-gradient(160deg, #ffffff, #fff5f9, #ffe4ec);
+    border: 4px solid var(--accent-secondary);
+    border-radius: var(--radius);
+    padding: clamp(30px, 5vw, 50px);
+    box-shadow: 
+        0 12px 0 var(--accent-tertiary),
+        var(--shadow-soft);
+    position: relative;
+}
+
+/* Декоративные уголки */
+.content-box::before {
+    content: '🎀';
+    position: absolute;
+    top: -18px;
+    left: 30px;
+    font-size: 2rem;
+    z-index: 3;
+    filter: drop-shadow(0 2px 4px rgba(255,107,157,0.3));
+}
+
+.content-box::after {
+    content: '✨';
+    position: absolute;
+    bottom: -12px;
+    right: 25px;
+    font-size: 1.5rem;
+    z-index: 3;
+    animation: sparkle-bounce 1.5s ease-in-out infinite;
+}
+
+@keyframes sparkle-bounce {
+    0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+    50% { transform: scale(1.4) rotate(15deg); opacity: 0.7; }
+}
+
+/* ========== КНОПКИ: пухлые, как маршмеллоу ========== */
+.btn {
+    background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+    color: #fff;
+    border: 3px solid var(--accent);
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 12px 28px;
+    box-shadow: 
+        0 6px 0 var(--accent-tertiary),
+        0 8px 25px rgba(255, 107, 157, 0.3);
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    text-shadow: 1px 1px 0 rgba(0,0,0,0.1);
+    letter-spacing: 0.02em;
+}
+
+.btn:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 
+        0 10px 0 var(--accent-secondary),
+        0 14px 40px rgba(255, 107, 157, 0.4);
+    background: linear-gradient(135deg, var(--accent-secondary), var(--accent));
+}
+
+.btn:active {
+    transform: translateY(3px) scale(0.98);
+    box-shadow: 
+        0 2px 0 var(--accent-tertiary),
+        0 4px 15px rgba(255, 107, 157, 0.2);
+}
+
+.btn-secondary {
+    background: #fff;
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #ff9ec6, #ff6b9d);
+    border-color: #ff3d8a;
+}
+
+/* ========== БЕЙДЖИ: как наклейки ========== */
+.badge {
+    background: linear-gradient(135deg, #fff, #ffe4ec);
+    border: 3px solid var(--accent);
+    color: var(--accent);
+    border-radius: 50px;
+    padding: 8px 20px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    box-shadow: 4px 4px 0 var(--accent-secondary);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    text-transform: none;
+    letter-spacing: 0.02em;
+}
+
+.badge:hover {
+    transform: translate(-3px, -3px) rotate(-3deg);
+    box-shadow: 7px 7px 0 var(--accent);
+    background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+    color: #fff;
+}
+
+/* ========== QR-КОДЫ: в рамке с сердечками ========== */
+.qr-box {
+    background: #fff;
+    border: 4px dashed var(--accent);
+    border-radius: 30px;
+    padding: 16px;
+    box-shadow: 
+        8px 8px 0 var(--accent-secondary),
+        0 12px 40px rgba(255, 107, 157, 0.15);
+    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+}
+
+.qr-box::before {
+    content: '💕';
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.3rem;
+}
+
+.qr-box:hover {
+    transform: scale(1.08) rotate(-2deg);
+    border-style: solid;
+    box-shadow: 
+        12px 12px 0 var(--accent),
+        0 20px 50px rgba(255, 107, 157, 0.3);
+}
+
+/* ========== ГАЛЕРЕЯ: как стикеры ========== */
+.gallery-item {
+    background: linear-gradient(135deg, #ffb3d9, #ff6b9d, #ff9ec6);
+    border: 4px solid #fff;
+    border-radius: 24px;
+    box-shadow: 6px 6px 0 var(--accent-tertiary);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.gallery-item:hover {
+    transform: scale(1.15) rotate(5deg);
+    box-shadow: 10px 10px 0 var(--accent);
+    z-index: 10;
+}
+
+/* ========== НАВИГАЦИЯ ========== */
+.n-dot {
+    background: #fff;
+    border: 3px solid var(--accent);
+    width: 14px;
+    height: 14px;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.n-dot:hover {
+    transform: scale(1.5) rotate(15deg);
+}
+
+.n-dot.active {
+    background: var(--accent);
+    transform: scale(1.6) rotate(10deg);
+    box-shadow: 0 0 20px rgba(255, 107, 157, 0.7);
+}
+
+.n-arrow {
+    background: #fff;
+    border: 3px solid var(--accent);
+    color: var(--accent);
+    border-radius: 50%;
+    font-weight: bold;
+    box-shadow: 5px 5px 0 var(--accent-secondary);
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.n-arrow:hover {
+    transform: scale(1.2) rotate(10deg);
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 8px 8px 0 var(--accent-secondary);
+}
+
+/* ========== ПРОГРЕСС-БАР ========== */
+.progress-bar {
+    height: 6px;
+    background: linear-gradient(90deg, var(--accent-tertiary), var(--accent), var(--accent-secondary));
+    border-radius: 0 3px 3px 0;
+    box-shadow: 0 0 20px rgba(255, 107, 157, 0.6);
+}
+
+/* ========== ТЕМА-СВИТЧЕР ========== */
+.theme-switcher {
+    background: #fff;
+    border: 3px solid var(--accent);
+    box-shadow: 6px 6px 0 var(--accent-secondary);
+    border-radius: 50px;
+    padding: 8px;
+}
+
+.theme-btn {
+    border: 3px solid #fff;
+    box-shadow: 2px 2px 0 rgba(0,0,0,0.08);
+}
+
+.theme-btn.active {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px #fff, 0 0 20px rgba(255, 107, 157, 0.7);
+    transform: scale(1.2);
+}
+
+/* ========== ЗАМЕТКИ ========== */
+.speaker-notes {
+    background: #fff;
+    border: 3px solid var(--accent-secondary);
+    border-radius: 24px;
+    box-shadow: 8px 8px 0 var(--accent-tertiary);
+    color: var(--text-primary);
+}
+
+.notes-header {
+    color: var(--accent);
+    font-weight: 700;
+}
+
+/* ========== ФОРМЫ ========== */
+.field-select, .field-input {
+    background: #fff;
+    border: 3px solid var(--accent-secondary);
+    border-radius: 16px;
+    padding: 10px 14px;
+    color: var(--text-primary);
+    font-weight: 500;
+    font-family: var(--font-body);
+}
+
+.field-select:focus, .field-input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px rgba(255, 107, 157, 0.2);
+    outline: none;
+}
+
+.field-label {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+}
+
+/* ========== МОКАП ========== */
+.mockup {
+    background: #fff;
+    border: 3px solid var(--accent-secondary);
+    border-radius: 24px;
+    overflow: hidden;
+}
+
+.mockup-bar {
+    background: linear-gradient(135deg, #ffe4ec, #fff5f9);
+    border-bottom: 3px solid var(--accent-secondary);
+}
+
+.mockup-tabs {
+    border-bottom: 2px solid var(--accent-secondary);
+}
+
+.mock-tab {
+    border: 2px solid var(--accent-secondary);
+    border-radius: 50px;
+    color: var(--accent);
+    font-weight: 600;
+    background: #fff;
+}
+
+.mock-tab.active {
+    background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+    color: #fff;
+    border-color: var(--accent);
+}
+
+/* ========== ПЛАВАЮЩИЕ ЭЛЕМЕНТЫ ========== */
+.floating-element {
+    font-size: 2.5rem;
+    animation: float-cute 4s ease-in-out infinite;
+    filter: drop-shadow(0 3px 6px rgba(255,107,157,0.3));
+}
+
+@keyframes float-cute {
+    0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+    33% { transform: translateY(-20px) rotate(12deg) scale(1.1); }
+    66% { transform: translateY(-10px) rotate(-8deg) scale(1.05); }
+}
+
+/* ========== СПИСКИ ========== */
+.feature-list li {
+    border-bottom: 2px dashed var(--accent-secondary);
+    color: var(--text-primary);
+    padding: 10px 0;
+}
+
+.feature-list li::before {
+    content: '💖';
+    font-size: 0.9rem;
+}
+
+/* ========== КОД ========== */
+.code-block {
+    background: #fff;
+    border: 3px dashed var(--accent-secondary);
+    border-radius: 20px;
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+}
+
+.code-tag { color: var(--accent); font-weight: 600; }
+.code-str { color: #a78bfa; }
+.code-comment { color: var(--accent-secondary); }
+
+/* ========== ПЛАВАЮЩИЕ ЭМОДЗИ (JS) ========== */
+.floating-emoji {
+    animation: float-up-cute 6s ease-out forwards;
+    text-shadow: 0 2px 4px rgba(255,107,157,0.3);
+}
+
+@keyframes float-up-cute {
+    0% {
+        transform: translateY(0) rotate(0deg) scale(0.5);
+        opacity: 0;
+    }
+    10% { opacity: 1; transform: scale(1.2); }
+    100% {
+        transform: translateY(-150vh) rotate(720deg) scale(0.8);
+        opacity: 0;
+    }
+}
+
+/* ========== PARALLAX LAYER ========== */
+.parallax-layer {
+    background: 
+        radial-gradient(ellipse at 20% 80%, rgba(255,107,157,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(255,158,198,0.06) 0%, transparent 60%);
+}
+
+/* ========== АДАПТИВ ========== */
+@media (max-width: 768px) {
+    h1 { font-size: 2.5rem; }
+    .card { border-width: 2px; padding: 18px; }
+    .content-box { padding: 24px; }
+    .btn { padding: 10px 20px; font-size: 0.9rem; }
+}

@@ -6,6 +6,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Bad+Script&family=Viaoda+Libre&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Comic+Relief:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Rubik+Iso&display=swap');
+@import url('https://cdn.jsdelivr.net/npm/@fontsource/great-vibes@5/index.css');
 
 
 :root {
@@ -13,8 +14,14 @@
   --main-color-mobile: rgb(151, 46, 81);
   --background-color: #d3d1d1; /* Глубокий угольный */
   --text-over-background: aliceblue;
-  --paragraph-color: #291a1a;
-
+    --main-p-size: 1.2rem; /* ~18px. Попробуй 1.25rem или 1.1rem */
+    
+    --paragraph-color: #2d2d2d;
+    --link-color: #d94d8c;
+    --link-hover-color: #b5306b;
+    --link-glow: rgba(217, 77, 140, 0.35);
+    --link-glow-strong: rgba(217, 77, 140, 0.55);
+    --transition-smooth: 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   --card-background: rgba(77, 77, 77, 0.582);
 
   --neon-1: rgb(255, 96, 175);
@@ -220,14 +227,144 @@ main{
   color: var(--text-primary);
 }
 
-.main-p{
-    font-size: 1.3rem;
-    line-height: 1.5;
-    color: var(--paragraph-color);
+* ---------- Параграф ---------- */
+/* ========================================
+   Файл: styles.css
+   ======================================== */
+
+:root {
+    /* 🔤 ШРИФТ: убедись, что имя переменной совпадает с твоим проектом */
+
+    
+    /* 📏 РАЗМЕР: поменяй на нужное значение */
+
+}
+
+/* ---------- Параграф ---------- */
+.main-p {
     font-family: var(--paragraph-font);
+    font-size: var(--main-p-size, 1.15rem);
+    line-height: 1.65; /* Чуть больше для "рукописного" шрифта */
+    color: var(--paragraph-color);
     text-align: center;
-    margin-bottom: 20px;
-    flex-grow: 1; /* Чтобы параграф занимал доступное пространство */
+    margin-bottom: 24px;
+    flex-grow: 1;
+    
+    /* Мягкое появление */
+    animation: fadeInUp 0.5s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Ссылка: база ---------- */
+.link-in-paragraph {
+    color: var(--link-color);
+    text-decoration: none;
+    position: relative;
+    font-weight: 600;
+    padding: 2px 4px;
+    border-radius: 4px;
+    
+    transition: 
+        color var(--transition-smooth),
+        text-shadow var(--transition-smooth),
+        box-shadow var(--transition-smooth),
+        transform var(--transition-smooth);
+    
+    background: linear-gradient(to right, var(--link-color), var(--link-color)) no-repeat;
+    background-size: 100% 2px;
+    background-position: 0 1.35em;
+}
+
+/* ---------- HOVER: glow + контраст ---------- */
+.link-in-paragraph:hover {
+    color: var(--link-hover-color);
+    
+    text-shadow: 
+        0 0 6px var(--link-glow),
+        0 0 12px var(--link-glow);
+        
+    box-shadow: 
+        0 0 0 1px rgba(217, 77, 140, 0.15),
+        0 0 10px var(--link-glow);
+        
+    transform: translateY(-1px) scale(1.02);
+    
+    background: linear-gradient(to right, var(--link-hover-color) 50%, var(--link-color) 50%) no-repeat;
+    background-size: 200% 2px;
+    background-position: 100% 1.35em;
+    transition: background-position 0.4s ease, var(--transition-smooth);
+    
+    animation: pulseGlow 1.4s ease-in-out infinite alternate;
+}
+
+@keyframes pulseGlow {
+    0% {
+        text-shadow: 0 0 6px var(--link-glow), 0 0 12px var(--link-glow);
+        box-shadow: 0 0 10px var(--link-glow);
+    }
+    100% {
+        text-shadow: 0 0 8px var(--link-glow), 0 0 18px var(--link-glow-strong);
+        box-shadow: 0 0 14px var(--link-glow), 0 0 24px var(--link-glow-strong);
+    }
+}
+
+/* ---------- Active / Focus ---------- */
+.link-in-paragraph:active {
+    color: #9a2859;
+    transform: scale(0.99);
+    transition-duration: 0.1s;
+}
+
+.link-in-paragraph:focus-visible {
+    outline: 2px solid var(--link-color);
+    outline-offset: 3px;
+    border-radius: 3px;
+}
+
+/* ---------- Блик (не мешает чтению) ---------- */
+.link-in-paragraph::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    border-radius: 4px;
+    pointer-events: none;
+    transition: left 0.5s ease;
+}
+.link-in-paragraph:hover::after { left: 100%; }
+
+/* ---------- Адаптив ---------- */
+@media (max-width: 768px) {
+    .main-p {
+        font-size: calc(var(--main-p-size) * 0.9);
+        padding: 0 12px;
+    }
+    .link-in-paragraph:hover { transform: translateY(-1px) scale(1.01); }
+}
+
+/* ---------- Тёмная тема ---------- */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --paragraph-color: #f0f0f0;
+        --link-color: #ff7eb6;
+        --link-hover-color: #ffc8d9;
+        --link-glow: rgba(255, 126, 182, 0.5);
+        --link-glow-strong: rgba(255, 126, 182, 0.75);
+    }
+}
+
+/* ---------- Доступность ---------- */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+    .link-in-paragraph:hover { transform: none; animation: none; }
 }
 
 .poem {
@@ -476,32 +613,46 @@ margin-left: auto;
 }
 
 footer{
-    background-color: black;
-    padding: 20px;
+    padding: 80px;
     color: var(--text-over-background);
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: auto;
     width: 100%;
+    font-family: "Alumni Sans Collegiate One", sans-serif;
+}
+
+.author-signature {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2rem; color: var(--header-bg-solid);
+    margin: 0.4rem 0;
+    animation: signatureFloat 4s ease-in-out infinite;
+    color: #972e51;
+    margin: 5rem 0;
+}
+
+.poet-badge{
+    display: inline-flex; 
+    align-items: center; 
+    gap: 0.4rem;
+    background: rgba(151,46,81,0.06); 
+    padding: 0.5rem 1.2rem;
+    border-radius: 2rem; 
+    font-size: 1.5rem; 
+    margin-top: 0;
+    border: 1px solid rgba(151,46,81,0.1);
+    font-family: var(--caveat);
 }
 
 .footer-capture{
-    font-family: var(--paragraph-font);
-    font-size: 1.34rem;
-    color: var(--text-primary);
+    font-family: var(--poem-text-font);
+    size: 1.15rem;
+    color: #972e51;
 }
 
-.footer-links{
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start; /* исправлено с left на flex-start */
-    justify-content: flex-start;
-    margin-right: auto; /* прижимает к левому краю */
-    width: 100%; /* занимает всю доступную ширину */
-}
 
-.footer-quote{
+/* .footer-quote{
     margin-top: 0.5%;
     text-align: left;
     font-family: var(--caveat);
@@ -511,17 +662,19 @@ footer{
     text-decoration: underline;
     text-decoration-line: underline;
     text-decoration-color: var(--text-primary);
-    text-decoration-thickness: 3px; /* Задает толщину линии 3 пикселя */
+    text-decoration-thickness: 3px; 
     white-space: nowrap;
     margin-left: 10%; 
-}
+} */
 
 
-.footer-logo-links-container{
+.footer-links {
     display: flex;
     flex-direction: row;
+    justify-content: center;  /* горизонтальное центрирование дочерних элементов */
+    width: 100%;              /* растягиваем на всю ширину родителя (footer) */
     gap: 10px;
-    margin-left: 50%;
+        flex-wrap: nowrap;        /* запрещаем перенос */
 }
 
 .footer-logo-link img {
@@ -550,7 +703,15 @@ footer{
 
 
 
-
+.footer-logo-links-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;           /* отступы между иконками */
+    width: 100%;
+    flex-wrap: nowrap;
+}
 
 
 

@@ -3,19 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> тёплые лучи рассвета | главная </title>
-    <meta description="Тёплые лучи рассвета (warm rays of dawn) - поэтический проект, созданный Шугой Теплорассветным. Читайте стихи на русском языке и не только.">
+    <title> тёплые лучи рассвета | статьи </title>
+    <meta description="Тёплые лучи рассвета (warm rays of dawn) - поэтический проект, созданный Шугой Теплорассветным. Вы можете ознакомиться с авторскими статьями поэта.">
     <link rel="stylesheet" href="/css/style.css">
+  <meta name="description" content="Статьи и разборы от автора канала «Тёплые лучи рассвета». О творчестве, вдохновении и процессе написания стихов.">
+  <link rel="canonical" href="https://warmraysofdawn.github.io/articles/index.html">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="тёплые лучи рассвета | статьи | Тёплые лучи рассвета">
+  <meta property="og:description" content="Статьи и разборы от автора канала «Тёплые лучи рассвета». О творчестве, вдохновении и процессе написания стихов.">
+  <meta property="og:url" content="https://warmraysofdawn.github.io/articles/index.html">
+  <meta property="og:site_name" content="Тёплые лучи рассвета">
+  <meta property="og:locale" content="ru_RU">
+
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "тёплые лучи рассвета | статьи",
+    "author": {
+      "@type": "Person",
+      "name": "Автор канала «Тёплые лучи рассвета»"
+    },
+    "datePublished": "2026-04-08",
+    "inLanguage": "ru",
+    "genre": "Поэзия",
+    "url": "https://warmraysofdawn.github.io/articles/index.html"
+  }
+  </script>
+
 </head>
 <body>
+    <div class="background-container" id="particles-container"></div>
     <header>
         <div class="header-container">
-            <img class="header-logo" src="/img/тлр-лого копия-1.svg" alt="Лого">
+            <img class="header-logo" src="/img/logo.svg" alt="Лого">
 
             <nav>
                     <a href="/">Главная</a>
                     <a href="/poems/">Стихи</a>
-                    <a href="/events/">С обытия</a>
+                    <a href="/events/">События</a>
                     <a href="/more/">Статьи</a>
                     <a href="/contact/">Связаться</a>
                 
@@ -24,12 +54,20 @@
     </header>
 
     <main>
-        
+ 
     </main>
 
     <footer>
-        <h3 class="footer-capture">"Останавливаясь в самосовершенствовании, человек переходит в фазу медленного самоубийства; останавливаясь в созидании, человек переходит к уничтожению"</h3>
-        <h3 class="signed">тёплые лучи рассвета.</h3>
+        <div class="author-signature"><a href="/">~ тёплые лучи рассвета ~</a></div>
+        <div class="poet-badge">✦ с любовью • ваш Шуга ✦</div>
+        <p class="footer-capture">Не желайте никому зла и не порождайте его</p>
+        <div class="footer-logo-links-container">
+            <a href="https://t.me/warmraysofdawn" target="_blank"><img class="footer-logo-link" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/500px-Telegram_logo.svg.png" alt="Telegram"></a>
+            <a href="https://warm-rays-magazine.github.io/" target="_blank"><img class="footer-logo-link" src="/img/wrdm-logo.svg" alt="WRDM logo"></a>
+            <a href="https://github.com/warmraysofdawn/" target="_blank"><img class="footer-logo-link" src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="Github logo"></a>
+            
+        </div>
     </footer>
 </body>
+<script src="/js/main.js"></script>
 </html>
