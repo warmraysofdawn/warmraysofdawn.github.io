@@ -1,0 +1,1656 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Электрический ток в вакууме</title>
+<link href="https://cdn.jsdelivr.net/npm/fontsource-roboto@5.0.0/cyrillic.css" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background: #05050f;
+  color: #e0e0f0;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  user-select: none;
+}
+
+#bgCanvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+#transCanvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 50;
+  pointer-events: none;
+}
+
+.presentation {
+  position: relative;
+  z-index: 1;
+  width: 100%; height: 100%;
+  perspective: 1400px;
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 80px;
+  opacity: 0;
+  pointer-events: none;
+  will-change: opacity, transform;
+}
+
+.slide.active {
+  opacity: 1;
+  transform: translateX(0) rotateY(0deg) scale(1);
+  pointer-events: auto;
+  z-index: 5;
+}
+
+.slide.enter-right {
+  animation: slideEnterRight 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.slide.exit-left {
+  animation: slideExitLeft 0.75s cubic-bezier(0.55, 0, 1, 0.45) forwards;
+}
+.slide.enter-left {
+  animation: slideEnterLeft 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.slide.exit-right {
+  animation: slideExitRight 0.75s cubic-bezier(0.55, 0, 1, 0.45) forwards;
+}
+.slide.enter-zoom {
+  animation: slideZoomIn 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes slideEnterRight {
+  0% { opacity: 0; transform: translateX(100%) rotateY(-12deg) scale(0.88); filter: blur(6px); }
+  60% { filter: blur(0); }
+  100% { opacity: 1; transform: translateX(0) rotateY(0deg) scale(1); filter: blur(0); }
+}
+@keyframes slideExitLeft {
+  0% { opacity: 1; transform: translateX(0) rotateY(0deg) scale(1); filter: blur(0); }
+  100% { opacity: 0; transform: translateX(-100%) rotateY(12deg) scale(0.88); filter: blur(6px); }
+}
+@keyframes slideEnterLeft {
+  0% { opacity: 0; transform: translateX(-100%) rotateY(12deg) scale(0.88); filter: blur(6px); }
+  60% { filter: blur(0); }
+  100% { opacity: 1; transform: translateX(0) rotateY(0deg) scale(1); filter: blur(0); }
+}
+@keyframes slideExitRight {
+  0% { opacity: 1; transform: translateX(0) rotateY(0deg) scale(1); filter: blur(0); }
+  100% { opacity: 0; transform: translateX(100%) rotateY(-12deg) scale(0.88); filter: blur(6px); }
+}
+@keyframes slideZoomIn {
+  0% { opacity: 0; transform: scale(0.4) rotateX(8deg); filter: blur(14px); }
+  60% { filter: blur(0); }
+  100% { opacity: 1; transform: scale(1) rotateX(0deg); filter: blur(0); }
+}
+
+.slide-inner {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.slide-title {
+  font-size: 2.6rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #60a5fa, #a78bfa, #f472b6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.2;
+}
+
+.slide-subtitle {
+  font-size: 1.15rem;
+  color: #94a3b8;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.slide-content {
+  display: flex;
+  gap: 36px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.slide-text {
+  flex: 1;
+  min-width: 300px;
+}
+
+.slide-text ul {
+  list-style: none;
+  padding: 0;
+}
+
+.slide-text ul li {
+  position: relative;
+  padding-left: 28px;
+  margin-bottom: 14px;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #cbd5e1;
+}
+
+.slide-text ul li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 10px;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #60a5fa, #a78bfa);
+  box-shadow: 0 0 10px rgba(96,165,250,0.5);
+}
+
+.slide-text ul li strong {
+  color: #e2e8f0;
+  font-weight: 600;
+}
+
+.formula {
+  background: rgba(96,165,250,0.08);
+  border: 1px solid rgba(96,165,250,0.2);
+  border-radius: 12px;
+  padding: 14px 22px;
+  margin: 10px 0;
+  font-family: 'Courier New', monospace;
+  font-size: 1.1rem;
+  color: #93c5fd;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+.slide-visual {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.slide-visual img {
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  max-width: 380px;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.visual-caption {
+  font-size: 0.82rem;
+  color: #64748b;
+  text-align: center;
+  font-style: italic;
+}
+
+.anim-canvas {
+  border-radius: 16px;
+  background: rgba(10,10,26,0.85);
+  border: 1px solid rgba(96,165,250,0.15);
+}
+
+.progress-bar {
+  position: fixed; bottom: 0; left: 0;
+  width: 100%; height: 4px;
+  background: rgba(255,255,255,0.08);
+  z-index: 100;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #60a5fa, #a78bfa, #f472b6);
+  transition: width 0.5s ease;
+  border-radius: 0 2px 2px 0;
+}
+
+.nav-controls {
+  position: fixed; bottom: 22px; left: 50%;
+  transform: translateX(-50%);
+  display: flex; align-items: center; gap: 16px;
+  z-index: 100;
+}
+
+.nav-btn {
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  border: 2px solid rgba(96,165,250,0.3);
+  background: rgba(15,15,35,0.85);
+  color: #93c5fd;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+.nav-btn:hover {
+  background: rgba(96,165,250,0.2);
+  border-color: #60a5fa;
+  box-shadow: 0 0 18px rgba(96,165,250,0.3);
+  transform: scale(1.08);
+}
+.nav-btn:disabled { opacity: 0.25; cursor: default; transform: none; }
+
+.slide-counter {
+  font-size: 0.9rem; color: #64748b; min-width: 60px; text-align: center;
+}
+
+.slide-dots {
+  position: fixed; right: 20px; top: 50%; transform: translateY(-50%);
+  display: flex; flex-direction: column; gap: 9px; z-index: 100;
+}
+.dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  cursor: pointer; transition: all 0.3s ease;
+}
+.dot.active {
+  background: #60a5fa;
+  box-shadow: 0 0 10px rgba(96,165,250,0.6);
+  transform: scale(1.35);
+}
+
+.slide-1 .slide-inner { text-align: center; align-items: center; }
+.slide-1 .slide-title { font-size: 3.4rem; }
+.slide-1 .slide-subtitle { font-size: 1.3rem; max-width: 600px; }
+
+.title-meta {
+  margin-top: 36px;
+  padding: 18px 30px;
+  background: rgba(96,165,250,0.07);
+  border: 1px solid rgba(96,165,250,0.12);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+}
+.title-meta p { font-size: 1rem; color: #94a3b8; margin: 5px 0; }
+
+.conclusion-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px; width: 100%;
+}
+.conclusion-box {
+  background: rgba(96,165,250,0.05);
+  border: 1px solid rgba(96,165,250,0.12);
+  border-radius: 12px; padding: 18px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.conclusion-box:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(96,165,250,0.12); }
+.conclusion-box h4 { color: #60a5fa; margin-bottom: 6px; font-size: 0.92rem; }
+.conclusion-box p { font-size: 0.88rem; color: #94a3b8; line-height: 1.5; }
+
+.sources-list { list-style: none; padding: 0; }
+.sources-list li {
+  padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+  color: #94a3b8; font-size: 1rem; line-height: 1.5;
+}
+.sources-list li:last-child { border-bottom: none; }
+
+.glow-line {
+  width: 80px; height: 3px;
+  background: linear-gradient(90deg, #60a5fa, #a78bfa);
+  border-radius: 2px; margin: 6px 0 14px 0;
+  box-shadow: 0 0 10px rgba(96,165,250,0.5);
+}
+.slide-1 .glow-line { margin: 10px auto 20px auto; width: 100px; }
+
+.two-col { display: flex; gap: 28px; width: 100%; }
+.col-box {
+  flex: 1; background: rgba(15,15,35,0.7);
+  border-radius: 16px; padding: 22px;
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: transform 0.3s ease;
+}
+.col-box:hover { transform: translateY(-2px); }
+.col-box h3 { font-size: 1.05rem; margin-bottom: 14px; padding-bottom: 7px; border-bottom: 2px solid; }
+.col-box.pros h3 { color: #34d399; border-color: #34d399; }
+.col-box.cons h3 { color: #f87171; border-color: #f87171; }
+.col-box ul li::before { width: 8px; height: 8px; }
+.col-box.pros ul li::before { background: #34d399; box-shadow: 0 0 8px rgba(52,211,153,0.5); }
+.col-box.cons ul li::before { background: #f87171; box-shadow: 0 0 8px rgba(248,113,113,0.5); }
+
+.slide-badge {
+  position: absolute; top: 20px; left: 28px;
+  font-size: 0.75rem; color: #475569;
+  font-weight: 600; letter-spacing: 2px;
+  text-transform: uppercase; z-index: 10;
+}
+
+.vignette {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: radial-gradient(ellipse at center, transparent 45%, rgba(0,0,0,0.35) 100%);
+  pointer-events: none; z-index: 2;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 10px rgba(96,165,250,0.5); }
+  50% { box-shadow: 0 0 22px rgba(96,165,250,0.85); }
+}
+
+.slide.active .slide-title { animation: fadeInUp 0.55s ease 0.12s both; }
+.slide.active .glow-line { animation: fadeInUp 0.45s ease 0.22s both, glowPulse 2.5s ease-in-out 1.2s infinite; }
+.slide.active .slide-subtitle { animation: fadeInUp 0.55s ease 0.3s both; }
+.slide.active .slide-content { animation: fadeInUp 0.55s ease 0.38s both; }
+.slide.active .title-meta { animation: fadeInScale 0.65s ease 0.45s both; }
+.slide.active .two-col { animation: fadeInUp 0.55s ease 0.35s both; }
+.slide.active .conclusion-grid { animation: fadeInUp 0.55s ease 0.35s both; }
+.slide.active .formula { animation: fadeInScale 0.55s ease 0.5s both; }
+.slide.active .col-box:nth-child(1) { animation: fadeInLeft 0.5s ease 0.3s both; }
+.slide.active .col-box:nth-child(2) { animation: fadeInUp 0.5s ease 0.45s both; }
+.slide.active .conclusion-box:nth-child(1) { animation: fadeInScale 0.45s ease 0.18s both; }
+.slide.active .conclusion-box:nth-child(2) { animation: fadeInScale 0.45s ease 0.26s both; }
+.slide.active .conclusion-box:nth-child(3) { animation: fadeInScale 0.45s ease 0.34s both; }
+.slide.active .conclusion-box:nth-child(4) { animation: fadeInScale 0.45s ease 0.42s both; }
+.slide.active .slide-visual { animation: fadeInScale 0.6s ease 0.45s both; }
+
+@media (max-width: 900px) {
+  .slide { padding: 36px 24px; }
+  .slide-title { font-size: 1.7rem; }
+  .slide-1 .slide-title { font-size: 2rem; }
+  .slide-content { flex-direction: column; }
+  .slide-visual { max-width: 100%; }
+  .slide-visual img { max-width: 100%; }
+  .two-col { flex-direction: column; gap: 14px; }
+  .conclusion-grid { grid-template-columns: 1fr; }
+  .slide-dots { display: none; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="bgCanvas"></canvas>
+<canvas id="transCanvas"></canvas>
+<div class="vignette"></div>
+
+<div class="presentation" id="presentation">
+
+  <!-- SLIDE 1: Title -->
+  <div class="slide slide-1 active" data-slide="1">
+    <span class="slide-badge">Слайд 1 / 12</span>
+    <div class="slide-inner">
+      <div class="slide-title">Электрический ток в вакууме</div>
+      <div class="glow-line"></div>
+      <div class="slide-subtitle">Исследование природы тока в безвоздушной среде</div>
+      <div class="title-meta">
+        <p>📖 Доклад по физике</p>
+        <p>✍️ Презентация крутая</p>
+        <p>📅 Дата: 13.04.2026</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 2: Vacuum concept -->
+  <div class="slide" data-slide="2">
+    <span class="slide-badge">Слайд 2 / 12</span>
+    <div class="slide-inner">
+      <div class="slide-title">Что такое вакуум?</div>
+      <div class="glow-line"></div>
+      <div class="slide-subtitle">Почему ток в вакууме — неочевидное явление</div>
+      <div class="slide-content">
+        <div class="slide-text">
+          <ul>
+            <li><strong>Вакуум</strong> — состояние газа с давлением значительно ниже атмосферного (менее 10⁻⁵ Па)</li>
+            <li>В глубоком вакууме практически <strong>нет свободных электронов и ионов</strong></li>
+            <li>Для протекания тока нужны носители заряда → их нужно <strong>«ввести» извне</strong></li>
+          </ul>
+          <div class="formula">p &lt; 10⁻⁵ Па — глубокий вакуум</div>
+        </div>
+        <div class="slide-visual">
+          <img src="https://image.qwenlm.ai/public_source/90ddc6c1-dbb8-46db-8102-e239d9b6db00/1d60bf3bf-538a-4ead-bd82-0a211e7b7da5.png" alt="Вакуумная трубка">
+          <div class="visual-caption">Вакуумная трубка с электронным лучом</div>
+        </div>
+      </div>
+      <canvas id="vacuumScale" class="anim-canvas" width="1120" height="110"></canvas>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: Conditions for current -->
+  <div class="slide" data-slide="3">
+    <span class="slide-badge">Слайд 3 / 12</span>
+    <div class="slide-inner">
+      <div class="slide-title">Как заставить ток течь через пустоту?</div>
+      <div class="glow-line"></div>
+      <div class="slide-content">
+        <div class="slide-text">
+          <ul>
+            <li>Наличие <strong>источника свободных электронов</strong> (катод)</li>
+            <li>Создание <strong>электрического поля</strong> для направленного движения (анод +)</li>
+            <li>Электроны должны преодолеть <strong>работу выхода</strong> из катода</li>
+            <li>Основной механизм — <strong>термоэлектронная эмиссия</strong></li>
+          </ul>
+        </div>
+        <div class="slide-visual">
+          <canvas id="electronAnim3" class="anim-canvas" width="420" height="320"></canvas>
+          <div class="visual-caption">Схема: катод → анод, движение электронов</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4: Thermionic emission -->
+  <div class="slide" data-slide="4">
+    <span class="slide-badge">Слайд 4 / 12</span>
+    <div class="slide-inner">
+      <div class="slide-title">Термоэлектронная эмиссия</div>
+      <div class="glow-line"></div>
+      <div class="slide-subtitle">Как нагрев «выбивает» электроны из металла?</div>
+      <div class="slide-content">
+        <div class="slide-text">
+          <ul>
+            <li>При нагреве катода электроны получают энергию <strong>&gt; работы выхода</strong></li>
+            <li>Электроны покидают поверхность металла, образуя <strong>электронное облако</strong></li>
+            <li>Формула Ричардсона–Дешмана:</li>
+          </ul>
+          <div class="formula">j = A · T² · e<sup>−W/(kT)</sup></div>
+          <p style="font-size:0.88rem;color:#64748b;margin-top:6px;">
+            j — плотность тока эмиссии, T — температура, W — работа выхода, k — постоянная Больцмана
+          </p>
+        </div>
+        <div class="slide-visual">
+          <canvas id="emissionChart" class="anim-canvas" width="420" height="320"></canvas>
+          <div class="visual-caption">Зависимость плотности тока от температуры</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5: Vacuum diode -->
+  <div class="slide" data-slide="5">
+    <span class="slide-badge">Слайд 5 / 12</span>
+    <div class="slide-inner">
+      <div class="slide-title">Вакуумный диод</div>
+      <div class="glow-line"></div>
+      <div class="slide-subtitle">Простейший вакуумный прибор</div>
+      <div class="slide-content">
+        <div class="slide-text">
+          <ul>
+            <li><strong>Устройство:</strong> стеклянный баллон, подогревной катод (нить накала), анод</li>
+            <li>Электроны летят от катода к аноду только при <strong>положительном напряжении</strong> на аноде</li>
+            <li><strong>Односторонняя проводимость</strong> (вентильное свойство)</li>
+          </ul>
+          <div class="formula">Iₐ = B · Uₐ<sup>3/2</sup> — закон Чайлда–Ленгмюра</div>
+        </div>
+        <div class="slide-visual">
+          <img src="https://image.qwenlm.ai/public_source/90ddc6c1-dbb8-46db-8102-e239d9b6db00/18373d9df-ca50-4858-ac13-173cc1f4cc02.png" alt="Вакуумный диод">
+          <div class="visual-caption">Рисунок вакуумного диода</div>
+        </div>
+        <div class="slide-visual">
+          <img src="https://pho.rs/p/img/41803/task" alt="Схема диода">
+          <div class="visual-caption">Схема включения</div>
+        </div>
+      </div>
+      <canvas id="diodeVAH" class="anim-canvas" width="1120" height="190"></canvas>
+    </div>
+  </div>
+
+  <!-- SLIDE 6: Triode -->
+  <div class="slide" data-slide="6">
+    <span class="slide-badge">Слайд 6 / 12</span>
+    <div class="slide-inner">
+      <div class="slide-title">Вакуумный триод</div>
+      <div class="glow-line"></div>
+      <div class="slide-subtitle">Управление током с помощью сетки</div>
+      <div class="slide-content">
+        <div class="slide-text">
+          <ul>
+            <li>Добавлена <strong>управляющая сетка</strong> — третий электрод между катодом и анодом</li>
+            <li>Небольшое <strong>отрицательное напряжение</strong> на сетке отталкивает электроны → ток анода падает</li>
+            <li>Возможно <strong>усиление</strong> слабых электрических сигналов</li>
+          </ul>
+        </div>
+        <div class="slide-visual">
+          <canvas id="triodeAnim" class="anim-canvas" width="420" height="320"></canvas>
+          <div class="visual-caption">Схема триода: катод → сетка → анод</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 7: CRT -->
+  <div class="slide" data-slide="7">
+    <span class="slide-badge">Слайд 7 / 12</span>
+    <div class="slide-inner">
+      <div class="slide-title">Электронно-лучевая трубка (ЭЛТ)</div>
+      <div class="glow-line"></div>
+      <div class="slide-subtitle">Как увидеть электрический ток в вакууме?</div>
+      <div class="slide-content">
+        <div class="slide-text">
+          <ul>
+            <li>ЭЛТ — основа <strong>осциллографов</strong> и старых телевизоров</li>
+            <li>Узкий пучок электронов (<strong>электронная пушка</strong>), отклоняющие пластины, люминесцентный экран</li>
+            <li>Управление лучом позволяет <strong>рисовать изображение</strong></li>
+          </ul>
+        </div>
+        <div class="slide-visual">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/%D0%A3%D1%81%D1%82%D1%80%D0%BE%D0%B9%D1%81%D1%82%D0%B2%D0%BE_%D0%BE%D1%81%D1%86%D0%B8%D0%BB%D0%BB%D0%BE%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B9_%D0%AD%D0%9B%D0%A2.svg/500px-%D0%A3%D1%81%D1%82%D1%80%D0%BE%D0%B9%D1%81%D1%82%D0%B2%D0%BE_%D0%BE%D1%81%D1%86%D0%B8%D0%BB%D0%BB%D0%BE%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B9_%D0%AD%D0%9B%D0%A2.svg.png" alt="ЭЛТ">
+          <div class="visual-caption">Устройство осциллографической ЭЛТ</div>
+        </div>
+      </div>
+      <canvas id="crtAnim" class="anim-canvas" width="1120" height="200"></canvas>
+    </div>
+  </div>
+
+  <!-- SLIDE 8: Other emissions -->
+  <div class="slide" data-slide="8">
+    <span class="slide-badge">Слайд 8 / 12</span>
+    <div class="slide-inner">
+      <div class="slide-title">Другие виды эмиссии</div>
+      <div class="glow-line"></div>
+      <div class="slide-subtitle">Не только нагрев</div>
+      <div class="slide-content">
+        <div class="slide-text">
+          <ul>
+            <li><strong>Фотоэлектронная эмиссия</strong> — свет выбивает электроны (фотоэффект)</li>
+            <li><strong>Вторичная электронная эмиссия</strong> — бомбардировка поверхности быстрыми электронами</li>
+            <li><strong>Автоэлектронная (полевая) эмиссия</strong> — сильное электрическое поле вырывает электроны даже из холодного катода</li>
+          </ul>
+        </div>
+        <div class="slide-visual">
+          <canvas id="emissionTypes" class="anim-canvas" width="420" height="320"></canvas>
+          <div class="visual-caption">Схема фотоэлектронной эмиссии</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 9: Applications -->
+  <div class="slide" data-slide="9">
+    <span class="slide-badge">Слайд 9 / 12</span>
+    <div class="slide-inner">
+      <div class="slide-title">Где используются вакуумные приборы?</div>
+      <div class="glow-line"></div>
+      <div class="slide-subtitle">От исторических ламп до современных технологий</div>
+      <div class="slide-content">
+        <div class="slide-text">
+          <ul>
+            <li><strong>Исторически:</strong> радиолампы, первые компьютеры (ЭНИАК)</li>
+            <li><strong>Рентгеновские трубки</strong> — медицина, дефектоскопия</li>
+            <li><strong>СВЧ-приборы</strong> — магнетроны, клистроны</li>
+            <li><strong>Электронные микроскопы</strong></li>
+            <li><strong>Ламповый Hi-Fi</strong> — ценители «тёплого» звука</li>
+          </ul>
+        </div>
+        <div class="slide-visual">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/0/02/USSR_x-ray_tube.jpg" alt="Рентгеновская трубка" style="max-width:260px">
+          <div class="visual-caption">Рентгеновская трубка</div>
+        </div>
+      </div>
+      <canvas id="appsAnim" class="anim-canvas" width="1120" height="130"></canvas>
+    </div>
+  </div>
+
+  <!-- SLIDE 10: Pros and cons -->
+  <div class="slide" data-slide="10">
+    <span class="slide-badge">Слайд 10 / 12</span>
+    <div class="slide-inner">
+      <div class="slide-title">Преимущества и недостатки</div>
+      <div class="glow-line"></div>
+      <div class="slide-subtitle">Почему полупроводники вытеснили вакуум? Но кое-где он незаменим</div>
+      <div class="two-col">
+        <div class="col-box pros">
+          <h3>✓ Преимущества</h3>
+          <ul>
+            <li>Высокая скорость электронов (близка к световой)</li>
+            <li>Мало шумов (нет теплового движения носителей в вакууме)</li>
+            <li>Работа в широком диапазоне частот и мощностей</li>
+            <li>Радиационная стойкость</li>
+          </ul>
+        </div>
+        <div class="col-box cons">
+          <h3>✗ Недостатки</h3>
+          <ul>
+            <li>Громоздкость, нагрев катода (низкий КПД)</li>
+            <li>Высокое напряжение питания</li>
+            <li>Недолговечность (перегорает нить накала)</li>
+            <li>Хрупкость стеклянного баллона</li>
+          </ul>
+        </div>
+      </div>
+      <canvas id="efficiencyChart" class="anim-canvas" width="1120" height="170"></canvas>
+    </div>
+  </div>
+
+  <!-- SLIDE 11: Conclusions -->
+  <div class="slide" data-slide="11">
+    <span class="slide-badge">Слайд 11 / 12</span>
+    <div class="slide-inner">
+      <div class="slide-title">Выводы</div>
+      <div class="glow-line"></div>
+      <div class="slide-subtitle">Роль электрического тока в вакууме — вчера, сегодня, завтра</div>
+      <div class="conclusion-grid">
+        <div class="conclusion-box">
+          <h4>🔬 Уникальная среда</h4>
+          <p>Вакуум — идеальная среда для управления электронами без рассеяния на атомах газа</p>
+        </div>
+        <div class="conclusion-box">
+          <h4>🔑 Ключевой эффект</h4>
+          <p>Термоэлектронная эмиссия — основной механизм создания тока в вакууме</p>
+        </div>
+        <div class="conclusion-box">
+          <h4>📡 Современное применение</h4>
+          <p>Незаменимы в мощной СВЧ-электронике, рентгене и микроскопии</p>
+        </div>
+        <div class="conclusion-box">
+          <h4>🚀 Перспективы</h4>
+          <p>Понимание процессов в вакууме необходимо для физики пучков и нанотехнологий</p>
+        </div>
+      </div>
+      <div class="slide-visual" style="margin-top:14px;align-self:center">
+        <img src="https://siriusuniversity.ru/upload/iblock/9c2/zbcianya7kmyd3xpl2vxkllkyd6z7xw9/JEM%202100,%20JEOL.jpg" alt="Электронный микроскоп" style="max-width:340px">
+        <div class="visual-caption">Современный электронный микроскоп</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 12: Sources -->
+  <div class="slide" data-slide="12">
+    <span class="slide-badge">Слайд 12 / 12</span>
+    <div class="slide-inner">
+      <div class="slide-title">Литература и ссылки</div>
+      <div class="glow-line"></div>
+      <div class="slide-content">
+        <div class="slide-text" style="max-width:800px">
+          <ul class="sources-list">
+            <li>📗 Калашников С.Г. «Электричество», глава «Ток в вакууме»</li>
+            <li>📘 Савельев И.В. «Курс общей физики», т. 2</li>
+            <li>🌐 Материалы с сайта <span style="color:#60a5fa">physics.ru</span></li>
+            <li>🖼️ Изображения: Wikimedia Commons (лицензия Creative Commons), Sirius University</li>
+          </ul>
+          <div style="margin-top:28px;text-align:center">
+            <div style="font-size:1.3rem;color:#60a5fa;margin-bottom:6px">Спасибо за внимание!</div>
+            <div style="font-size:1rem;color:#475569">Вопросы?</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+<div class="slide-dots" id="slideDots"></div>
+<div class="nav-controls">
+  <button class="nav-btn" id="prevBtn" onclick="goSlide(currentSlide - 1)">◀</button>
+  <span class="slide-counter" id="slideCounter">1 / 12</span>
+  <button class="nav-btn" id="nextBtn" onclick="goSlide(currentSlide + 1)">▶</button>
+</div>
+
+<script>
+// ===== DEBUG MODE =====
+const DEBUG = true;
+function log(...args) { if (DEBUG) console.log('[SLIDES]', ...args); }
+function warn(...args) { if (DEBUG) console.warn('[SLIDES]', ...args); }
+function error(...args) { console.error('[SLIDES]', ...args); }
+
+// ===== POLYFILL для roundRect (старые браузеры) =====
+if (!CanvasRenderingContext2D.prototype.roundRect) {
+  CanvasRenderingContext2D.prototype.roundRect = function(x, y, w, h, r) {
+    if (w < 2 * r) r = w / 2;
+    if (h < 2 * r) r = h / 2;
+    this.beginPath();
+    this.moveTo(x + r, y);
+    this.arcTo(x + w, y, x + w, y + h, r);
+    this.arcTo(x + w, y + h, x, y + h, r);
+    this.arcTo(x, y + h, x, y, r);
+    this.arcTo(x, y, x + w, y, r);
+    this.closePath();
+    return this;
+  };
+  log('✓ Polyfill roundRect added');
+}
+
+// ===== BACKGROUND ANIMATION =====
+const bgC = document.getElementById('bgCanvas');
+const bgX = bgC?.getContext('2d');
+let bgW, bgH;
+
+function resizeBg() {
+  if (!bgC) return;
+  bgW = bgC.width = window.innerWidth;
+  bgH = bgC.height = window.innerHeight;
+  log(`📐 Background canvas resized: ${bgW}×${bgH}`);
+}
+resizeBg();
+window.addEventListener('resize', resizeBg);
+
+class BgP {
+  constructor() { this.reset(); }
+  reset() {
+    this.x = Math.random() * bgW;
+    this.y = Math.random() * bgH;
+    this.s = Math.random() * 2 + 0.5;
+    this.vx = (Math.random() - 0.5) * 0.4;
+    this.vy = (Math.random() - 0.5) * 0.4;
+    this.o = Math.random() * 0.4 + 0.08;
+    this.h = Math.random() * 80 + 210;
+  }
+  update() {
+    this.x += this.vx; this.y += this.vy;
+    if (this.x < 0 || this.x > bgW || this.y < 0 || this.y > bgH) this.reset();
+  }
+  draw() {
+    if (!bgX) return;
+    bgX.beginPath(); bgX.arc(this.x, this.y, this.s, 0, Math.PI * 2);
+    bgX.fillStyle = `hsla(${this.h},80%,65%,${this.o})`; bgX.fill();
+  }
+}
+
+const bgParticles = Array.from({ length: 100 }, () => new BgP());
+
+function drawBg() {
+  if (!bgX) return;
+  bgX.clearRect(0, 0, bgW, bgH);
+  const t = Date.now() * 0.001;
+  const cx = bgW * (0.3 + 0.12 * Math.sin(t * 0.3));
+  const cy = bgH * (0.4 + 0.1 * Math.cos(t * 0.2));
+  const g = bgX.createRadialGradient(cx, cy, 0, bgW * 0.5, bgH * 0.5, bgW * 0.7);
+  g.addColorStop(0, '#0f0f30'); g.addColorStop(0.5, '#080818'); g.addColorStop(1, '#04040c');
+  bgX.fillStyle = g; bgX.fillRect(0, 0, bgW, bgH);
+
+  const g2 = bgX.createRadialGradient(bgW * 0.7, bgH * 0.6, 0, bgW * 0.7, bgH * 0.6, bgW * 0.35);
+  g2.addColorStop(0, 'rgba(167,139,250,0.035)'); g2.addColorStop(1, 'transparent');
+  bgX.fillStyle = g2; bgX.fillRect(0, 0, bgW, bgH);
+
+  bgParticles.forEach(p => { p.update(); p.draw(); });
+
+  for (let i = 0; i < bgParticles.length; i++) {
+    for (let j = i + 1; j < bgParticles.length; j++) {
+      const dx = bgParticles[i].x - bgParticles[j].x;
+      const dy = bgParticles[i].y - bgParticles[j].y;
+      const d = Math.sqrt(dx * dx + dy * dy);
+      if (d < 130) {
+        bgX.beginPath(); bgX.moveTo(bgParticles[i].x, bgParticles[i].y);
+        bgX.lineTo(bgParticles[j].x, bgParticles[j].y);
+        bgX.strokeStyle = `rgba(96,165,250,${0.05 * (1 - d / 130)})`;
+        bgX.lineWidth = 0.5; bgX.stroke();
+      }
+    }
+  }
+  requestAnimationFrame(drawBg);
+}
+drawBg();
+log('✓ Background animation started');
+
+// ===== TRANSITION EFFECTS =====
+const trC = document.getElementById('transCanvas');
+const trX = trC?.getContext('2d');
+let trW, trH;
+
+function resizeTr() {
+  if (!trC) return;
+  trW = trC.width = window.innerWidth;
+  trH = trC.height = window.innerHeight;
+}
+resizeTr();
+window.addEventListener('resize', resizeTr);
+
+let transParts = [];
+class TP {
+  constructor(x, y, col) {
+    this.x = x; this.y = y;
+    this.vx = (Math.random() - 0.5) * 14;
+    this.vy = (Math.random() - 0.5) * 14;
+    this.s = Math.random() * 4 + 1;
+    this.life = 1; this.dec = Math.random() * 0.02 + 0.012;
+    this.col = col;
+  }
+  update() { this.x += this.vx; this.y += this.vy; this.vx *= 0.97; this.vy *= 0.97; this.life -= this.dec; }
+  draw() {
+    if (!trX || this.life <= 0) return;
+    trX.beginPath(); trX.arc(this.x, this.y, this.s * this.life, 0, Math.PI * 2);
+    trX.fillStyle = this.col.replace('1)', `${this.life})`); trX.fill();
+  }
+}
+
+function burst(x, y) {
+  const cols = ['rgba(96,165,250,1)','rgba(167,139,250,1)','rgba(244,114,182,1)','rgba(52,211,153,1)'];
+  for (let i = 0; i < 50; i++) transParts.push(new TP(x, y, cols[Math.floor(Math.random() * 4)]));
+  log(`💥 Burst at ${Math.round(x)},${Math.round(y)}`);
+}
+
+function animTrans() {
+  if (!trX) return;
+  trX.clearRect(0, 0, trW, trH);
+  transParts = transParts.filter(p => p.life > 0);
+  transParts.forEach(p => { p.update(); p.draw(); });
+  requestAnimationFrame(animTrans);
+}
+animTrans();
+log('✓ Transition animation started');
+
+// ===== SLIDE MANAGEMENT =====
+let currentSlide = 1;
+const totalSlides = 12;
+const slides = document.querySelectorAll('.slide');
+let animRaf = {};
+
+log(`📊 Found ${slides.length} slides, starting at #${currentSlide}`);
+
+// Dots
+const dotsCont = document.getElementById('slideDots');
+for (let i = 1; i <= totalSlides; i++) {
+  const d = document.createElement('div');
+  d.className = 'dot' + (i === 1 ? ' active' : '');
+  d.onclick = () => { log(`🔘 Dot clicked: slide ${i}`); goSlide(i); };
+  dotsCont.appendChild(d);
+}
+
+// ✅ ИСПРАВЛЕННАЯ ФУНКЦИЯ isActive
+function isActive(sn) {
+  const el = document.querySelector(`.slide[data-slide="${sn}"]`);
+  const hasActive = el?.classList.contains('active');
+  // log(`🔍 isActive(${sn}): ${hasActive}`);
+  return hasActive;
+}
+
+// ✅ ИСПРАВЛЕННАЯ ФУНКЦИЯ goSlide с правильным управлением классами
+function goSlide(n) {
+  if (n < 1 || n > totalSlides) { warn(`❌ Invalid slide number: ${n}`); return; }
+  if (n === currentSlide) { log(`⚠ Already on slide ${n}`); return; }
+  
+  log(`🔄 Navigating: ${currentSlide} → ${n}`);
+  const dir = n > currentSlide ? 1 : -1;
+  burst(trW * (dir > 0 ? 0.8 : 0.2), trH * 0.5);
+
+  // Cancel all running animations
+  Object.entries(animRaf).forEach(([key, id]) => {
+    if (id) { cancelAnimationFrame(id); log(`⏹ Cancelled animation #${key}`); }
+  });
+  animRaf = {};
+
+  const prev = slides[currentSlide - 1];
+  const next = slides[n - 1];
+
+  if (!prev || !next) { error(`❌ Slide element not found`); return; }
+
+  // Анимация выхода для предыдущего
+  prev.classList.remove('active', 'enter-right', 'enter-left', 'enter-zoom', 'exit-left', 'exit-right');
+  prev.classList.add(dir > 0 ? 'exit-left' : 'exit-right');
+  log(`← Slide ${currentSlide}: exit animation`);
+
+  // Анимация входа для нового + КЛЮЧЕВОЕ: добавляем 'active'
+  next.classList.remove('active', 'enter-right', 'enter-left', 'enter-zoom', 'exit-left', 'exit-right');
+  next.classList.add('active'); // ← ВАЖНО: делаем слайд активным СРАЗУ
+  next.classList.add(n === 1 ? 'enter-zoom' : (dir > 0 ? 'enter-right' : 'enter-left'));
+  log(`→ Slide ${n}: enter animation + ACTIVE class`);
+
+  currentSlide = n;
+  
+  // Обновляем интерфейс
+  document.getElementById('slideCounter').textContent = `${currentSlide} / ${totalSlides}`;
+  document.getElementById('progressFill').style.width = `${(currentSlide / totalSlides) * 100}%`;
+  document.querySelectorAll('.dot').forEach((d, i) => {
+    d.classList.toggle('active', i === currentSlide - 1);
+  });
+  document.getElementById('prevBtn').disabled = currentSlide === 1;
+  document.getElementById('nextBtn').disabled = currentSlide === totalSlides;
+  
+  log(`✅ UI updated: counter, progress, dots, buttons`);
+
+  // Запускаем анимации нового слайда с небольшой задержкой
+  setTimeout(() => {
+    if (isActive(currentSlide)) {
+      log(`▶ Starting animations for slide ${currentSlide}`);
+      triggerAnims(currentSlide);
+    } else {
+      warn(`⚠ Slide ${currentSlide} lost 'active' class before animation start`);
+    }
+  }, 100);
+
+  // Очищаем предыдущий слайд после завершения анимации
+  setTimeout(() => {
+    prev.classList.remove('exit-left', 'exit-right');
+    log(`🧹 Cleaned exit classes from slide ${currentSlide - (dir > 0 ? 1 : -1)}`);
+  }, 800);
+}
+
+// Обработчики клавиатуры
+document.addEventListener('keydown', e => {
+  if (['ArrowRight', 'ArrowDown', ' '].includes(e.key)) {
+    e.preventDefault();
+    log(`⌨ Key: ${e.key} → next`);
+    goSlide(currentSlide + 1);
+  } else if (['ArrowLeft', 'ArrowUp'].includes(e.key)) {
+    e.preventDefault();
+    log(`⌨ Key: ${e.key} → prev`);
+    goSlide(currentSlide - 1);
+  }
+});
+
+// Тач-свайпы
+let touchSX = 0;
+document.addEventListener('touchstart', e => { touchSX = e.touches[0].clientX; }, { passive: true });
+document.addEventListener('touchend', e => {
+  const d = touchSX - e.changedTouches[0].clientX;
+  if (Math.abs(d) > 50) {
+    log(`👆 Swipe: ${d > 0 ? 'left' : 'right'} → ${d > 0 ? 'next' : 'prev'}`);
+    goSlide(currentSlide + (d > 0 ? 1 : -1));
+  }
+}, { passive: true });
+
+// Инициализация кнопок
+document.getElementById('prevBtn').disabled = true;
+document.getElementById('nextBtn').onclick = () => { log('🔘 Next button'); goSlide(currentSlide + 1); };
+document.getElementById('prevBtn').onclick = () => { log('🔘 Prev button'); goSlide(currentSlide - 1); };
+document.getElementById('progressFill').style.width = `${(1 / totalSlides) * 100}%`;
+
+log('✅ Slide manager initialized');
+
+// ===== TRIGGER ANIMATIONS =====
+function triggerAnims(sn) {
+  log(`🎬 triggerAnims(${sn}) called`);
+  
+  // Проверка доступности canvas
+  const canvasMap = {
+    2: 'vacuumScale', 3: 'electronAnim3', 4: 'emissionChart',
+    5: 'diodeVAH', 6: 'triodeAnim', 7: 'crtAnim',
+    8: 'emissionTypes', 9: 'appsAnim', 10: 'efficiencyChart'
+  };
+  
+  if (canvasMap[sn]) {
+    const cv = document.getElementById(canvasMap[sn]);
+    if (!cv) { warn(`❌ Canvas #${canvasMap[sn]} not found for slide ${sn}`); return; }
+    if (cv.width === 0 || cv.height === 0) {
+      warn(`⚠ Canvas #${canvasMap[sn]} has zero size: ${cv.width}×${cv.height}`);
+    }
+  }
+  
+  const animFunctions = {
+    2: drawVacuumScale, 3: drawElectronFlow, 4: drawEmissionChart,
+    5: drawDiodeVAH, 6: drawTriodeAnim, 7: drawCRTAnim,
+    8: drawEmissionTypes, 9: drawAppsAnim, 10: drawEfficiencyChart
+  };
+  
+  if (animFunctions[sn]) {
+    try {
+      animRaf[sn] = animFunctions[sn]();
+      log(`✅ Animation #${sn} started, rafId: ${animRaf[sn]}`);
+    } catch (err) {
+      error(`❌ Error starting animation #${sn}:`, err);
+    }
+  } else if (sn !== 1 && sn !== 11 && sn !== 12) {
+    warn(`⚠ No animation function for slide ${sn}`);
+  }
+}
+
+// ===== АНИМАЦИИ СЛАЙДОВ =====
+
+// Слайд 2: Vacuum Scale
+function drawVacuumScale() {
+  const cv = document.getElementById('vacuumScale');
+  if (!cv) { warn('❌ vacuumScale canvas not found'); return; }
+  const c = cv.getContext('2d');
+  const W = cv.width, H = cv.height;
+  let prog = 0;
+  log(`🎨 drawVacuumScale: canvas ${W}×${H}`);
+
+  const zones = [
+    { name: 'Атмосфера', p: '10⁵ Па', col: '#60a5fa' },
+    { name: 'Низкий вакуум', p: '10² Па', col: '#818cf8' },
+    { name: 'Средний вакуум', p: '10⁻¹ Па', col: '#a78bfa' },
+    { name: 'Высокий вакуум', p: '10⁻⁵ Па', col: '#c084fc' },
+    { name: 'Сверхвысокий', p: '10⁻¹⁰ Па', col: '#f472b6' }
+  ];
+
+  function frame() {
+    if (!isActive(2)) { log('⏹ vacuumScale: not active, stopping'); return; }
+    c.clearRect(0, 0, W, H);
+    prog = Math.min(prog + 0.015, 1);
+
+    const bw = (W - 60) / zones.length;
+    const barH = 50, barY = 30;
+
+    zones.forEach((z, i) => {
+      const x = 30 + i * bw;
+      const revealed = Math.min(prog * zones.length - i, 1);
+      if (revealed <= 0) return;
+
+      const w = bw * revealed - 2;
+      const grad = c.createLinearGradient(x, barY, x, barY + barH);
+      grad.addColorStop(0, z.col + '40'); grad.addColorStop(1, z.col + '15');
+
+      c.fillStyle = grad; c.beginPath(); c.roundRect(x, barY, w, barH, 6); c.fill();
+      c.strokeStyle = z.col + '60'; c.lineWidth = 1;
+      c.beginPath(); c.roundRect(x, barY, w, barH, 6); c.stroke();
+
+      if (revealed > 0.7) {
+        c.fillStyle = z.col; c.font = 'bold 10px Roboto'; c.textAlign = 'center';
+        c.fillText(z.name, x + bw / 2 - 1, barY - 6);
+        c.fillStyle = '#94a3b8'; c.font = '9px Roboto';
+        c.fillText(z.p, x + bw / 2 - 1, barY + barH + 16);
+      }
+    });
+
+    c.fillStyle = '#64748b'; c.font = '11px Roboto'; c.textAlign = 'left';
+    c.fillText('p →', W - 60, 85); c.fillText('↑ вакуум', 8, H - 6);
+
+    if (prog < 1) return requestAnimationFrame(frame);
+    log('✅ vacuumScale animation complete');
+  }
+  return frame();
+}
+
+// Слайд 3: Electron Flow
+function drawElectronFlow() {
+  const cv = document.getElementById('electronAnim3');
+  if (!cv) { warn('❌ electronAnim3 canvas not found'); return; }
+  const c = cv.getContext('2d');
+  const W = cv.width, H = cv.height;
+  log(`🎨 drawElectronFlow: canvas ${W}×${H}`);
+
+  const electrons = [];
+  for (let i = 0; i < 28; i++) {
+    electrons.push({
+      x: 60 + Math.random() * 25, y: 70 + Math.random() * (H - 140),
+      sp: 1.5 + Math.random() * 2, sz: 3 + Math.random() * 2, trail: []
+    });
+  }
+
+  function frame() {
+    if (!isActive(3)) return;
+    c.clearRect(0, 0, W, H);
+
+    // Grid
+    c.strokeStyle = 'rgba(96,165,250,0.04)'; c.lineWidth = 0.5;
+    for (let gx = 0; gx < W; gx += 25) { c.beginPath(); c.moveTo(gx, 0); c.lineTo(gx, H); c.stroke(); }
+    for (let gy = 0; gy < H; gy += 25) { c.beginPath(); c.moveTo(0, gy); c.lineTo(W, gy); c.stroke(); }
+
+    // Cathode
+    c.fillStyle = '#ff6b35'; c.shadowColor = '#ff6b35'; c.shadowBlur = 22;
+    c.beginPath(); c.roundRect(28, H * 0.1, 26, H * 0.8, 6); c.fill(); c.shadowBlur = 0;
+    c.fillStyle = '#e2e8f0'; c.font = 'bold 12px Roboto'; c.textAlign = 'center';
+    c.fillText('Катод (−)', 41, H * 0.07);
+
+    // Anode
+    c.fillStyle = '#60a5fa'; c.shadowColor = '#60a5fa'; c.shadowBlur = 18;
+    c.beginPath(); c.roundRect(W - 54, H * 0.1, 26, H * 0.8, 6); c.fill(); c.shadowBlur = 0;
+    c.fillStyle = '#e2e8f0'; c.fillText('Анод (+)', W - 41, H * 0.07);
+
+    // Field lines
+    for (let i = 0; i < 7; i++) {
+      const y = H * 0.18 + i * H * 0.1;
+      c.beginPath(); c.setLineDash([6, 4]); c.moveTo(65, y); c.lineTo(W - 65, y);
+      c.strokeStyle = 'rgba(96,165,250,0.12)'; c.lineWidth = 1; c.stroke(); c.setLineDash([]);
+      c.fillStyle = 'rgba(96,165,250,0.25)';
+      c.beginPath(); c.moveTo(W - 65, y); c.lineTo(W - 72, y - 4); c.lineTo(W - 72, y + 4); c.fill();
+    }
+
+    c.fillStyle = 'rgba(96,165,250,0.4)'; c.font = '10px Roboto';
+    c.fillText('E →', W * 0.5, H - 8);
+
+    // Electrons
+    electrons.forEach(el => {
+      el.trail.push({ x: el.x, y: el.y });
+      if (el.trail.length > 15) el.trail.shift();
+      el.x += el.sp;
+      if (el.x > W - 54) { el.x = 54 + Math.random() * 12; el.y = 70 + Math.random() * (H - 140); el.trail = []; }
+
+      if (el.trail.length > 1) {
+        for (let t = 0; t < el.trail.length - 1; t++) {
+          const a = (t / el.trail.length) * 0.35;
+          c.beginPath(); c.moveTo(el.trail[t].x, el.trail[t].y);
+          c.lineTo(el.trail[t + 1].x, el.trail[t + 1].y);
+          c.strokeStyle = `rgba(96,165,250,${a})`; c.lineWidth = el.sz * 0.5; c.stroke();
+        }
+      }
+
+      c.beginPath(); c.arc(el.x, el.y, el.sz, 0, Math.PI * 2);
+      c.fillStyle = '#93c5fd'; c.shadowColor = '#93c5fd'; c.shadowBlur = 10; c.fill(); c.shadowBlur = 0;
+    });
+
+    return requestAnimationFrame(frame);
+  }
+  return frame();
+}
+
+// Слайд 4: Emission Chart
+function drawEmissionChart() {
+  const cv = document.getElementById('emissionChart');
+  if (!cv) { warn('❌ emissionChart canvas not found'); return; }
+  const c = cv.getContext('2d');
+  const W = cv.width, H = cv.height;
+  const mg = { l: 55, r: 15, t: 20, b: 35 };
+  const cW = W - mg.l - mg.r, cH = H - mg.t - mg.b;
+  let prog = 0;
+  log(`🎨 drawEmissionChart: canvas ${W}×${H}`);
+
+  function jRD(t) {
+    const T = 0.15 + t * 0.85;
+    const Wok = 2.5;
+    return Math.pow(T, 2) * Math.exp(-Wok / T);
+  }
+  const maxJ = jRD(1);
+
+  function frame() {
+    if (!isActive(4)) return;
+    c.clearRect(0, 0, W, H);
+    prog = Math.min(prog + 0.012, 1);
+
+    c.strokeStyle = 'rgba(255,255,255,0.04)'; c.lineWidth = 0.5;
+    for (let i = 0; i <= 5; i++) {
+      const x = mg.l + i * cW / 5;
+      c.beginPath(); c.moveTo(x, mg.t); c.lineTo(x, mg.t + cH); c.stroke();
+    }
+    for (let i = 0; i <= 5; i++) {
+      const y = mg.t + i * cH / 5;
+      c.beginPath(); c.moveTo(mg.l, y); c.lineTo(mg.l + cW, y); c.stroke();
+    }
+
+    c.strokeStyle = '#64748b'; c.lineWidth = 2;
+    c.beginPath(); c.moveTo(mg.l, mg.t); c.lineTo(mg.l, mg.t + cH); c.lineTo(mg.l + cW, mg.t + cH); c.stroke();
+
+    c.fillStyle = '#64748b'; c.font = '11px Roboto'; c.textAlign = 'center';
+    c.fillText('T (температура)', mg.l + cW / 2, H - 5);
+    c.save(); c.translate(12, mg.t + cH / 2); c.rotate(-Math.PI / 2);
+    c.fillText('j (плотность тока)', 0, 0); c.restore();
+
+    c.fillStyle = '#475569'; c.font = '9px Roboto';
+    for (let i = 0; i <= 5; i++) {
+      c.fillText((i * 200) + ' K', mg.l + i * cW / 5, mg.t + cH + 15);
+    }
+    c.textAlign = 'right';
+    for (let i = 0; i <= 5; i++) {
+      c.fillText((i * 20) + '%', mg.l - 5, mg.t + cH - i * cH / 5 + 4);
+    }
+
+    const pts = [];
+    const maxI = prog * cW;
+    c.beginPath();
+    for (let i = 0; i <= maxI; i++) {
+      const t = i / cW;
+      const val = jRD(t) / maxJ;
+      const x = mg.l + i, y = mg.t + cH - val * cH;
+      pts.push({ x, y });
+      if (i === 0) c.moveTo(x, y); else c.lineTo(x, y);
+    }
+
+    const grad = c.createLinearGradient(mg.l, 0, mg.l + cW, 0);
+    grad.addColorStop(0, '#34d399'); grad.addColorStop(0.5, '#60a5fa'); grad.addColorStop(1, '#a78bfa');
+    c.strokeStyle = grad; c.lineWidth = 3;
+    c.shadowColor = '#60a5fa'; c.shadowBlur = 10; c.stroke(); c.shadowBlur = 0;
+
+    if (pts.length > 2) {
+      c.lineTo(pts[pts.length - 1].x, mg.t + cH);
+      c.lineTo(pts[0].x, mg.t + cH); c.closePath();
+      const ag = c.createLinearGradient(0, mg.t, 0, mg.t + cH);
+      ag.addColorStop(0, 'rgba(96,165,250,0.18)'); ag.addColorStop(1, 'rgba(96,165,250,0.01)');
+      c.fillStyle = ag; c.fill();
+    }
+
+    c.fillStyle = 'rgba(255,255,255,0.45)'; c.font = 'italic 12px Roboto'; c.textAlign = 'right';
+    c.fillText('j = A·T²·e^(−W/kT)', W - 12, 30);
+
+    if (prog > 0.5) {
+      c.fillStyle = 'rgba(52,211,153,0.5)'; c.font = 'bold 10px Roboto'; c.textAlign = 'left';
+      c.fillText('Экспоненциальный рост ↑', mg.l + 8, mg.t + 18);
+    }
+
+    if (prog < 1) return requestAnimationFrame(frame);
+    log('✅ emissionChart animation complete');
+  }
+  return frame();
+}
+
+// Слайд 5: Diode VAH
+function drawDiodeVAH() {
+  const cv = document.getElementById('diodeVAH');
+  if (!cv) { warn('❌ diodeVAH canvas not found'); return; }
+  const c = cv.getContext('2d');
+  const W = cv.width, H = cv.height;
+  const mg = { l: 80, r: 15, t: 15, b: 30 };
+  const cW = W - mg.l - mg.r, cH = H - mg.t - mg.b;
+  let prog = 0;
+  log(`🎨 drawDiodeVAH: canvas ${W}×${H}`);
+
+  function frame() {
+    if (!isActive(5)) return;
+    c.clearRect(0, 0, W, H);
+    prog = Math.min(prog + 0.01, 1);
+
+    c.strokeStyle = 'rgba(255,255,255,0.03)'; c.lineWidth = 0.5;
+    for (let i = 0; i <= 8; i++) {
+      const x = mg.l + i * cW / 8;
+      c.beginPath(); c.moveTo(x, mg.t); c.lineTo(x, mg.t + cH); c.stroke();
+    }
+
+    c.strokeStyle = '#64748b'; c.lineWidth = 2;
+    c.beginPath(); c.moveTo(mg.l, mg.t); c.lineTo(mg.l, mg.t + cH); c.lineTo(mg.l + cW, mg.t + cH); c.stroke();
+
+    c.fillStyle = '#64748b'; c.font = '12px Roboto'; c.textAlign = 'center';
+    c.fillText('Uₐ (напряжение анода)', mg.l + cW / 2, H - 5);
+    c.save(); c.translate(14, mg.t + cH / 2); c.rotate(-Math.PI / 2);
+    c.fillText('Iₐ (анодный ток)', 0, 0); c.restore();
+
+    const satY = mg.t + cH * 0.12;
+    const maxI = prog * cW;
+
+    c.beginPath();
+    for (let i = 0; i <= maxI; i++) {
+      const x = mg.l + i;
+      const t = i / cW;
+      let val;
+      if (t < 0.7) { val = Math.pow(t / 0.7, 1.5) * (cH - satY + mg.t); }
+      else { val = (cH - satY + mg.t) + (t - 0.7) * (cH * 0.04) / 0.3; }
+      const y = mg.t + cH - val;
+      if (i === 0) c.moveTo(x, y); else c.lineTo(x, y);
+    }
+    const grad = c.createLinearGradient(mg.l, 0, mg.l + cW, 0);
+    grad.addColorStop(0, '#a78bfa'); grad.addColorStop(1, '#f472b6');
+    c.strokeStyle = grad; c.lineWidth = 3;
+    c.shadowColor = '#a78bfa'; c.shadowBlur = 10; c.stroke(); c.shadowBlur = 0;
+
+    c.setLineDash([6, 4]); c.strokeStyle = 'rgba(244,114,182,0.35)'; c.lineWidth = 1.5;
+    c.beginPath(); c.moveTo(mg.l, satY); c.lineTo(mg.l + cW, satY); c.stroke(); c.setLineDash([]);
+    c.fillStyle = 'rgba(244,114,182,0.55)'; c.font = '11px Roboto'; c.textAlign = 'left';
+    c.fillText('Насыщение', mg.l + cW * 0.55, satY - 8);
+
+    c.fillStyle = 'rgba(167,139,250,0.5)'; c.font = '11px Roboto';
+    c.fillText('Iₐ ∝ Uₐ^(3/2)', mg.l + 8, mg.t + 22);
+
+    if (prog < 1) return requestAnimationFrame(frame);
+    log('✅ diodeVAH animation complete');
+  }
+  return frame();
+}
+
+// Слайд 6: Triode
+function drawTriodeAnim() {
+  const cv = document.getElementById('triodeAnim');
+  if (!cv) { warn('❌ triodeAnim canvas not found'); return; }
+  const c = cv.getContext('2d');
+  const W = cv.width, H = cv.height;
+  log(`🎨 drawTriodeAnim: canvas ${W}×${H}`);
+
+  const electrons = [];
+  for (let i = 0; i < 20; i++) {
+    electrons.push({
+      x: 50 + Math.random() * 25, y: 55 + Math.random() * (H - 110),
+      sp: 1 + Math.random() * 1.5, sz: 2.5 + Math.random() * 1.5,
+      blocked: false, trail: []
+    });
+  }
+  let gV = -0.5, gD = 0.008;
+
+  function frame() {
+    if (!isActive(6)) return;
+    c.clearRect(0, 0, W, H);
+    gV += gD; if (gV > 0.3 || gV < -2) gD *= -1;
+
+    c.strokeStyle = 'rgba(96,165,250,0.03)'; c.lineWidth = 0.5;
+    for (let gx = 0; gx < W; gx += 20) { c.beginPath(); c.moveTo(gx, 0); c.lineTo(gx, H); c.stroke(); }
+    for (let gy = 0; gy < H; gy += 20) { c.beginPath(); c.moveTo(0, gy); c.lineTo(W, gy); c.stroke(); }
+
+    c.fillStyle = '#ff6b35'; c.shadowColor = '#ff6b35'; c.shadowBlur = 14;
+    c.beginPath(); c.roundRect(24, H * 0.1, 20, H * 0.8, 5); c.fill(); c.shadowBlur = 0;
+    c.fillStyle = '#e2e8f0'; c.font = 'bold 11px Roboto'; c.textAlign = 'center';
+    c.fillText('Катод', 34, H * 0.07);
+
+    const gX = W * 0.45;
+    const gCol = gV < -0.5 ? '#f87171' : gV < 0 ? '#fbbf24' : '#34d399';
+    c.strokeStyle = gCol; c.lineWidth = 2; c.shadowColor = gCol; c.shadowBlur = 8;
+    for (let gy = H * 0.1; gy < H * 0.9; gy += 16) {
+      c.beginPath(); c.moveTo(gX - 3, gy); c.lineTo(gX + 3, gy + 8); c.stroke();
+    }
+    c.shadowBlur = 0;
+    c.fillStyle = gCol; c.font = 'bold 11px Roboto'; c.fillText('Сетка', gX, H * 0.07);
+
+    c.fillStyle = '#60a5fa'; c.shadowColor = '#60a5fa'; c.shadowBlur = 14;
+    c.beginPath(); c.roundRect(W - 44, H * 0.1, 20, H * 0.8, 5); c.fill(); c.shadowBlur = 0;
+    c.fillStyle = '#e2e8f0'; c.fillText('Анод', W - 34, H * 0.07);
+
+    c.fillStyle = gCol; c.font = 'bold 11px Roboto'; c.textAlign = 'left';
+    c.fillText(`U_сетки = ${gV.toFixed(2)} В`, 8, H - 10);
+
+    electrons.forEach(el => {
+      el.trail.push({ x: el.x, y: el.y });
+      if (el.trail.length > 8) el.trail.shift();
+      el.x += el.sp;
+      if (!el.blocked && el.x > gX - 8 && el.x < gX + 8 && gV < -0.3 && Math.random() < 0.45) {
+        el.blocked = true; el.x -= 2;
+      }
+      if (el.blocked) { el.x -= 1.5; if (el.x < 45) { resetEl(el); } }
+      if (el.x > W - 44) resetEl(el);
+
+      if (el.trail.length > 1) {
+        for (let t = 0; t < el.trail.length - 1; t++) {
+          const a = (t / el.trail.length) * 0.3;
+          c.beginPath(); c.moveTo(el.trail[t].x, el.trail[t].y);
+          c.lineTo(el.trail[t + 1].x, el.trail[t + 1].y);
+          c.strokeStyle = el.blocked ? `rgba(248,113,113,${a})` : `rgba(96,165,250,${a})`;
+          c.lineWidth = el.sz * 0.5; c.stroke();
+        }
+      }
+      c.beginPath(); c.arc(el.x, el.y, el.sz, 0, Math.PI * 2);
+      c.fillStyle = el.blocked ? 'rgba(248,113,113,0.5)' : '#93c5fd';
+      if (!el.blocked) { c.shadowColor = '#93c5fd'; c.shadowBlur = 6; }
+      c.fill(); c.shadowBlur = 0;
+    });
+
+    function resetEl(el) { el.x = 45 + Math.random() * 10; el.y = 55 + Math.random() * (H - 110); el.blocked = false; el.trail = []; }
+
+    return requestAnimationFrame(frame);
+  }
+  return frame();
+}
+
+// Слайд 7: CRT
+function drawCRTAnim() {
+  const cv = document.getElementById('crtAnim');
+  if (!cv) { warn('❌ crtAnim canvas not found'); return; }
+  const c = cv.getContext('2d');
+  const W = cv.width, H = cv.height;
+  let t = 0;
+  log(`🎨 drawCRTAnim: canvas ${W}×${H}`);
+
+  function frame() {
+    if (!isActive(7)) return;
+    c.clearRect(0, 0, W, H);
+    t += 0.025;
+
+    c.strokeStyle = 'rgba(96,165,250,0.2)'; c.lineWidth = 2;
+    c.beginPath();
+    c.moveTo(60, H * 0.22); c.lineTo(170, H * 0.16);
+    c.lineTo(W - 60, H * 0.1); c.lineTo(W - 60, H * 0.9);
+    c.lineTo(170, H * 0.84); c.lineTo(60, H * 0.78); c.closePath(); c.stroke();
+
+    c.fillStyle = '#ff6b35'; c.shadowColor = '#ff6b35'; c.shadowBlur = 14;
+    c.beginPath(); c.roundRect(38, H * 0.36, 32, H * 0.28, 5); c.fill(); c.shadowBlur = 0;
+    c.fillStyle = '#e2e8f0'; c.font = '10px Roboto'; c.textAlign = 'center';
+    c.fillText('Электронная', 54, H * 0.93); c.fillText('пушка', 54, H * 0.97);
+
+    c.strokeStyle = 'rgba(167,139,250,0.45)'; c.lineWidth = 3;
+    c.shadowColor = 'rgba(167,139,250,0.3)'; c.shadowBlur = 6;
+    c.beginPath(); c.moveTo(W * 0.28, H * 0.2); c.lineTo(W * 0.28, H * 0.32); c.stroke();
+    c.beginPath(); c.moveTo(W * 0.28, H * 0.68); c.lineTo(W * 0.28, H * 0.8); c.stroke();
+    c.shadowBlur = 0;
+    c.fillStyle = '#a78bfa'; c.font = '9px Roboto'; c.textAlign = 'center';
+    c.fillText('Отклоняющие', W * 0.28, H * 0.14); c.fillText('пластины', W * 0.28, H * 0.18);
+
+    c.strokeStyle = 'rgba(52,211,153,0.25)'; c.lineWidth = 3;
+    c.shadowColor = 'rgba(52,211,153,0.2)'; c.shadowBlur = 8;
+    c.beginPath(); c.ellipse(W - 60, H * 0.5, 10, H * 0.4, 0, 0, Math.PI * 2); c.stroke(); c.shadowBlur = 0;
+
+    const def = Math.sin(t * 2.5) * (H * 0.3);
+    const endX = W - 60, endY = H * 0.5 + def;
+    const bg = c.createLinearGradient(70, H * 0.5, endX, endY);
+    bg.addColorStop(0, 'rgba(96,165,250,0.9)'); bg.addColorStop(0.5, 'rgba(167,139,250,0.5)'); bg.addColorStop(1, 'rgba(52,211,153,0.9)');
+    c.beginPath(); c.moveTo(70, H * 0.5);
+    c.quadraticCurveTo(W * 0.28, H * 0.5 + def * 0.3, endX, endY);
+    c.strokeStyle = bg; c.lineWidth = 2.5; c.shadowColor = '#34d399'; c.shadowBlur = 10; c.stroke(); c.shadowBlur = 0;
+
+    c.beginPath(); c.arc(endX, endY, 8, 0, Math.PI * 2);
+    c.fillStyle = 'rgba(52,211,153,0.7)'; c.shadowColor = '#34d399'; c.shadowBlur = 22; c.fill(); c.shadowBlur = 0;
+
+    c.strokeStyle = 'rgba(52,211,153,0.35)'; c.lineWidth = 1.5;
+    c.beginPath();
+    for (let sx = 0; sx < 45; sx++) {
+      const t2 = t * 3.5 - sx * 0.1;
+      const px = endX - 45 + sx, py = H * 0.5 + Math.sin(t2) * 30;
+      if (sx === 0) c.moveTo(px, py); else c.lineTo(px, py);
+    }
+    c.stroke();
+
+    c.fillStyle = '#64748b'; c.font = '10px Roboto'; c.textAlign = 'left';
+    c.fillText('Экран', W - 55, H * 0.94);
+    c.fillStyle = 'rgba(96,165,250,0.4)'; c.font = '9px Roboto'; c.textAlign = 'center';
+    c.fillText('Электронный луч →', W * 0.52, H * 0.4);
+
+    return requestAnimationFrame(frame);
+  }
+  return frame();
+}
+
+// Слайд 8: Emission Types
+function drawEmissionTypes() {
+  const cv = document.getElementById('emissionTypes');
+  if (!cv) { warn('❌ emissionTypes canvas not found'); return; }
+  const c = cv.getContext('2d');
+  const W = cv.width, H = cv.height;
+  log(`🎨 drawEmissionTypes: canvas ${W}×${H}`);
+
+  const photons = [];
+  for (let i = 0; i < 12; i++) {
+    photons.push({ x: 12 + Math.random() * 35, y: 35 + Math.random() * (H - 70), sp: 1.5 + Math.random(), sz: 3 + Math.random() * 2, ph: Math.random() * Math.PI * 2 });
+  }
+  let emitted = [];
+
+  function frame() {
+    if (!isActive(8)) return;
+    c.clearRect(0, 0, W, H);
+
+    c.fillStyle = 'rgba(100,116,139,0.2)';
+    c.beginPath(); c.roundRect(W * 0.4, 12, 32, H - 24, 5); c.fill();
+    c.strokeStyle = 'rgba(100,116,139,0.35)'; c.lineWidth = 1;
+    c.beginPath(); c.moveTo(W * 0.4, 12); c.lineTo(W * 0.4, H - 12); c.stroke();
+
+    c.fillStyle = 'rgba(100,116,139,0.12)';
+    for (let ly = 25; ly < H - 25; ly += 14) {
+      for (let lx = W * 0.43; lx < W * 0.7; lx += 14) {
+        c.beginPath(); c.arc(lx, ly, 2, 0, Math.PI * 2); c.fill();
+      }
+    }
+
+    c.fillStyle = '#e2e8f0'; c.font = 'bold 11px Roboto'; c.textAlign = 'center';
+    c.fillText('Металл', W * 0.4 + 16, H - 2);
+
+    c.setLineDash([4, 4]); c.strokeStyle = 'rgba(248,113,113,0.3)'; c.lineWidth = 1;
+    c.beginPath(); c.moveTo(W * 0.4, H * 0.22); c.lineTo(W * 0.4, H * 0.78); c.stroke(); c.setLineDash([]);
+    c.fillStyle = 'rgba(248,113,113,0.45)'; c.font = '9px Roboto';
+    c.save(); c.translate(W * 0.4 - 7, H * 0.5); c.rotate(-Math.PI / 2); c.textAlign = 'center';
+    c.fillText('W', 0, 0); c.restore();
+
+    photons.forEach(ph => {
+      ph.x += ph.sp; ph.ph += 0.1;
+      c.beginPath();
+      for (let i = 0; i < 22; i++) {
+        const px = ph.x - i * 2.5, py = ph.y + Math.sin(i * 0.6 + ph.ph) * 4;
+        if (i === 0) c.moveTo(px, py); else c.lineTo(px, py);
+      }
+      c.strokeStyle = 'rgba(250,204,21,0.35)'; c.lineWidth = 1.5; c.stroke();
+
+      c.beginPath(); c.arc(ph.x, ph.y, ph.sz, 0, Math.PI * 2);
+      c.fillStyle = '#fbbf24'; c.shadowColor = '#fbbf24'; c.shadowBlur = 10; c.fill(); c.shadowBlur = 0;
+
+      if (ph.x > W * 0.4 - 2) {
+        if (Math.random() < 0.12) {
+          emitted.push({ x: W * 0.4 + 5, y: ph.y, vx: 1.5 + Math.random() * 2, vy: (Math.random() - 0.5) * 2, life: 1, sz: 2.5 + Math.random() * 1.5 });
+        }
+        ph.x = 12 + Math.random() * 30; ph.y = 35 + Math.random() * (H - 70);
+      }
+    });
+
+    emitted = emitted.filter(e => e.life > 0);
+    emitted.forEach(e => {
+      e.x += e.vx; e.y += e.vy; e.life -= 0.007;
+      c.beginPath(); c.moveTo(e.x - e.vx * 5, e.y - e.vy * 5); c.lineTo(e.x, e.y);
+      c.strokeStyle = `rgba(147,197,253,${e.life * 0.3})`; c.lineWidth = 1; c.stroke();
+      c.beginPath(); c.arc(e.x, e.y, e.sz * e.life, 0, Math.PI * 2);
+      c.fillStyle = `rgba(147,197,253,${e.life})`; c.shadowColor = '#93c5fd'; c.shadowBlur = 6; c.fill(); c.shadowBlur = 0;
+    });
+
+    c.fillStyle = '#fbbf24'; c.font = 'bold 10px Roboto'; c.textAlign = 'left';
+    c.fillText('hν (фотон)', 6, 16);
+    c.fillStyle = '#93c5fd';
+    c.fillText('e⁻', W * 0.55, 16);
+
+    return requestAnimationFrame(frame);
+  }
+  return frame();
+}
+
+// Слайд 9: Applications
+function drawAppsAnim() {
+  const cv = document.getElementById('appsAnim');
+  if (!cv) { warn('❌ appsAnim canvas not found'); return; }
+  const c = cv.getContext('2d');
+  const W = cv.width, H = cv.height;
+  let prog = 0;
+  log(`🎨 drawAppsAnim: canvas ${W}×${H}`);
+
+  const items = [
+    { name: 'Радиолампы', icon: '📻', x: 0.08 },
+    { name: 'Рентген', icon: '🏥', x: 0.28 },
+    { name: 'СВЧ-печи', icon: '📡', x: 0.48 },
+    { name: 'Микроскопы', icon: '🔬', x: 0.68 },
+    { name: 'Hi-Fi аудио', icon: '🎵', x: 0.88 }
+  ];
+
+  function frame() {
+    if (!isActive(9)) return;
+    c.clearRect(0, 0, W, H);
+    prog = Math.min(prog + 0.015, 1);
+
+    c.beginPath(); c.moveTo(W * 0.1, H * 0.45);
+    c.lineTo(W * 0.1 + prog * W * 0.8, H * 0.45);
+    c.strokeStyle = 'rgba(96,165,250,0.15)'; c.lineWidth = 2; c.stroke();
+
+    items.forEach((item, i) => {
+      const reveal = Math.min(prog * items.length - i, 1);
+      if (reveal <= 0) return;
+      const ix = W * item.x;
+      const alpha = reveal;
+
+      c.beginPath(); c.arc(ix, H * 0.45, 22 * alpha, 0, Math.PI * 2);
+      c.fillStyle = `rgba(96,165,250,${0.08 * alpha})`;
+      c.strokeStyle = `rgba(96,165,250,${0.3 * alpha})`; c.lineWidth = 2; c.fill(); c.stroke();
+
+      if (reveal > 0.5) {
+        c.font = '18px serif'; c.textAlign = 'center';
+        c.globalAlpha = alpha;
+        c.fillText(item.icon, ix, H * 0.45 + 6);
+        c.globalAlpha = 1;
+      }
+
+      if (reveal > 0.8) {
+        c.fillStyle = `rgba(226,232,240,${alpha})`; c.font = '11px Roboto'; c.textAlign = 'center';
+        c.fillText(item.name, ix, H * 0.78);
+      }
+    });
+
+    c.fillStyle = '#64748b'; c.font = '11px Roboto'; c.textAlign = 'left';
+    c.fillText('Эволюция применения вакуумных приборов', 20, 20);
+
+    if (prog < 1) return requestAnimationFrame(frame);
+    log('✅ appsAnim animation complete');
+  }
+  return frame();
+}
+
+// Слайд 10: Efficiency Chart
+function drawEfficiencyChart() {
+  const cv = document.getElementById('efficiencyChart');
+  if (!cv) { warn('❌ efficiencyChart canvas not found'); return; }
+  const c = cv.getContext('2d');
+  const W = cv.width, H = cv.height;
+  const mg = { l: 80, r: 160, t: 15, b: 30 };
+  const cW = W - mg.l - mg.r, cH = H - mg.t - mg.b;
+  let prog = 0;
+  log(`🎨 drawEfficiencyChart: canvas ${W}×${H}`);
+
+  function frame() {
+    if (!isActive(10)) return;
+    c.clearRect(0, 0, W, H);
+    prog = Math.min(prog + 0.01, 1);
+
+    c.strokeStyle = 'rgba(255,255,255,0.03)'; c.lineWidth = 0.5;
+    for (let i = 0; i <= 10; i++) {
+      const x = mg.l + i * cW / 10;
+      c.beginPath(); c.moveTo(x, mg.t); c.lineTo(x, mg.t + cH); c.stroke();
+    }
+
+    c.strokeStyle = '#64748b'; c.lineWidth = 2;
+    c.beginPath(); c.moveTo(mg.l, mg.t); c.lineTo(mg.l, mg.t + cH); c.lineTo(mg.l + cW, mg.t + cH); c.stroke();
+
+    c.fillStyle = '#64748b'; c.font = '11px Roboto'; c.textAlign = 'center';
+    c.fillText('Частота →', mg.l + cW / 2, H - 5);
+    c.save(); c.translate(14, mg.t + cH / 2); c.rotate(-Math.PI / 2);
+    c.fillText('КПД (%)', 0, 0); c.restore();
+
+    const maxI = prog * cW;
+
+    c.beginPath();
+    for (let i = 0; i <= maxI; i++) {
+      const x = mg.l + i, t = i / cW;
+      const val = 20 + 50 * Math.pow(t, 2.2);
+      const y = mg.t + cH - (val / 100) * cH;
+      if (i === 0) c.moveTo(x, y); else c.lineTo(x, y);
+    }
+    c.strokeStyle = '#60a5fa'; c.lineWidth = 3; c.shadowColor = '#60a5fa'; c.shadowBlur = 10; c.stroke(); c.shadowBlur = 0;
+
+    c.beginPath();
+    for (let i = 0; i <= maxI; i++) {
+      const x = mg.l + i, t = i / cW;
+      const val = 75 - 25 * Math.pow(t, 1.8);
+      const y = mg.t + cH - (val / 100) * cH;
+      if (i === 0) c.moveTo(x, y); else c.lineTo(x, y);
+    }
+    c.strokeStyle = '#34d399'; c.lineWidth = 3; c.shadowColor = '#34d399'; c.shadowBlur = 10; c.stroke(); c.shadowBlur = 0;
+
+    const lx = mg.l + cW + 15;
+    c.fillStyle = '#60a5fa'; c.fillRect(lx, mg.t + 12, 18, 3);
+    c.fillStyle = '#e2e8f0'; c.font = '11px Roboto'; c.textAlign = 'left';
+    c.fillText('Вакуумные лампы', lx + 24, mg.t + 17);
+    c.fillStyle = '#34d399'; c.fillRect(lx, mg.t + 35, 18, 3);
+    c.fillStyle = '#e2e8f0'; c.fillText('Полупроводники', lx + 24, mg.t + 40);
+
+    if (prog < 1) return requestAnimationFrame(frame);
+    log('✅ efficiencyChart animation complete');
+  }
+  return frame();
+}
+
+// ===== INIT =====
+window.addEventListener('load', () => {
+  log('🚀 Page loaded, initializing slide 1 animations');
+  setTimeout(() => triggerAnims(1), 200);
+  
+  // Диагностика при клике
+  document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('slide')) {
+      log(`🖱 Clicked on slide ${e.target.dataset.slide}, active: ${e.target.classList.contains('active')}`);
+    }
+  });
+});
+
+// Глобальный обработчик ошибок для анимаций
+window.addEventListener('error', (e) => {
+  error(`💥 Global error: ${e.message} at ${e.filename}:${e.lineno}`);
+});
+</script>
+</body>
+</html>
+
